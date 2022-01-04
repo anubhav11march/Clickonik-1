@@ -181,11 +181,15 @@ function Navbarr() {
               Contact Us
             </NavLink>
             {console.log(user)}
-            {!user?( <NavLink className="nav-link nav-padding" to="/submit">
-              Submit Blog
-            </NavLink>):(<NavLink className="nav-link nav-padding" to="/user/publish">
-              Submit Blog
-            </NavLink>)}
+            {!user ? (
+              <NavLink className="nav-link nav-padding" to="/submit">
+                Submit Blog
+              </NavLink>
+            ) : (
+              <NavLink className="nav-link nav-padding" to="/user/publish">
+                Submit Blog
+              </NavLink>
+            )}
             {!user ? (
               <NavLink
                 className="nav-link nav-padding nav-menu"
