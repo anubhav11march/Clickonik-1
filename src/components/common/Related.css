@@ -1,0 +1,30 @@
+.related-main{
+    padding-top: 1em;
+}
+
+.related-heading {
+  font-size: 2.4rem;
+  font-weight: 500;
+  background: #e1e8f8;
+  border-radius: 8px;
+  padding: 1em;
+  text-align: center;
+}
+
+.related-content {
+  background: #f1f9ff;
+  border-radius: 8px;
+  font-size: 2rem;
+  font-weight: 500;
+  padding: 1em;
+}
+
+.related-odd {
+  color: rgba(0, 0, 0, 0.35);
+  padding-bottom: 1em;
+}
+
+.related-even {
+  color: rgba(102, 77, 253, 0.8);
+  padding-bottom: 1em;
+}

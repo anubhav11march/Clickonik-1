@@ -1,0 +1,52 @@
+.cwl-main {
+  padding-top: 30px;
+}
+
+.cwl-img {
+  width: 100%;
+  height: 95%;
+  filter: brightness(0.7);
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cwl-col {
+  position: relative;
+}
+
+.cwl-div {
+  position: absolute;
+  left: 5%;
+  bottom: 10%;
+  color: white;
+  width: 90%;
+}
+
+.cwl-heading {
+  font-size: 3.6rem;
+  font-weight: 700;
+}
+
+.cwl-subheading {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.item-row {
+  padding-bottom: 1em;
+}
+
+.item-heading {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.item-subheading {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #8c8c8c;
+}
+
+.item-img {
+  width: min(125px, 100%);
+}

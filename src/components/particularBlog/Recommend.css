@@ -1,0 +1,54 @@
+.rmd-main {
+  padding: 1em;
+}
+
+.rmd-topic {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.rmd-th {
+  background: #e1e8f8;
+  border-radius: 8px;
+  font-size: 2.4rem;
+  font-weight: 500;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.rmd-list {
+  list-style: none;
+  background: #f1f9ff;
+  border-radius: 8px;
+  padding: 1em;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.rmd-odd {
+  color: rgba(0, 0, 0, 0.35);
+  padding-bottom: 1em;
+}
+
+.rmd-even {
+  color: rgba(102, 77, 253, 0.8);
+  padding-bottom: 1em;
+}
+
+.rmd-img {
+  padding-top: 2em;
+  width: 100%;
+}
+
+.rmd-ch {
+  font-size: 2.2rem;
+  font-weight: 500;
+  padding-top: 1em;
+}
+
+.rmd-cb {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #5b5b5b;
+  padding-top: 1em;
+}

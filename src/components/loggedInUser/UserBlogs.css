@@ -1,0 +1,86 @@
+.userb-main {
+  margin-top: 120px;
+  padding-bottom: 30px;
+}
+
+.userb-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: #575757;
+}
+
+.userb-blogs {
+  width: 250px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}
+
+.userb-pub {
+  background: #4468e2;
+  border-radius: 25px;
+  color: white;
+  border: none;
+  font-size: 2.2rem;
+  font-weight: 500;
+  padding: 0.2em 1em;
+}
+
+.userb-active {
+  color: #000;
+}
+
+.userb-ablog {
+  background: #ffffff;
+  box-shadow: 0px 0px 30px rgba(102, 77, 253, 0.15);
+  border-radius: 8px;
+  font-size: 2.2rem;
+  font-weight: 500;
+  padding: 2em;
+  margin-top: 1.5em;
+}
+
+.userb-abhead {
+  padding-bottom: 1em;
+}
+
+.userb-blog {
+  display: flex;
+  padding-bottom: 1em;
+}
+
+.userb-blogc {
+  padding: 1em;
+}
+
+.userb-blogb {
+  color: #5b5b5b;
+  font-size: 1.4rem;
+  font-weight: 400;
+  padding: 1em 0em;
+}
+
+.userb-blogi {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #4468e2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.userb-pad > span {
+  padding: 0em 1em 0em 0.5em;
+}
+
+.userb-bloge {
+  color: #4468e2;
+}
+
+@media (max-width: 578px) {
+  .userb-blog {
+    flex-direction: column;
+  }
+}

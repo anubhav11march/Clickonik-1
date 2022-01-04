@@ -1,0 +1,35 @@
+.cc-cards {
+  text-align: center;
+  padding: 2em;
+  background: #ffffff;
+  box-shadow: 0px 0px 50px rgba(102, 77, 253, 0.15);
+  border-radius: 8px;
+  /* width: 90%; */
+  margin-bottom: 3em;
+  /* margin: 2em; */
+}
+
+.cc-cdh {
+  padding-top: 1em;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.cc-cdsh {
+  padding: 1em 0em;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #a3a3a3;
+}
+
+.cc-btn {
+  border: none;
+  color: #ffffff;
+  background: #4468e2;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
+  border-radius: 100px;
+  padding: 1em 2em;
+  width: 80%;
+  font-size: 1.8rem;
+  font-weight: 700;
+}

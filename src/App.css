@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+html {
+  font-size: 10px;
+}
+
+@media (max-width: 992px) {
+  html {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+
+.app-main {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  overflow-x: hidden;
+}

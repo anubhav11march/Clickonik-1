@@ -1,0 +1,50 @@
+.userc-main {
+  margin-top: 120px;
+  padding-bottom: 30px;
+}
+
+.userc-comments {
+  background: #ffffff;
+  box-shadow: 0px 0px 30px rgba(102, 77, 253, 0.15);
+  border-radius: 8px;
+  font-size: 2.2rem;
+  font-weight: 500;
+  padding: 2em;
+}
+
+.userc-comment {
+  padding-bottom: 1em;
+}
+
+.userc-chead {
+  padding-bottom: 1em;
+}
+
+.userc-user {
+  width: 40px;
+  height: 40px;
+}
+
+.userc-name {
+  padding-left: 1em;
+  font-size: 1.8rem;
+}
+
+.userc-cb {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #5b5b5b;
+  padding: 1em 0em 1em 4em;
+}
+
+.userc-approve {
+  padding-left: 3em;
+  color: #34a853;
+  font-size: 1.8rem;
+}
+
+@media (max-width: 992px) {
+  .userc-comments {
+    margin-top: 2em;
+  }
+}
