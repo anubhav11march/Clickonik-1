@@ -180,9 +180,12 @@ function Navbarr() {
             <NavLink className="nav-link nav-padding" to="/contact">
               Contact Us
             </NavLink>
-            <NavLink className="nav-link nav-padding" to="/submit">
+            {console.log(user)}
+            {!user?( <NavLink className="nav-link nav-padding" to="/submit">
               Submit Blog
-            </NavLink>
+            </NavLink>):(<NavLink className="nav-link nav-padding" to="/user/publish">
+              Submit Blog
+            </NavLink>)}
             {!user ? (
               <NavLink
                 className="nav-link nav-padding nav-menu"

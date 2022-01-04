@@ -64,11 +64,8 @@ function UserPublish() {
       }
     );
   };
-  console.log("t"+title,"c"+category,"b"+blog,blogText+"OOO")
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(body, typeof body);
-    console.log(title,category,blog,selectedImage,blogText+"data submit")
     if (!title) {
       alert("please select title");
       return;
