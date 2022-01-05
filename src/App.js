@@ -8,6 +8,7 @@ import Coupons from "./components/coupons/Coupons";
 import Brand from "./components/particularBrand/Brand";
 import Contact from "./components/contact/Contact";
 import Submit from "./components/submit/Submit";
+import UserContact from "./components/loggedInUser/UserContact";
 import UserInsights from "./components/loggedInUser/UserInsights";
 import UserDashboard from "./components/loggedInUser/UserDashboard";
 import UserBlogs from "./components/loggedInUser/UserBlogs";
@@ -38,6 +39,7 @@ function App() {
             <Route exact path="/particular-brand" element={<Brand />} />
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/submit" element={<Submit />} />
+            <Route exact path="/user/contact" element={<UserContact />} />
             <Route exact path="/user/dashboard" element={<UserDashboard />} />
             <Route exact path="/user/insights" element={<UserInsights />} />
             <Route exact path="/user/blogs" element={<UserBlogs />} />

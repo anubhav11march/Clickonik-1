@@ -177,10 +177,15 @@ function Navbarr() {
             <NavLink className="nav-link nav-padding" to="/coupons">
               Coupons
             </NavLink>
-            <NavLink className="nav-link nav-padding" to="/contact">
+            {!user ? (
+               <NavLink className="nav-link nav-padding" to="/contact">
+               Contact Us
+             </NavLink>
+            ) : (
+              <NavLink className="nav-link nav-padding" to="/user/contact">
               Contact Us
             </NavLink>
-            {console.log(user)}
+            )}
             {!user ? (
               <NavLink className="nav-link nav-padding" to="/submit">
                 Submit Blog
