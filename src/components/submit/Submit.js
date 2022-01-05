@@ -92,7 +92,6 @@ function Submit() {
       thumbnail: url,
       blogText: blogText,
     };
-    console.log(data);
     try {
       const res = await axios.post("api/guest/blog", data);
       alert(res?.data?.message);

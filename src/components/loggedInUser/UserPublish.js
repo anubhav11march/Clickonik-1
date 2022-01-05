@@ -91,7 +91,8 @@ function UserPublish() {
     handleImageUploadandSave(data);
   };
 
-  const handleDraft = () => {
+  const handleDraft = (e) => {
+    e.preventDefault();
     const data = {
       title: title,
       category: category,
@@ -101,9 +102,12 @@ function UserPublish() {
     };
     handleImageUploadandSave(data);
   };
+  const previewBlog =(e)=>{
+    e.preventDefault();
+    setPreview(true)
+  }
 
   const postUserBlog = async (data) => {
-    console.log(data);
     
     try {
       const res = await axios.post("api/user/blog", data);
@@ -167,7 +171,7 @@ function UserPublish() {
             <button className="publish-btn1" onClick={handleDraft}>
               Save as Draft
             </button>
-            <button className="publish-btn1" onClick={() => setPreview(true)}>
+            <button className="publish-btn1" onClick={previewBlog}>
               Preview
             </button>
             <button
