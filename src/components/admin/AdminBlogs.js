@@ -60,10 +60,7 @@ function AdminBlogs() {
   useEffect(() => {
     const getGuestBlogs = async () => {
       try {
-        const res = await axios.get("/api/admin/blog", {
-          params: { blogIndex: guestBlogIndex, isGuestBlog: true },
-        });
-        // console.log(res);
+        const res = await axios.get("api/admin/blog?blogIndex=0&isGuestBlogs=true");
         if (res?.data?.code !== 200) return;
         if (res?.data?.data?.length < 1) {
           setHasMoreGuestBlogs(false);
@@ -76,15 +73,17 @@ function AdminBlogs() {
     };
     if (!hasMoreGuestBlogs) return;
     getGuestBlogs(guestBlogIndex);
-    // console.log("commentIndex", commentIndex);
+    
   }, [guestBlogIndex, hasMoreGuestBlogs]);
 
   useEffect(() => {
     const getUserBlogs = async () => {
       try {
-        const res = await axios.get("/api/admin/blog", {
-          params: { blogIndex: userBlogIndex, isGuestBlog: false },
-        });
+   
+        const res = await axios.get(`api/admin/blog?blogIndex=0&isGuestBlogs=false`
+        //   params: { blogIndex: 0, isGuestBlog: false },
+        // }
+        );
         console.log(res);
         if (res?.data?.code !== 200) return;
         if (res?.data?.data?.length < 1) {
