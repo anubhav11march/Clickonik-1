@@ -101,6 +101,7 @@ function UserBlogs() {
                         alt="comment"
                       />
                     </div>
+                   
                   </div>
                 );
               } else {
@@ -119,6 +120,7 @@ function UserBlogs() {
               }
             })}
           </div>
+          
         </Container>
       </>
     );

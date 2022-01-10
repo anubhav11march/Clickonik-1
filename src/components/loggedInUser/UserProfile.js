@@ -15,7 +15,7 @@ function UserProfile() {
   const image = useRef(null);
   const { user, isLoading } = useContext(UserContext);
   const navigate = useNavigate();
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(user?.profile);
   const [sidebarShow, setSidebarShow] = useState(false);
   const [preview, setPreview] = useState(user?.profile);
   const [username, setUsername] = useState(user?.username);
@@ -23,6 +23,7 @@ function UserProfile() {
 
   useEffect(() => {
     setPreview(user?.profile);
+    setSelectedImage(user?.profile);
     setUsername(user?.username);
     setAbout(user?.about);
   }, [user]);
@@ -51,38 +52,42 @@ function UserProfile() {
 
   const handleImageUploadAndSave = (e) => {
     e.preventDefault();
+    setSelectedImage(user.profile);
     if (!selectedImage) {
       alert("Add/Update user profile image");
       return;
+    } else {
+      const uploadTask = storage
+        .ref(`images/avatar/${selectedImage.name}-${selectedImage.size}`)
+        .put(selectedImage);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images/avatar")
+            .child(`${selectedImage.name}-${selectedImage.size}`)
+            .getDownloadURL()
+            .then((url) => {
+              handleSave(url);
+            });
+        }
+      );
     }
-    const uploadTask = storage
-      .ref(`images/avatar/${selectedImage.name}-${selectedImage.size}`)
-      .put(selectedImage);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {},
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images/avatar")
-          .child(`${selectedImage.name}-${selectedImage.size}`)
-          .getDownloadURL()
-          .then((url) => {
-            handleSave(url);
-          });
-      }
-    );
   };
 
   const handleSave = async (url) => {
+    let undefined = url.includes("undefined");
+    let pic = url;
+    undefined === true ? (pic = user.profile) : (pic = url);
     const data = {
       username: username,
       about: about,
-      profile: url,
+      profile: pic,
     };
-    // console.log(data);
     try {
       const res = await axios.put("/api/user", data);
       alert(res?.data?.message);
@@ -94,12 +99,28 @@ function UserProfile() {
     }
   };
 
+  const requestVerify = async (e) => {
+    e.preventDefault();
+    const data = {
+      username: username,
+      about: about,
+      profile: user.profile,
+    };
+    try {
+      const res = await axios.get("api/user/requestVerification", data);
+      alert(res?.data?.message);
+      navigate("/user/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <Header setSidebarShow={setSidebarShow} sidebarShow={sidebarShow} />
       {sidebarShow && <Sidebar selected={"profile"} />}
       <Container className="userp-main">
-        <form onSubmit={handleImageUploadAndSave}>
+        <form>
           <div className="userp-sec1">
             <div className="userp-addimg" onClick={handleClick}>
               {!preview ? (
@@ -143,10 +164,13 @@ function UserProfile() {
             onChange={handleAbout}
           />
           <div className="userp-btns">
-            <button className="userp-veri userp-btn">
+            <button onClick={requestVerify} className="userp-veri userp-btn">
               Request Verification
             </button>
-            <button type="submit" className="userp-save userp-btn">
+            <button
+              onClick={handleImageUploadAndSave}
+              className="userp-save userp-btn"
+            >
               Save Changes
             </button>
           </div>

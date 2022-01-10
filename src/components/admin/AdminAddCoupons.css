@@ -1,0 +1,86 @@
+.adminb-ablog {
+  background: #ffffff;
+  box-shadow: 0px 0px 30px rgba(102, 77, 253, 0.15);
+  border-radius: 8px;
+  font-size: 2.2rem;
+  font-weight: 500;
+  padding: 2em;
+}
+.adminb-gu {
+  display: flex;
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: #575757;
+  padding-bottom: 1em;
+  cursor: pointer;
+}
+
+.contact-main {
+  padding-top: 10px;
+}
+
+.contact-input::placeholder {
+  font-size: 2rem;
+  color: #cbcbcb;
+}
+
+.contact-input {
+  display: block;
+  font-size: 2rem;
+  width: 100%;
+  border: none;
+  padding: 1em;
+  background: #f1f1f1;
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.contact-btn {
+  font-size: 2rem;
+  color: white;
+  font-weight: 600;
+  background: #4468e2;
+  border-radius: 8px;
+  border: none;
+  padding: 0.5em 3em;
+  left: 40%;
+  right: 50%;
+  position: absolute;
+  width: 300px;
+}
+.From-to-input {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  height: 100%;
+}
+.userp-sec1 {
+    display: inherit;
+    position: relative;
+    margin-left: -20px;
+   
+  }
+.selector-image{
+    opacity: -20;
+    position: absolute;
+    margin-top: -200px;
+    height: 202px;
+    width: 191px;
+    cursor: pointer;
+}
+.contact-img {
+    width: 160px;
+    height: 150px;
+    /* object-fit: contain; */
+    overflow: hidden;
+    border-radius: 50%;
+
+}
+.upload-txt {
+    color: #7a7a7a;
+    font-size: 18px;
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+}

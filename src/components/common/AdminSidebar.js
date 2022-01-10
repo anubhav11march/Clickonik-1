@@ -47,6 +47,14 @@ function AdminSidebar({ selected }) {
         >
           User Verification
         </li>
+        <li
+          className={`adminsb-li ${
+            selected === "coupons" && "adminsb-active"
+          }`}
+          onClick={() => handleChange("/admin/coupons")}
+        >
+          Coupons
+        </li>
       </ul>
     </div>
   );
