@@ -31,15 +31,14 @@ const AdminAddCoupons = () => {
     name = e.target.name;
     value = e.target.value;
     setInputData({ ...inputData, [name]: value });
-    console.log(inputData)
+    console.log(inputData);
   };
-
- 
 
   if (!isLoading && !user?.isAdmin) navigate("/");
   if (isLoading) return null;
   const handleClick = () => {
     image.current.click();
+    console.log("s");
   };
 
   const handleImageSelect = (e) => {
@@ -49,11 +48,44 @@ const AdminAddCoupons = () => {
     setPreview(URL.createObjectURL(e.target.files[0]));
   };
 
-
   const handleImageUploadAndSave = (e) => {
     e.preventDefault();
+    const { BrandName, Title, WebsiteLink, Bio, Couponcode, Deal, From, To } =
+      inputData;
     if (!selectedImage) {
       alert("Add Coupon image");
+      return;
+    }
+    if (!BrandName) {
+      alert("BrandName is required Field");
+      return;
+    }
+    if (!Title) {
+      alert("Title is required Field");
+      return;
+    }
+    if (!WebsiteLink) {
+      alert("Website-Link is required Field");
+      return;
+    }
+    if (!Bio) {
+      alert("Bio is required Field");
+      return;
+    }
+    if (!Couponcode) {
+      alert("Coupon-Code is required Field");
+      return;
+    }
+    if (!Deal) {
+      alert("Deal is required Field");
+      return;
+    }
+    if (!From) {
+      alert("From is required Field");
+      return;
+    }
+    if (!To) {
+      alert("To is required Field");
       return;
     } else {
       const uploadTask = storage
@@ -78,21 +110,20 @@ const AdminAddCoupons = () => {
     }
   };
 
-
   const handleSave = async (url) => {
-    const {BrandName,Title,WebsiteLink ,Bio,Couponcode,Deal,From,To } = inputData;
+    const { BrandName, Title, WebsiteLink, Bio, Couponcode, Deal, From, To } =
+      inputData;
     const data = {
-        brandName:BrandName,
-        title:Title,
-        websiteLink:WebsiteLink,
-        bio:Bio,
-        couponCode:Couponcode,
-        deal:Deal,
-        image:url,
-        from:From,
-        to:To
+      brandName: BrandName,
+      title: Title,
+      websiteLink: WebsiteLink,
+      bio: Bio,
+      couponCode: Couponcode,
+      deal: Deal,
+      image: url,
+      from: From,
+      to: To,
     };
-    console.log(data);
     try {
       const res = await axios.post("api/admin/coupon", data);
       alert(res?.data?.message);
@@ -102,7 +133,6 @@ const AdminAddCoupons = () => {
       console.log(err);
     }
   };
-
 
   return (
     <>
@@ -117,18 +147,23 @@ const AdminAddCoupons = () => {
               <Container className="contact-main">
                 <Row>
                   <Col lg={2} className="order-lg-2">
-                    <div className="userp-sec1" onClick={handleClick}>
-                     {preview==null?(
-                      <img
-                        src={uploadCoupon}
-                        alt="uploadCoupon"
-                        className="contact-img"
-                      />):(<img
-                        src={preview}
-                        alt="uploadCoupon"
-                        className="contact-img"
-                      />)}
+                    <div className="userp-sec1" 
+                    onClick={()=>handleClick}>
+                      {preview == null ? (
+                        <img
+                          src={uploadCoupon}
+                          alt="uploadCoupon"
+                          className="contact-img"
+                        />
+                      ) : (
+                        <img
+                          src={preview}
+                          alt="uploadCoupon"
+                          className="contact-img"
+                        />
+                      )}
                       <span className="upload-txt"> Upload Image</span>
+
                       <input
                         type="file"
                         ref={image}
@@ -219,8 +254,11 @@ const AdminAddCoupons = () => {
                             className="contact-input"
                           />
                         </div>
-                        <button type="submit" className="contact-btn"
-                         onClick={handleImageUploadAndSave}>
+                        <button
+                          type="submit"
+                          className="contact-btn"
+                          onClick={handleImageUploadAndSave}
+                        >
                           Submit
                         </button>
                       </form>

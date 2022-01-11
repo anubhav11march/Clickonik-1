@@ -41,119 +41,105 @@
   grid-column-start: 4;
   grid-row-end: 2;
   grid-column-end: 6;
-  border-top: none!important;
-  border-right: none!important;
-  border-left: none!important;
-  border-bottom:2px solid #A5A5A5 !important;
-  font-size:17px !important;;
+  border-top: none !important;
+  border-right: none !important;
+  border-left: none !important;
+  border-bottom: 2px solid #a5a5a5 !important;
+  font-size: 17px !important;
 }
-.search-icon{
-    color: #A5A5A5 !important;
-    margin-top: 8px;
-    margin-left: -14px;
-    font-size: 18px;
+.search-icon {
+  color: #a5a5a5 !important;
+  margin-top: 8px;
+  margin-left: -14px;
+  font-size: 18px;
 }
-.Trend-text{
-font-size: 22px;
-margin-top: 1.5em;
+.Trend-text {
+  font-size: 22px;
+  margin-top: 1.5em;
 }
 
 /* //CARD */
 
 .adminv-card {
-  
-    font-size: 2.2rem;
-    font-weight: 500;
-    /* padding: 2em; */
-display: flex;
-
-
-  }
-
+  font-size: 2.2rem;
+  font-weight: 500;
+width: 100%;
+  /* display: flex; */
+}
 
 .cc-cards {
-    text-align: center;
-    text-align: center;
-    padding: 1em;
-    background: #ffffff;
-   
-    border-radius: 8px;
-    width: 85%;
-    margin-bottom: 3em;
-    margin: 25px;
-    height: 18.3em;
-  }
-  .cc-expire-cards{
-    text-align: center;
-    text-align: center;
-    padding: 1em;
-    background: #E1E8F8;
-   
-    border-radius: 8px;
-    width: 85%;
-    margin-bottom: 3em;
-    margin: 25px;
-    height: 18.3em;
-  }
-  
-  .cc-cdh {
-    padding-top: 1em;
-    font-size: 1.8rem;
-    font-weight: 500;
-  }
-  
-  .cc-cdsh {
-    padding: 1em 0em;
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: #a3a3a3;
-  }
-  .web-font{
-    font-size: 15px;
-    font-weight: 700;
-    /* color: #4468E2; */
-    display: flex;
-    justify-content:space-between;
-  }
-  .text-visit{
-      color:#4468E2;
-      float: left;
-
-  }
-  .text-days{
-    color:#000;
-    float: right;
+  text-align: center;
+  padding: 1em;
+  background: #ffffff;
+  font-size: 2.2rem;
+  font-weight: 500;
+  border-radius: 8px;
+  width: 90%;
+  margin-bottom: 3em;
+  margin: 25px;
+  height: 18em;
 }
-  .btn-edit-delete{
-    display: flex;
-    justify-content:space-between
-    
-  }
-  .delete-btn {
-    border: none;
-    color: #ffffff;
-    background: #EA4335;
-    box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
-    border-radius: 8px;
-    width: 120px;
-    font-size: 1.8rem;
-    font-weight: 500;
-    height:45px;
-  }
-  .edit-btn {
-    border: none;
-    color: #ffffff;
-    background: #C4C4C4;
-    box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
-    border-radius: 8px;
-    width: 120px;
-    font-size: 1.8rem;
-    font-weight: 500;
-    height:45px;
-  }
-  
+.cc-expire-cards {
+  text-align: center;
+  padding: 1em;
+  background: #e1e8f8;
+  border-radius: 8px;
+  width: 90%;
+  margin-bottom: 3em;
+  margin: 25px;
+  height: 18em;
+}
 
+.cc-cdh {
+  padding-top: 1em;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
 
-
-
-
+.cc-cdsh {
+  padding: 1em 0em;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #a3a3a3;
+}
+.web-font {
+  font-size: 15px;
+  font-weight: 700;
+  /* color: #4468E2; */
+  display: flex;
+  justify-content: space-between;
+}
+.text-visit {
+  color: #4468e2;
+  float: left;
+}
+.text-days {
+  color: #000;
+  float: right;
+}
+.btn-edit-delete {
+  display: flex;
+  justify-content: space-between;
+}
+.delete-btn {
+  border: none;
+  color: #ffffff;
+  background: #ea4335;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  width: 120px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  height: 45px;
+}
+.edit-btn {
+  border: none;
+  color: #ffffff;
+  background: #c4c4c4;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  width: 120px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  height: 45px;
+}
