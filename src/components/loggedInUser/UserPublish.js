@@ -102,13 +102,12 @@ function UserPublish() {
     };
     handleImageUploadandSave(data);
   };
-  const previewBlog =(e)=>{
+  const previewBlog = (e) => {
     e.preventDefault();
-    setPreview(true)
-  }
+    setPreview(true);
+  };
 
   const postUserBlog = async (data) => {
-    
     try {
       const res = await axios.post("api/user/blog", data);
       // console.log(res);
@@ -116,6 +115,7 @@ function UserPublish() {
     } catch (err) {
       console.log(err);
     }
+    navigate('/blogs')
   };
 
   return (
@@ -165,7 +165,12 @@ function UserPublish() {
               <option value="" disabled>
                 Category
               </option>
-              <option value="travel">Travel</option>
+              <option value="Technology">Technology</option>
+              <option value="Scifi">Scifi</option>
+              <option value="Educational">Educational</option>
+              <option value="Horror">Horror</option>
+              <option value="Drama">Drama</option>
+              <option value="Kids">Kids</option>
             </select>
             <TextEditor setBlog={setBlog} setBlogText={setBlogText} />
             <button className="publish-btn1" onClick={handleDraft}>

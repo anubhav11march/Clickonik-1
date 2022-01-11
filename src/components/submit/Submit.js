@@ -3,12 +3,14 @@ import { Container } from "react-bootstrap";
 import Footer from "../common/Footer";
 import Navbarr from "../common/Navbarr";
 import Preview from "../common/Preview";
+import { useNavigate } from "react-router-dom";
 import TextEditor from "../common/TextEditor";
 import "./Submit.css";
 import axios from "../../utils/axios";
 import { storage } from "../../utils/firebaseConfig";
 
 function Submit() {
+  const navigate = useNavigate();
   const [preview, setPreview] = useState(false);
   const [blog, setBlog] = useState("");
   const [blogText, setBlogText] = useState("");
@@ -98,6 +100,7 @@ function Submit() {
     } catch (err) {
       console.log(err);
     }
+    navigate('/blogs')
   };
 
   return (
@@ -157,7 +160,12 @@ function Submit() {
               <option value="" disabled>
                 Category
               </option>
-              <option value="travel">Travel</option>
+              <option value="Technology">Technology</option>
+              <option value="Scifi">Scifi</option>
+              <option value="Educational">Educational</option>
+              <option value="Horror">Horror</option>
+              <option value="Drama">Drama</option>
+              <option value="Kids">Kids</option>
             </select>
             <TextEditor setBlog={setBlog} setBlogText={setBlogText} />
             <button className="submit-btn1" onClick={() => setPreview(true)}>

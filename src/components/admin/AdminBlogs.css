@@ -82,11 +82,19 @@
 
 .adminb-rej {
   color: #ea4335;
+  cursor: pointer;
+}
+.adminb-rej:hover {
+  color: #b41616;
 }
 
 .adminb-app {
   color: #34a853;
   padding-left: 3em;
+  cursor: pointer;
+}
+.adminb-app:hover{
+  color: #0a7527;
 }
 
 @media (max-width: 578px) {

@@ -8,26 +8,6 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../../utils/userContext";
 import axios from "../../utils/axios";
 
-const Blog = ({ blog, id }) => {
-  return (
-    <div className="adminb-blog" key={id}>
-      <img
-        src={blog?.thumbnail ? blog.thumbnail : BlogImg}
-        alt="blog"
-        className="adminb-img"
-      />
-      <div className="adminb-blogc">
-        <div className="adminb-blogt">{blog?.title}</div>
-        <div className="adminb-blogb">{blog?.blogText?.slice(0, 80)}</div>
-        <div className="adminb-ar">
-          <div className="adminb-rej">Reject</div>
-          <div className="adminb-app">Approve</div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 function AdminBlogs() {
   const [isGuest, setIsGuest] = useState(true);
   const [sidebarShow, setSidebarShow] = useState(false);
@@ -60,7 +40,9 @@ function AdminBlogs() {
   useEffect(() => {
     const getGuestBlogs = async () => {
       try {
-        const res = await axios.get("api/admin/blog?blogIndex=0&isGuestBlogs=true");
+        const res = await axios.get(
+          "api/admin/blog?blogIndex=0&isGuestBlogs=true"
+        );
         if (res?.data?.code !== 200) return;
         if (res?.data?.data?.length < 1) {
           setHasMoreGuestBlogs(false);
@@ -73,16 +55,13 @@ function AdminBlogs() {
     };
     if (!hasMoreGuestBlogs) return;
     getGuestBlogs(guestBlogIndex);
-    
   }, [guestBlogIndex, hasMoreGuestBlogs]);
 
   useEffect(() => {
     const getUserBlogs = async () => {
       try {
-   
-        const res = await axios.get(`api/admin/blog?blogIndex=0&isGuestBlogs=false`
-        //   params: { blogIndex: 0, isGuestBlog: false },
-        // }
+        const res = await axios.get(
+          `api/admin/blog?blogIndex=0&isGuestBlogs=false`
         );
         console.log(res);
         if (res?.data?.code !== 200) return;
@@ -101,6 +80,21 @@ function AdminBlogs() {
 
   if (!isLoading && !user?.isAdmin) navigate("/");
   if (isLoading) return null;
+
+  const acceptbtn = async (_id) => {
+    try {
+      const res = await axios.put(`api/admin/blog/${_id}`);
+      if (res?.data?.code !== 200) {
+        alert(res?.data?.message);
+        return;
+      }
+      console.log(guestBlogIndex);
+    } catch (err) {
+      console.log(err);
+    }
+    setUserBlogs(userBlogs.filter((userBlog) => userBlog._id !== _id));
+    setGuestBlogs(guestBlogs.filter((guestBlog) => guestBlog._id !== _id));
+  };
 
   return (
     <>
@@ -128,10 +122,56 @@ function AdminBlogs() {
           </div>
           {isGuest
             ? guestBlogs.map((blog, id) => {
-                return <Blog blog={blog} id={id} />;
+                return (
+                  <div className="adminb-blog" key={id}>
+                    <img
+                      src={blog?.thumbnail ? blog.thumbnail : BlogImg}
+                      alt="blog"
+                      className="adminb-img"
+                    />
+                    <div className="adminb-blogc">
+                      <div className="adminb-blogt">{blog?.title}</div>
+                      <div className="adminb-blogb">
+                        {blog?.blogText?.slice(0, 80)}
+                      </div>
+                      <div className="adminb-ar">
+                        <div className="adminb-rej">Reject</div>
+                        <div
+                          className="adminb-app"
+                          onClick={() => acceptbtn(blog._id)}
+                        >
+                          Approve
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
               })
             : userBlogs.map((blog, id) => {
-                return <Blog blog={blog} id={id} />;
+                return (
+                  <div className="adminb-blog" key={id}>
+                    <img
+                      src={blog?.thumbnail ? blog.thumbnail : BlogImg}
+                      alt="blog"
+                      className="adminb-img"
+                    />
+                    <div className="adminb-blogc">
+                      <div className="adminb-blogt">{blog?.title}</div>
+                      <div className="adminb-blogb">
+                        {blog?.blogText?.slice(0, 80)}
+                      </div>
+                      <div className="adminb-ar">
+                        <div className="adminb-rej">Reject</div>
+                        <div
+                          className="adminb-app"
+                          onClick={() => acceptbtn(blog._id)}
+                        >
+                          Approve
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
               })}
         </div>
       </Container>
