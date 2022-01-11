@@ -216,7 +216,7 @@ const AdminAddCoupons = () => {
                           <input
                             className="mb-4"
                             type="text"
-                            placeholder="From"
+                            placeholder="From (yyyy-mm-dd)"
                             name="From"
                             value={inputData.From}
                             onChange={handleInputs}
@@ -226,7 +226,7 @@ const AdminAddCoupons = () => {
                           <input
                             className="mb-4"
                             type="text"
-                            placeholder="To"
+                            placeholder="To (yyyy-mm-dd)"
                             name="To"
                             value={inputData.To}
                             onChange={handleInputs}
