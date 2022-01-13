@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./UserDashboard.css";
 import { Container, Row, Col } from "react-bootstrap";
 import Blog from "../../assets/images/ablog.svg";
@@ -10,31 +10,51 @@ import Sidebar from "../common/Sidebar";
 import Header from "../common/Header";
 import UserContext from "../../utils/userContext";
 import { useNavigate } from "react-router-dom";
-
+import axios from "../../utils/axios";
 const ABlog = () => {
+  const [userdata, setUserData] = useState(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    function Userblog() {
+      try {
+        axios
+          .get(`api/user/blog?blogIndex=0&isDraft=false`)
+          .then((response) => {
+            setUserData(response.data);
+            if (response.data.code !== 200) throw navigate("/");
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    Userblog();
+  }, []);
+
   return (
-    <div className="userd-blog">
-      <img src={Blog} alt="blog" />
-      <div className="userd-blogc">
-        <div className="userd-blogt">Topic</div>
-        <div className="userd-blogb">
-          Lorem ipsum dolor sit amet, con se ctetur adipiscing elit. Tellus
-          pretium mauris, at blandit massa....more
-        </div>
-        <div className="userd-blogi">
-          <div className="userd-blogvs userd-pad">
-            <img src={View} alt="view" />
-            <span>102</span>
-            <img src={Share} alt="share" />
-            <span>14</span>
+    <>
+      {userdata?.data.slice(0, 3).map((data, id) => {
+        return (
+          <div className="userd-blog" key={id}>
+            <img id="item-0" src={data?.thumbnail} alt="blog" />
+
+            <div id="item-1">{data?.title}</div>
+            <div id="item-2">
+              {data?.blogText.slice(0, 150)}
+              <span className="more-text">...more</span>
+            </div>
+            <div id="item-3">
+              <img src={View} alt="view" />
+              <span> &nbsp; 102</span>
+              <img className="item-share" src={Share} alt="share" />
+              <span> &nbsp; 14</span>
+
+              <span className="item-comments-span"> &nbsp; 17</span>
+              <img className="item-comments" src={Comments} alt="comment" />
+            </div>
           </div>
-          <div className="userd-blogcmt userd-pad">
-            <img src={Comments} alt="comment" />
-            <span>14</span>
-          </div>
-        </div>
-      </div>
-    </div>
+        );
+      })}
+    </>
   );
 };
 
@@ -76,8 +96,6 @@ function UserDashboard() {
             <div className="userd-ablog">
               <div className="userd-abhead">Active Blogs</div>
               <ABlog />
-              <ABlog />
-              <ABlog />
               <div className="userd-show">show all</div>
             </div>
           </Col>
@@ -87,7 +105,12 @@ function UserDashboard() {
               <Comment />
               <Comment />
               <Comment />
-              <div className="userd-show">show all</div>
+              <div
+                className="userd-show"
+                onClick={() => navigate("/user/blogs")}
+              >
+                show all
+              </div>
             </div>
           </Col>
         </Row>

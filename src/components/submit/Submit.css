@@ -69,3 +69,7 @@ option[value=""][disabled] {
 option {
   color: black;
 }
+.Toast-notify{
+  font-size: 13px;
+  font-weight: bold;
+}

@@ -57,6 +57,9 @@
   color: #ea4335;
   cursor: pointer;
 }
+.admind-rej:hover {
+  color: #b41616;
+}
 
 .admind-pad {
   padding-left: 3em;
@@ -66,6 +69,9 @@
   color: #34a853;
   padding-left: 3em;
   cursor: pointer;
+}
+.admind-app:hover{
+  color: #0a7527;
 }
 
 .admind-show {
@@ -112,6 +118,13 @@
   padding-left: 3em;
   color: #34a853;
   font-size: 1.8rem;
+}
+
+
+.adminb-img {
+  width: 184px;
+  height: 184px;
+  object-fit: cover;
 }
 
 @media (max-width: 992px) {

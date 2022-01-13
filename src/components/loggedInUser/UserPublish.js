@@ -108,9 +108,10 @@ function UserPublish() {
   };
 
   const postUserBlog = async (data) => {
+    console.log(data)
     try {
       const res = await axios.post("api/user/blog", data);
-      // console.log(res);
+      console.log(res);
       alert(res?.data?.message);
     } catch (err) {
       console.log(err);

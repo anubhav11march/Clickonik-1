@@ -51,11 +51,11 @@
 }
 
 .inst-bl {
-  width: 20%;
+  width: 12%;
 }
 
 .inst-bf {
-  width: 30%;
+  width: 42%;
 }
 
 .inst-row {
@@ -65,7 +65,7 @@
 
 .inst-bc {
   display: flex;
-  width: 30%;
+  width: 40%;
 }
 
 .inst-bc > div {
@@ -84,4 +84,9 @@
 .inst-num {
   color: #5b5b5b;
   font-size: 2rem;
+}
+.user-img {
+  width: 127px;
+  height: 75px;
+  object-fit: cover;
 }

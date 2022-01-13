@@ -3,8 +3,10 @@ import { Container } from "react-bootstrap";
 import Sidebar from "../common/Sidebar";
 import Header from "../common/Header";
 import "./UserInsights.css";
-import Graph from "../common/Graph";
-import Blog from "../../assets/images/tblog.svg";
+import GraphView from "../common/GraphView";
+import GraphShare from "../common/GraphShare";
+import GraphComment from "../common/GraphComment";
+// import Blog from "../../assets/images/tblog.svg";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../utils/userContext";
 import axios from "../../utils/axios";
@@ -16,13 +18,18 @@ const UserInsights = () => {
   const [monthstat, setMonthStat] = useState();
   const { user, isLoading } = useContext(UserContext);
 
+
+
+
+  
   //for Total stat
   useEffect(() => {
     function AllTimestats() {
       try {
         axios.get("api/user/stat?isAllTime=true").then((response) => {
+          
           setAllStat(response.data);
-          if (response.data.code !== 200) throw navigate("/blogs");
+          if (response.data.code !== 200) throw navigate("/");
         });
       } catch (err) {
         console.log(err);
@@ -30,14 +37,14 @@ const UserInsights = () => {
     }
     AllTimestats();
   }, []);
-  // console.log(allstat?.data[0]);
   //for month
+ 
   useEffect(() => {
     function Monthstats() {
       try {
         axios.get("api/user/stat?isTabular=true").then((response) => {
           setMonthStat(response.data?.data);
-          if (response.data.code !== 200) throw navigate("/blogs");
+          if (response.data.code !== 200) throw navigate("/");
         });
       } catch (err) {
         console.log(err);
@@ -45,6 +52,7 @@ const UserInsights = () => {
     }
     Monthstats();
   }, []);
+
 
   if (!isLoading && !user) navigate("/");
   if (isLoading) return null;
@@ -75,19 +83,19 @@ const UserInsights = () => {
           <div className="inst-title">
             {allstat?.data[0]?.viewCount} Blog Views (This Month)
           </div>
-          <Graph />
+          <GraphView />
         </div>
         <div className="inst-box">
           <div className="inst-title">
             {allstat?.data[0]?.shareCount} Shares (This Month)
           </div>
-          <Graph />
+          <GraphShare />
         </div>
         <div className="inst-box">
           <div className="inst-title">
             {allstat?.data[0]?.commentCount} Comments (This Month)
           </div>
-          <Graph />
+          <GraphComment />
         </div>
         <div className="inst-box">
           <div className="inst-title">Blog Performance (This Month)</div>
@@ -99,15 +107,17 @@ const UserInsights = () => {
           </div>
           <hr />
           {monthstat?.map((count, id) => {
+      
             {
               return (
                 <>
                   <div className="inst-row" key={id}>
                     <div className="inst-bc">
-                      <img src={Blog} alt="blog" />
+                      <img src={count?.blog[0]?.thumbnail} className="user-img" alt="blog" />
 
                       <div>
-                        <div className="inst-bt">Topic</div>
+                        
+                        <div className="inst-bt">{count?.blog[0]?.title}</div>
                         <div className="inst-bp">Published 30 Nov 2021</div>
                       </div>
                     </div>

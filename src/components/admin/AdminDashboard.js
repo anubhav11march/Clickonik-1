@@ -9,25 +9,6 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../../utils/userContext";
 import axios from "../../utils/axios";
 
-const Blog = () => {
-  return (
-    <div className="admind-blog">
-      <img src={BlogImg} alt="blog" />
-      <div className="admind-blogc">
-        <div className="admind-blogt">Topic</div>
-        <div className="admind-blogb">
-          Lorem ipsum dolor sit amet, con se ctetur adipiscing elit. Tellus
-          pretium mauris, at blandit massa....more
-        </div>
-        <div className="admind-ar">
-          <div className="admind-rej">Reject</div>
-          <div className="admind-app">Approve</div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const Comment = ({ comment, id, updateCommentList }) => {
   const rejectComment = async (commentId) => {
     try {
@@ -85,21 +66,27 @@ const Comment = ({ comment, id, updateCommentList }) => {
   );
 };
 
-function AdminDashboard() {
+const AdminDashboard = () => {
   const navigate = useNavigate();
   const { user, isLoading } = useContext(UserContext);
   const [comments, setComments] = useState([]);
   const [sidebarShow, setSidebarShow] = useState(false);
+  const [userBlogs, setUserBlogs] = useState([]);
+  const [hasMoreUserBlogs, setHasMoreUserBlogs] = useState(true);
+  const [userBlogIndex] = useState(0);
 
   const updateCommentList = (commentId) => {
     setComments(comments.filter((comment) => comment?._id !== commentId));
   };
 
+ 
+
+  
+
   useEffect(() => {
     const getAllComments = async () => {
       try {
         const res = await axios.get("/api/admin/comment/0");
-        console.log(res);
         if (res?.data?.code !== 200) return;
         setComments(res?.data?.data);
       } catch (err) {
@@ -109,8 +96,45 @@ function AdminDashboard() {
     getAllComments();
   }, []);
 
+  useEffect(() => {
+    const getUserBlogs = async () => {
+      try {
+        const res = await axios.get(
+          `api/admin/blog?blogIndex=0&isGuestBlogs=false`
+        );
+        console.log(res);
+        if (res?.data?.code !== 200) return;
+        if (res?.data?.data?.length < 1) {
+          setHasMoreUserBlogs(false);
+          return;
+        }
+        setUserBlogs((userBlogs) => [...userBlogs, ...res?.data?.data]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (!hasMoreUserBlogs) return;
+    getUserBlogs(userBlogIndex);
+  }, [hasMoreUserBlogs, userBlogIndex]);
+
   if (!isLoading && !user?.isAdmin) navigate("/");
   if (isLoading) return null;
+
+
+
+  const acceptbtn = async (_id) => {
+    try {
+      const res = await axios.put(`api/admin/blog/${_id}`);
+      if (res?.data?.code !== 200) {
+        alert(res?.data?.message);
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setUserBlogs(userBlogs.filter((userBlog) => userBlog._id !== _id));
+   
+  };
 
   return (
     <>
@@ -125,9 +149,27 @@ function AdminDashboard() {
           <Col lg={8}>
             <div className="admind-ablog">
               <div className="admind-abhead">Blogs</div>
-              <Blog />
-              <Blog />
-              <Blog />
+              {userBlogs.slice(0,3).map((blog, id) => {
+                return (
+                  <div className="admind-blog" key={id}>
+                    <img
+                      src={blog?.thumbnail ? blog.thumbnail : BlogImg}
+                      alt="blog"
+                      className="adminb-img"
+                    />
+                    <div className="admind-blogc">
+                      <div className="admind-blogt">{blog?.title}</div>
+                      <div className="admind-blogb">
+                        {blog?.blogText?.slice(0, 80)}
+                      </div>
+                      <div className="admind-ar">
+                        <div className="admind-rej">Reject</div>
+                        <div className="admind-app" onClick={() => acceptbtn(blog._id)}>Approve</div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
               <div
                 className="admind-show"
                 onClick={() => navigate("/admin/blogs")}
@@ -160,6 +202,6 @@ function AdminDashboard() {
       </Container>
     </>
   );
-}
+};
 
 export default AdminDashboard;

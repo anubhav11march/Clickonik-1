@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Footer from "../common/Footer";
 import Navbarr from "../common/Navbarr";
@@ -8,6 +8,8 @@ import TextEditor from "../common/TextEditor";
 import "./Submit.css";
 import axios from "../../utils/axios";
 import { storage } from "../../utils/firebaseConfig";
+import {  toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Submit() {
   const navigate = useNavigate();
@@ -20,6 +22,9 @@ function Submit() {
   const [category, setCategory] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewImg, setPreviewImg] = useState(null);
+  
+
+ 
 
   const handleAuthorName = (e) => {
     setAuthorName(e.target.value);
@@ -38,7 +43,7 @@ function Submit() {
   };
 
   const handleSubmit = (e) => {
-    // console.log(body, typeof body);
+    
     e.preventDefault();
     if (!selectedImage) {
       alert("please select thumbnail");
@@ -102,6 +107,23 @@ function Submit() {
     }
     navigate('/blogs')
   };
+
+  useEffect(() => {
+
+    toast.info(<div className="Toast-notify">Start Your Blogging Journey by Creating New Account on Clickonik</div>,{
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
+
+
+  },[])
+
+
 
   return (
     <>
@@ -174,11 +196,14 @@ function Submit() {
             <button type="submit" className="submit-btn2">
               Submit
             </button>
+           
           </form>
         </div>
         {preview === true && (
           <Preview title={title} blog={blog} blogText={blogText} />
         )}
+       
+            <ToastContainer />
       </Container>
       <Footer />
     </>

@@ -100,11 +100,11 @@ function ParticularBlog() {
                 <span>
                   <img src={Views} alt="views" className="pb-sm" />
                 </span>
-                102
+                {userdata?.data?.viewCount}
                 <span>
                   <img src={Share} alt="share" className="pb-sm" />
                 </span>
-                14
+                {userdata?.data?.shareCount}
               </div>
             </div>
             <div className="pb-sec3">

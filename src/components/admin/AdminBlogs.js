@@ -41,8 +41,9 @@ function AdminBlogs() {
     const getGuestBlogs = async () => {
       try {
         const res = await axios.get(
-          "api/admin/blog?blogIndex=0&isGuestBlogs=true"
+          `api/admin/blog?blogIndex=${guestBlogIndex}&isGuestBlogs=true`
         );
+        //  console.log(res);
         if (res?.data?.code !== 200) return;
         if (res?.data?.data?.length < 1) {
           setHasMoreGuestBlogs(false);
@@ -61,9 +62,8 @@ function AdminBlogs() {
     const getUserBlogs = async () => {
       try {
         const res = await axios.get(
-          `api/admin/blog?blogIndex=0&isGuestBlogs=false`
+          `api/admin/blog?blogIndex=${userBlogIndex}&isGuestBlogs=false`
         );
-        console.log(res);
         if (res?.data?.code !== 200) return;
         if (res?.data?.data?.length < 1) {
           setHasMoreUserBlogs(false);
@@ -88,7 +88,6 @@ function AdminBlogs() {
         alert(res?.data?.message);
         return;
       }
-      console.log(guestBlogIndex);
     } catch (err) {
       console.log(err);
     }

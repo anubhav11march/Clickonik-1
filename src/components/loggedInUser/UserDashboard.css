@@ -32,20 +32,63 @@
 }
 
 .userd-blog {
-  display: flex;
-  padding-bottom: 1em;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px;
+  height: 100%;
+}
+#item-0 {
+  grid-row-start: 2;
+  grid-column-start: 1;
+  grid-row-end: 4;
+  grid-column-end: 2;
+  width: 210px;
+  height: 170px;
+}
+#item-1 {
+  grid-row-start: 2;
+  grid-column-start: 2;
+  grid-row-end: 3;
+  grid-column-end: 3;
+  margin-left: 15px;
+}
+#item-2 {
+  margin-top: -30px;
+  grid-row-start: 3;
+  grid-column-start: 2;
+  grid-row-end: 4;
+  margin-left: 15px;
+  grid-column-end: 5;
+}
+#item-3 {
+  grid-row-start: 4;
+  grid-column-start: 2;
+  color: #4468e2;
+  grid-row-end: 5;
+  grid-column-end: 5;
+  margin-left: 15px;
+  font-size: 23px;
+  margin-top: -40px;
+}
+.more-text {
+  color: #4468e2;
 }
 
-.userd-blogc {
-  padding: 1em;
+.item-share {
+  margin-left: 33px;
+}
+.item-comments {
+  float: right;
+  margin-top: 5px;
+}
+.item-comments-span {
+  float: right;
+  margin-right: 135px;
 }
 
-.userd-blogb {
-  color: #5b5b5b;
-  font-size: 1.4rem;
-  font-weight: 400;
-  padding: 1em 0em;
-}
+
+
 
 .userd-blogi {
   font-size: 1.8rem;
@@ -55,9 +98,7 @@
   justify-content: space-between;
 }
 
-.userd-pad > span {
-  padding: 0em 1em 0em 0.5em;
-}
+
 
 .userd-show {
   color: #cbcbcb;
@@ -104,14 +145,55 @@
   font-size: 1.8rem;
 }
 
+@media (max-width: 1400px) {
+  .item-comments-span {
+    margin-right: 40px;
+  }
+}
+@media (max-width: 1200px) {
+  .item-comments-span {
+    margin-right: 20px;
+  }
+  #item-3 {
+    grid-column-end: 6 !important;
+  
+}}
+
+@media (max-width: 990px) {
+  .item-comments-span {
+    margin-right: 20px;
+  }
+  #item-3 {
+    grid-column-end: 5 !important;
+  
+}
+}
+@media (max-width: 769.9px) {
+  .item-comments-span {
+    margin-right: 80px;
+  }
+  #item-3 {
+    grid-row-start: 5 !important;
+    grid-column-start: 1 !important;
+    margin-left: 50px;
+  
+}
+
+}
 @media (max-width: 992px) {
   .userd-comments {
     margin-top: 2em;
   }
 }
 
-@media (max-width: 578px) {
+@media (max-width: 500.9px) {
   .userd-blog {
-    flex-direction: column;
+    display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 0px;
+  gap: 0px;
+  height: 100%;
   }
 }
+
