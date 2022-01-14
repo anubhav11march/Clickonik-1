@@ -15,16 +15,16 @@
   cursor: pointer;
 }
 
-.contact-main {
+.coupon-main {
   padding-top: 10px;
 }
 
-.contact-input::placeholder {
+.coupon-input::placeholder {
   font-size: 2rem;
   color: #cbcbcb;
 }
 
-.contact-input {
+.coupon-input {
   display: block;
   font-size: 2rem;
   width: 100%;
@@ -35,7 +35,7 @@
   margin-bottom: 1em;
 }
 
-.contact-btn {
+.coupon-btn {
   font-size: 2rem;
   color: white;
   font-weight: 600;
@@ -68,7 +68,7 @@
   width: 191px;
   cursor: pointer;
 }
-.contact-img {
+.coupon-img {
   width: 160px;
   height: 150px;
   overflow: hidden;
@@ -83,7 +83,7 @@
 }
 
 @media (max-width: 1200.9px) {
-  .contact-img {
+  .coupon-img {
     margin-left: -18px;
   }
   .selector-image {
@@ -92,7 +92,7 @@
 }}
 
 @media (max-width: 991.9px) {
-  .contact-img {
+  .coupon-img {
     margin-left: 213px;
   }
   .selector-image {
@@ -101,10 +101,10 @@
 }}
 
 @media (max-width: 767.9px) {
-  .contact-img {
+  .coupon-img {
     margin-left: 140px;
   }
-  .contact-btn {
+  .coupon-btn {
    left: 30%;
     right: 50%;
     width: 225px;
@@ -120,10 +120,10 @@
 
 }
 @media (max-width: 550.9px) {
-  .contact-img {
+  .coupon-img {
     margin-left: 120px;
   }
-  .contact-btn {
+  .coupon-btn {
    left: 30%;
     right: 50%;
     width: 225px;
@@ -133,10 +133,10 @@
 }
 }
 @media (max-width: 450.9px) {
-  .contact-img {
+  .coupon-img {
     margin-left: 80px;
   }
-  .contact-btn {
+  .coupon-btn {
     left: 25%;
     right: 50%;
     width: 190px;

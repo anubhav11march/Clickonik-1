@@ -144,7 +144,7 @@ const AdminAddCoupons = () => {
           <div className="adminv-shead">What are you doing today ?</div>
           <div className="adminb-ablog">
             <div className="adminb-gu">
-              <Container className="contact-main">
+              <Container className="coupon-main">
                 <Row>
                   <Col lg={2} className="order-lg-2">
                     <div className="userp-sec1" 
@@ -153,13 +153,13 @@ const AdminAddCoupons = () => {
                         <img
                           src={uploadCoupon}
                           alt="uploadCoupon"
-                          className="contact-img"
+                          className="coupon-img"
                         />
                       ) : (
                         <img
                           src={preview}
                           alt="uploadCoupon"
-                          className="contact-img"
+                          className="coupon-img"
                         />
                       )}
                       <span className="upload-txt"> Upload Image</span>
@@ -174,7 +174,7 @@ const AdminAddCoupons = () => {
                     </div>
                   </Col>
                   <Col lg={10} className="order-lg-2">
-                    <div className="contact-form">
+                    <div className="coupon-form">
                       <form>
                         <input
                           type="text"
@@ -183,7 +183,7 @@ const AdminAddCoupons = () => {
                           value={inputData.BrandName}
                           onChange={handleInputs}
                           required
-                          className="contact-input"
+                          className="coupon-input"
                         />
                         <input
                           type="text"
@@ -192,7 +192,7 @@ const AdminAddCoupons = () => {
                           value={inputData.Title}
                           onChange={handleInputs}
                           required
-                          className="contact-input"
+                          className="coupon-input"
                         />
                         <input
                           type="text"
@@ -201,7 +201,7 @@ const AdminAddCoupons = () => {
                           value={inputData.WebsiteLink}
                           onChange={handleInputs}
                           required
-                          className="contact-input"
+                          className="coupon-input"
                         />
                         <textarea
                           rows="5"
@@ -210,7 +210,7 @@ const AdminAddCoupons = () => {
                           required
                           name="Bio"
                           value={inputData.Bio}
-                          className="contact-input"
+                          className="coupon-input"
                         />
                         <div className="From-to-input">
                           <input
@@ -221,7 +221,7 @@ const AdminAddCoupons = () => {
                             value={inputData.From}
                             onChange={handleInputs}
                             required
-                            className="contact-input"
+                            className="coupon-input"
                           />
                           <input
                             className="mb-4"
@@ -231,7 +231,7 @@ const AdminAddCoupons = () => {
                             value={inputData.To}
                             onChange={handleInputs}
                             required
-                            className="contact-input"
+                            className="coupon-input"
                           />
                           <input
                             className="mb-4"
@@ -241,7 +241,7 @@ const AdminAddCoupons = () => {
                             value={inputData.Couponcode}
                             onChange={handleInputs}
                             required
-                            className="contact-input"
+                            className="coupon-input"
                           />{" "}
                           <input
                             className="mb-4"
@@ -251,12 +251,12 @@ const AdminAddCoupons = () => {
                             value={inputData.deal}
                             onChange={handleInputs}
                             required
-                            className="contact-input"
+                            className="coupon-input"
                           />
                         </div>
                         <button
                           type="submit"
-                          className="contact-btn"
+                          className="coupon-btn"
                           onClick={handleImageUploadAndSave}
                         >
                           Submit
