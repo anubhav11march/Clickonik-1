@@ -31,14 +31,12 @@ const AdminAddCoupons = () => {
     name = e.target.name;
     value = e.target.value;
     setInputData({ ...inputData, [name]: value });
-    console.log(inputData);
   };
 
   if (!isLoading && !user?.isAdmin) navigate("/");
   if (isLoading) return null;
   const handleClick = () => {
     image.current.click();
-    console.log("s");
   };
 
   const handleImageSelect = (e) => {
@@ -147,8 +145,7 @@ const AdminAddCoupons = () => {
               <Container className="coupon-main">
                 <Row>
                   <Col lg={2} className="order-lg-2">
-                    <div className="userp-sec1" 
-                    onClick={()=>handleClick}>
+                    <div className="userp-sec1" onClick={() => handleClick}>
                       {preview == null ? (
                         <img
                           src={uploadCoupon}
@@ -215,8 +212,8 @@ const AdminAddCoupons = () => {
                         <div className="From-to-input">
                           <input
                             className="mb-4"
-                            type="text"
-                            placeholder="From (yyyy-mm-dd)"
+                            type="date"
+                            // placeholder="From (yyyy-mm-dd)"
                             name="From"
                             value={inputData.From}
                             onChange={handleInputs}
@@ -225,8 +222,8 @@ const AdminAddCoupons = () => {
                           />
                           <input
                             className="mb-4"
-                            type="text"
-                            placeholder="To (yyyy-mm-dd)"
+                            type="date"
+                            // placeholder="To (yyyy-mm-dd)"
                             name="To"
                             value={inputData.To}
                             onChange={handleInputs}

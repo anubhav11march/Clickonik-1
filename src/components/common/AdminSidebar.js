@@ -55,6 +55,14 @@ function AdminSidebar({ selected }) {
         >
           Coupons
         </li>
+        <li
+          className={`adminsb-li ${
+            selected === "categories" && "adminsb-active"
+          }`}
+          onClick={() => handleChange("/admin/categories")}
+        >
+          Categories
+        </li>
       </ul>
     </div>
   );

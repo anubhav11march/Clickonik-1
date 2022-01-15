@@ -21,6 +21,7 @@ import AdminComments from "./components/admin/AdminComments";
 import AdminVerifications from "./components/admin/AdminVerifications";
 import AdminCoupons from "./components/admin/AdminCoupons";
 import AdminAddCoupons from "./components/admin/AdminAddCoupons";
+import AdminCategories from "./components/admin/AdminCategories";
 import getUser from "./utils/getUser";
 import UserContext from "./utils/userContext";
 
@@ -53,6 +54,7 @@ function App() {
             <Route exact path="/admin/comments" element={<AdminComments />} />
             <Route exact path="/admin/coupons" element={<AdminCoupons />} />
             <Route exact path="/admin/addcoupons" element={<AdminAddCoupons />} />
+            <Route exact path="/admin/categories" element={<AdminCategories />} />
             <Route
               exact
               path="/admin/user-verification"

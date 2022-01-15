@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Footer from "../common/Footer";
 import Navbarr from "../common/Navbarr";
@@ -8,8 +8,8 @@ import TextEditor from "../common/TextEditor";
 import "./Submit.css";
 import axios from "../../utils/axios";
 import { storage } from "../../utils/firebaseConfig";
-import {  toast,ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Submit() {
   const navigate = useNavigate();
@@ -22,9 +22,21 @@ function Submit() {
   const [category, setCategory] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewImg, setPreviewImg] = useState(null);
-  
+  const [categorylist, setCategorylist] = useState([]);
 
- 
+  useEffect(() => {
+    function Getcategory() {
+      try {
+        axios.get("api/admin/blogCategory").then((response) => {
+          setCategorylist(response.data.data);
+          // if (response.data.code !== 200) throw history("/blogs");
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    Getcategory();
+  }, []);
 
   const handleAuthorName = (e) => {
     setAuthorName(e.target.value);
@@ -43,7 +55,6 @@ function Submit() {
   };
 
   const handleSubmit = (e) => {
-    
     e.preventDefault();
     if (!selectedImage) {
       alert("please select thumbnail");
@@ -105,25 +116,25 @@ function Submit() {
     } catch (err) {
       console.log(err);
     }
-    navigate('/blogs')
+    navigate("/blogs");
   };
 
   useEffect(() => {
-
-    toast.info(<div className="Toast-notify">Start Your Blogging Journey by Creating New Account on Clickonik</div>,{
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      });
-
-
-  },[])
-
-
+    toast.info(
+      <div className="Toast-notify">
+        Start Your Blogging Journey by Creating New Account on Clickonik
+      </div>,
+      {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
+  }, []);
 
   return (
     <>
@@ -182,12 +193,13 @@ function Submit() {
               <option value="" disabled>
                 Category
               </option>
-              <option value="Technology">Technology</option>
-              <option value="Scifi">Scifi</option>
-              <option value="Educational">Educational</option>
-              <option value="Horror">Horror</option>
-              <option value="Drama">Drama</option>
-              <option value="Kids">Kids</option>
+              {categorylist.map((data, id) => {
+                return (
+                  <option value={data} key={id}>
+                    {data}
+                  </option>
+                );
+              })}
             </select>
             <TextEditor setBlog={setBlog} setBlogText={setBlogText} />
             <button className="submit-btn1" onClick={() => setPreview(true)}>
@@ -196,14 +208,13 @@ function Submit() {
             <button type="submit" className="submit-btn2">
               Submit
             </button>
-           
           </form>
         </div>
         {preview === true && (
           <Preview title={title} blog={blog} blogText={blogText} />
         )}
-       
-            <ToastContainer />
+
+        <ToastContainer />
       </Container>
       <Footer />
     </>

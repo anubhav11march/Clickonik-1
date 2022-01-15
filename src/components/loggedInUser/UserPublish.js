@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Footer from "../common/Footer";
 import Preview from "../common/Preview";
@@ -23,6 +23,21 @@ function UserPublish() {
   const [category, setCategory] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewImg, setPreviewImg] = useState(null);
+  const [categorylist, setCategorylist] = useState([]);
+
+  useEffect(() => {
+    function Getcategory() {
+      try {
+        axios.get("api/admin/blogCategory").then((response) => {
+          setCategorylist(response.data.data);
+          // if (response.data.code !== 200) throw history("/blogs");
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    Getcategory();
+  }, []);
 
   if (!isLoading && !user) navigate("/");
   if (isLoading) return null;
@@ -108,7 +123,7 @@ function UserPublish() {
   };
 
   const postUserBlog = async (data) => {
-    console.log(data)
+    console.log(data);
     try {
       const res = await axios.post("api/user/blog", data);
       console.log(res);
@@ -116,7 +131,7 @@ function UserPublish() {
     } catch (err) {
       console.log(err);
     }
-    navigate('/blogs')
+    navigate("/blogs");
   };
 
   return (
@@ -166,12 +181,13 @@ function UserPublish() {
               <option value="" disabled>
                 Category
               </option>
-              <option value="Technology">Technology</option>
-              <option value="Scifi">Scifi</option>
-              <option value="Educational">Educational</option>
-              <option value="Horror">Horror</option>
-              <option value="Drama">Drama</option>
-              <option value="Kids">Kids</option>
+              {categorylist.map((data, id) => {
+                return (
+                  <option value={data} key={id}>
+                    {data}
+                  </option>
+                );
+              })}
             </select>
             <TextEditor setBlog={setBlog} setBlogText={setBlogText} />
             <button className="publish-btn1" onClick={handleDraft}>
