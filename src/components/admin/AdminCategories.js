@@ -60,15 +60,18 @@ const AdminCategories = () => {
     setShow(false);
     setPost(true);
     setInput("");
-    if(color){
-    function Delete() {
-      setList(list.filter((list) => remove !== list));
+    if (color) {
+      function Delete() {
+        setList(list.filter((list) => remove !== list));
+      }
+      Delete();
     }
-    Delete();}
   };
 
   useEffect(() => {
     if (post === true) {
+      setPost(false);
+
       const data = {
         blogCategory: list,
       };
@@ -78,9 +81,7 @@ const AdminCategories = () => {
       } catch (err) {
         console.log(err);
       }
-      alert('Blog Category updated')
     }
-    setPost(false);
   }, [post]);
 
   if (!isLoading && !user?.isAdmin) navigate("/");
