@@ -1,73 +1,123 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./AdminCoupons.css";
 import { Col, Row, Container } from "react-bootstrap";
-import Brush from "../../assets/images/brush.svg";
+import axios from "../../utils/axios";
+import { useNavigate } from "react-router-dom";
+const AdminCouponCard = (more) => {
+  const [data, setData] = useState();
+  const [width, setWidth] = useState(window.innerWidth);
+  const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
+  const GetData = () => {
+    try {
+      axios
+        .get(`api/admin/coupon?couponIndex=${index}&isExpired=false`)
+        .then((response) => {
+          setData([response.data.data]);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-const AdminCouponCard = () => {
+  useEffect(() => {
+    if (more.more === true || more.more === false) {
+      setIndex(index + 1);
+      console.log(index)
+      try {
+        axios
+          .get(`api/admin/coupon?couponIndex=${index+1}&isExpired=false`)
+          .then((response) => {
+            console.log(response);
+            if (response.data.data.length === 0) {
+              alert("No More Active Coupon ");
+            } else {
+              setData([...data, response.data.data]);
+              console.log(response);
+            }
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [more]);
+
+  //
+  useEffect(() => {
+    GetData();
+  }, []);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+  });
+
+  const Delete = async (coupon) => {
+    try {
+      const res = await axios.delete(`api/admin/coupon/${coupon._id}`);
+      alert(res?.data?.message);
+    } catch (err) {
+      console.log(err);
+    }
+    function Delete() {
+      setData(data.flat().filter((data) => coupon !== data));
+    }
+    Delete();
+  };
+
   return (
     <Container>
-      <Row lg={3} md={2}>
-        <Col>
-          <div className="cc-cards">
-            <img src={Brush} alt="brush" />
-            <div className="cc-cdh">
-              Up to Rs.750+ Off SUGAR Cosmetics Black Friday Sale
-            </div>
-            <div className="cc-cdsh">
-              Head over to the SUGAR Cosmetics website and score up to Rs.750
-              off this Black Friday
-            </div>
-            <div className="web-font">
-              <p className="text-visit">Visit Website</p>
-              <p className="text-days">7 Days Left</p>
-            </div>
-            <div className="btn-edit-delete">
-              <button className="edit-btn">Edit</button>
-              <button className="delete-btn">delete</button>
-            </div>
-          </div>
-        </Col>
-
-        <Col>
-          <div className="cc-cards">
-            <img src={Brush} alt="brush" />
-            <div className="cc-cdh">
-              Up to Rs.750+ Off SUGAR Cosmetics Black Friday Sale
-            </div>
-            <div className="cc-cdsh">
-              Head over to the SUGAR Cosmetics website and score up to Rs.750
-              off this Black Friday
-            </div>
-            <div className="web-font">
-              <p className="text-visit">Visit Website</p>
-              <p className="text-days">7 Days Left</p>
-            </div>
-            <div className="btn-edit-delete">
-              <button className="edit-btn">Edit</button>
-              <button className="delete-btn">delete</button>
-            </div>
-          </div>
-        </Col>
-        <Col>
-          <div className="cc-cards">
-            <img src={Brush} alt="brush" />
-            <div className="cc-cdh">
-              Up to Rs.750+ Off SUGAR Cosmetics Black Friday Sale
-            </div>
-            <div className="cc-cdsh">
-              Head over to the SUGAR Cosmetics website and score up to Rs.750
-              off this Black Friday
-            </div>
-            <div className="web-font">
-              <p className="text-visit">Visit Website</p>
-              <p className="text-days">7 Days Left</p>
-            </div>
-            <div className="btn-edit-delete">
-              <button className="edit-btn">Edit</button>
-              <button className="delete-btn">delete</button>
-            </div>
-          </div>
-        </Col>
+      <Row lg={true}>
+        {data?.flat()?.map((data, id) => {
+          let ms = data?.to - data?.from;
+          let day = ms / 86400000;
+          let coupon = data;
+          return (
+            <>
+              <Col lg={width > 1200 ? 4 : 6} md={12} key={id}>
+                <div className="cc-cards">
+                  <div className="ccoupon-image">
+                    <img
+                      src={data.image}
+                      alt={data.title}
+                      className="card-coupon-img"
+                    />
+                  </div>
+                  <div className="cc-cdh">{data.title.slice(0, 60)}</div>
+                  <div className="cc-cdsh">{data.bio.slice(0, 90)}...</div>
+                  <div className="web-font">
+                    <a
+                      href={data.websiteLink}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      className="text-visit"
+                    >
+                      Visit Website
+                    </a>
+                    <p className="text-days">{day} Days Left</p>
+                  </div>
+                  <div className="btn-edit-delete">
+                    <button
+                      className="edit-btn"
+                      onClick={() =>
+                        navigate(`/admin/editcoupons`, {
+                          state: { coupon: coupon },
+                        })
+                      }
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => Delete(coupon)}
+                    >
+                      delete
+                    </button>
+                  </div>
+                </div>
+              </Col>
+            </>
+          );
+        })}
       </Row>
     </Container>
   );

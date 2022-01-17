@@ -6,56 +6,30 @@ import AdminSidebar from "../common/AdminSidebar";
 import { IoSearchOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../utils/userContext";
-import axios from "../../utils/axios";
 import AdminCouponCard from "../admin/AdminCouponCard";
 import AdminExpireCard from "../admin/AdminExpireCard";
 
 const AdminCoupons = () => {
   const [sidebarShow, setSidebarShow] = useState(false);
+  const[more, setMore]=useState();
   const navigate = useNavigate();
   const { user, isLoading } = useContext(UserContext);
-  const [verifyreq, setVerifyreq] = useState();
-
-  // const rejectbtn = async (reject_id) => {
-  //   try {
-  //     const res = await axios.delete(
-  //       `api/admin/requestVerification/${reject_id}`
-  //     );
-  //     if (res?.data?.code !== 200) {
-  //       alert(res?.data?.message);
-  //       return;
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  //   if (updatestate === 0) {
-  //     setUpdatestate(1);
-  //   } else {
-  //     setUpdatestate(0);
-  //   }
-  // };
-  //     const GetreqData = () => {
-  //       try {
-  //         axios
-  //           .get("api/admin/coupon")
-  //           .then((response) => {
-  //             setVerifyreq(response.data);
-  //           });
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     };
-  // console.log(verifyreq)
-  //     useEffect(() => {
-  //       GetreqData();
-  //     }, []);
-
-  // useEffect(() => {
-  //   GetreqData();
-  // }, [updatestate]);
 
   if (!isLoading && !user?.isAdmin) navigate("/");
   if (isLoading) return null;
+
+  const More=()=>{
+    setMore(true)
+    if (more===true){
+      setMore(false)
+    }
+  }
+  const ExpireMore=()=>{
+    setMore(0)
+    if (more===0){
+      setMore(1)
+    }
+  }
 
   return (
     <>
@@ -89,16 +63,19 @@ const AdminCoupons = () => {
           <div className="Trend-text">Trending Coupons</div>
         </div>
         <div className="adminv-card">
-          <AdminCouponCard />
+          <AdminCouponCard  />
         </div>
+        {/* <button className="More-coupon" onClick={More}>More Coupon</button> */}
         <div className="Trend-text">Active Coupons</div>
         <div className="adminv-card">
-          <AdminCouponCard />
+        <AdminCouponCard more={more} />
         </div>
+        <button className="More-coupon" onClick={More}>More Coupon</button>
         <div className="Trend-text">Expired Coupons</div>
         <div className="adminv-card">
-          <AdminExpireCard />
+          <AdminExpireCard more={more} />
         </div>
+        <button className="More-coupon" onClick={ExpireMore}>More Coupon</button>
       </Container>
     </>
   );

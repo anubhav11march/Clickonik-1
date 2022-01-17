@@ -103,6 +103,7 @@
 .userd-show {
   color: #cbcbcb;
   text-align: center;
+  cursor: pointer;
 }
 
 .userd-comments {

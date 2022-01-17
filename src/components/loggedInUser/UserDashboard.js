@@ -96,7 +96,13 @@ function UserDashboard() {
             <div className="userd-ablog">
               <div className="userd-abhead">Active Blogs</div>
               <ABlog />
-              <div className="userd-show">show all</div>
+              <div
+                className="userd-show"
+                onClick={() => navigate("/user/blogs")}
+              >
+                {" "}
+                show all
+              </div>
             </div>
           </Col>
           <Col lg={4}>
@@ -107,7 +113,7 @@ function UserDashboard() {
               <Comment />
               <div
                 className="userd-show"
-                onClick={() => navigate("/user/blogs")}
+                onClick={() => navigate("/user/comments")}
               >
                 show all
               </div>

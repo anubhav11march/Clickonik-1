@@ -50,10 +50,10 @@
 }
 .input-groupc {
   grid-row-start: 2;
-   grid-column-start: 2;
+  grid-column-start: 2;
 
-   grid-row-end: 3;
-   grid-column-end: 5;
+  grid-row-end: 3;
+  grid-column-end: 5;
 }
 .gridsystem {
   display: grid;
@@ -62,9 +62,9 @@
   gap: 0px;
   height: 100%;
 }
-.input-category{
+.input-category {
   width: 70%;
-  background: #F6F6F6;
+  background: #f6f6f6;
   outline: none;
   border: none;
   border-radius: 8px;
@@ -72,49 +72,44 @@
   margin-left: 12px;
   color: #00000080;
   font-weight: 500;
-
 }
 
-.adminc-input{
+.adminc-input {
   margin: 0px 20px 10px 159px;
 }
 
-.save-category-btn{
+.save-category-btn {
   padding: 20px;
   left: 37%;
   right: 50%;
   position: relative;
 }
 
-@media (max-width: 1400px){
+@media (max-width: 1400px) {
   .list-name {
     width: 190px;
   }
 }
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
   .list-name {
     width: 175px;
     margin: 0px 0px 0px 76px;
-
   }
   .adminc-input {
     margin: 0px 20px 10px 85px;
+  }
+
+  .save-category-btn {
+    left: 27%;
+  }
 }
 
-.save-category-btn {
-  left: 27%;
-
-}
-}
-
-
-@media (max-width: 767px){
-.list-name {
+@media (max-width: 767px) {
+  .list-name {
     width: 140px;
     margin: 0px 0px 0px 50px;
-}
-.adminc-input {
-  margin: 0px 20px 10px 53px;
-}
-
+  }
+  .adminc-input {
+    margin: 0px 20px 10px 53px;
+  }
 }

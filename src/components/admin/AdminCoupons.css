@@ -1,6 +1,6 @@
 .adminv-main {
   margin-top: 120px;
-  padding-bottom: 30px;
+  padding-bottom: 150px;
 }
 .adminv-greet {
   padding: 2em;
@@ -56,75 +56,148 @@
 .Trend-text {
   font-size: 22px;
   margin-top: 1.5em;
+  margin-bottom: 1em;
 }
 
 /* //CARD */
 
+.ccoupon-image {
+  height: 40%;
+  width: 100%;
+  margin-top: -10px;
+
+  grid-row-start: 1;
+  grid-column-start: 2;
+
+  grid-row-end: 2;
+  grid-column-end: 4;
+}
+.card-coupon-img {
+  width: 185px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 50%;
+}
 .adminv-card {
   font-size: 2.2rem;
   font-weight: 500;
-width: 100%;
-  /* display: flex; */
+  width: 100%;
+  padding-left: 15px;
 }
 
 .cc-cards {
   text-align: center;
   padding: 1em;
+  padding-left: 1em !important;
+  padding-right: 1em !important;
   background: #ffffff;
   font-size: 2.2rem;
   font-weight: 500;
   border-radius: 8px;
-  width: 90%;
-  margin-bottom: 3em;
-  margin: 25px;
-  height: 18em;
+  margin: 30px;
+  margin-left: 0px;
+  height: 19em;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0px;
+  overflow: hidden;
 }
+
 .cc-expire-cards {
   text-align: center;
   padding: 1em;
+  padding-left: 1em !important;
+  padding-right: 1em !important;
   background: #e1e8f8;
+  font-size: 2.2rem;
+  font-weight: 500;
   border-radius: 8px;
-  width: 90%;
-  margin-bottom: 3em;
-  margin: 25px;
-  height: 18em;
+  margin: 30px;
+  margin-left: 0px;
+  height: 19em;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0px;
+  overflow: hidden;
+}
+
+@media (max-width: 1200px) and (min-width: 1000px) {
+  .cc-cards {
+    width: 18em !important;
+  }
+  .cc-expire-cards {
+    width: 18em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .cc-cards {
+    height: 22em;
+  }
+  .cc-expire-cards {
+    height: 22em;
+  }
 }
 
 .cc-cdh {
   padding-top: 1em;
   font-size: 1.8rem;
   font-weight: 500;
+  grid-row-start: 2;
+  grid-column-start: 1;
+  grid-row-end: 3;
+  grid-column-end: 5;
+  grid-row-end: 2;
 }
 
 .cc-cdsh {
-  padding: 1em 0em;
+  margin-top: 80px;
+  padding: 0em 0em;
   font-size: 1.4rem;
   font-weight: 400;
   color: #a3a3a3;
+  grid-row-start: 2;
+  grid-column-start: 1;
+  grid-row-end: 3;
+  grid-column-end: 5;
 }
 .web-font {
   font-size: 15px;
   font-weight: 700;
-  /* color: #4468E2; */
-  display: flex;
-  justify-content: space-between;
+  margin-top: 10px;
+  grid-row-start: 4;
+  grid-column-start: 1;
+  grid-row-end: 3;
+  grid-column-end: 5;
 }
 .text-visit {
   color: #4468e2;
   float: left;
+  text-decoration: none;
 }
 .text-days {
   color: #000;
   float: right;
 }
+.text-expire-days {
+  color: #a3a3a3;
+  float: right;
+}
+
 .btn-edit-delete {
-  display: flex;
-  justify-content: space-between;
+  margin-top: 50px;
+  grid-row-start: 4;
+  grid-column-start: 1;
+  grid-row-end: 3;
+  grid-column-end: 5;
 }
 .delete-btn {
+  float: right;
   border: none;
   color: #ffffff;
-  background: #ea4335;
+  background: #f13d2c;
   box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
   border-radius: 8px;
   width: 120px;
@@ -133,6 +206,7 @@ width: 100%;
   height: 45px;
 }
 .edit-btn {
+  float: left;
   border: none;
   color: #ffffff;
   background: #c4c4c4;
@@ -142,4 +216,36 @@ width: 100%;
   font-size: 1.8rem;
   font-weight: 500;
   height: 45px;
+}
+.edit-btn:hover {
+  background: #858282;
+}
+
+.delete-btn:hover {
+  background: #a32c21;
+}
+@media (max-width: 500px) {
+  .delete-btn {
+    width: 90px;
+    height: 35px;
+  }
+  .edit-btn {
+    width: 90px;
+    height: 35px;
+  }
+}
+.More-coupon{
+  float: right;
+  border: none;
+  color: #ffffff;
+  background: #f13d2c;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  width: 200px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  height: 55px;
+}
+.More-coupon:hover {
+  background: #a32c21;
 }
