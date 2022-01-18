@@ -85,6 +85,7 @@ function About(props) {
     if (update === true) {
       postRating();
     }
+    setUpdate(false);
   }, [update]);
 
   return (

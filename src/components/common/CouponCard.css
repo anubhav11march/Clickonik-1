@@ -206,3 +206,8 @@
   display:flex;
   justify-content: center !important;
 }
+.Toast-success-copy{
+  font-size: 15px;
+ font-style: italic;
+ font-family: 'Times New Roman', Times, serif;
+}
