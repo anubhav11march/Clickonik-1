@@ -54,6 +54,15 @@ const AdminExpireCard = (more) => {
     }
     function Delete() {
       setData(data.flat().filter((data) => coupon !== data));
+      try {
+        axios
+          .get(`api/admin/coupon?couponIndex=${index}&isExpired=true`)
+          .then((response) => {
+            setData([response.data.data]);
+          });
+      } catch (err) {
+        console.log(err);
+      }
     }
     Delete();
 
@@ -82,7 +91,7 @@ const AdminExpireCard = (more) => {
                     />
                   </div>
                   <div className="cc-cdh">{data.title.slice(0, 55)}</div>
-                  <div className="cc-cdsh">{data.bio.slice(0, 80)}...</div>
+                  <div className="cc-cdsh">{data.bio.slice(0, 70)}...</div>
                   <div className="web-font">
                     <a
                       href={data.websiteLink}

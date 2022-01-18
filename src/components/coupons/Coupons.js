@@ -57,11 +57,8 @@ function Coupons() {
         </div>
         <Row>
           <CouponCard />
-          <CouponCard />
-          <CouponCard />
-          <CouponCard />
-          <CouponCard />
-          <CouponCard />
+         
+
         </Row>
         <div className="coupon-heading">
           Popular stores and brands you can
