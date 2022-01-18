@@ -81,7 +81,7 @@ const AdminExpireCard = (more) => {
                       className="card-coupon-img"
                     />
                   </div>
-                  <div className="cc-cdh">{data.title.slice(0, 60)}</div>
+                  <div className="cc-cdh">{data.title.slice(0, 55)}</div>
                   <div className="cc-cdsh">{data.bio.slice(0, 80)}...</div>
                   <div className="web-font">
                     <a

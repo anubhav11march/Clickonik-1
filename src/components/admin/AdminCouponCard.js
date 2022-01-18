@@ -23,17 +23,15 @@ const AdminCouponCard = (more) => {
   useEffect(() => {
     if (more.more === true || more.more === false) {
       setIndex(index + 1);
-      console.log(index)
+
       try {
         axios
-          .get(`api/admin/coupon?couponIndex=${index+1}&isExpired=false`)
+          .get(`api/admin/coupon?couponIndex=${index + 1}&isExpired=false`)
           .then((response) => {
-            console.log(response);
             if (response.data.data.length === 0) {
               alert("No More Active Coupon ");
             } else {
               setData([...data, response.data.data]);
-              console.log(response);
             }
           });
       } catch (err) {
@@ -82,7 +80,7 @@ const AdminCouponCard = (more) => {
                       className="card-coupon-img"
                     />
                   </div>
-                  <div className="cc-cdh">{data.title.slice(0, 60)}</div>
+                  <div className="cc-cdh">{data.title.slice(0, 55)}</div>
                   <div className="cc-cdsh">{data.bio.slice(0, 90)}...</div>
                   <div className="web-font">
                     <a
