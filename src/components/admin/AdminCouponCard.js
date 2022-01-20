@@ -19,7 +19,8 @@ const AdminCouponCard = (more) => {
       console.log(err);
     }
   };
-  console.log(data);
+
+  console.log(data)
 
   useEffect(() => {
     if (more.more === true || more.more === false) {

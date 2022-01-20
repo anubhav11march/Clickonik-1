@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Coupons.css";
 import Shoes from "../../assets/images/shoes.svg";
 import Flag from "../../assets/images/flag.svg";
@@ -6,8 +6,51 @@ import { Container, Row, Col } from "react-bootstrap";
 import CouponCard from "../common/CouponCard";
 import Navbarr from "../common/Navbarr";
 import Footer from "../common/Footer";
-
+import { useNavigate } from "react-router-dom";
+import axios from "../../utils/axios";
 function Coupons() {
+  const [data, setData] = useState();
+  const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
+  const GetData = () => {
+    try {
+      axios
+        .get(`api/user/coupon?couponIndex=${index}&isExpired=false`)
+        .then((response) => {
+          setData(response.data.data);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    GetData();
+  }, []);
+
+  const More = () => {
+    setIndex(index + 1);
+  };
+
+  useEffect(() => {
+    if (index > 0) {
+      try {
+        axios
+          .get(`api/user/coupon?couponIndex=${index}&isExpired=false`)
+          .then((response) => {
+            if (response.data.data.length === 0) {
+              alert("No More Brands ");
+            } else {
+              setData([...data, response.data.data]);
+            }
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [index]);
+
+  const unique = [...new Set(data?.flat().map((data) => data.brandName))];
+
   return (
     <>
       <Navbarr />
@@ -57,33 +100,34 @@ function Coupons() {
         </div>
         <Row>
           <CouponCard />
-         
-
         </Row>
         <div className="coupon-heading">
           Popular stores and brands you can
           <span> save money on with Clickonik</span>
         </div>
         <Row>
-          <Col lg={4}>
-            <div className="coupon-brand">Brand</div>
-          </Col>
-          <Col lg={4}>
-            <div className="coupon-brand">Brand</div>
-          </Col>
-          <Col lg={4}>
-            <div className="coupon-brand">Brand</div>
-          </Col>
-          <Col lg={4}>
-            <div className="coupon-brand">Brand</div>
-          </Col>
-          <Col lg={4}>
-            <div className="coupon-brand">Brand</div>
-          </Col>
-          <Col lg={4}>
-            <div className="coupon-brand">Brand</div>
-          </Col>
+          {unique.map((Brand, id) => {
+            return (
+              <>
+                <Col lg={4} key={id}>
+                  <div
+                    className="coupon-brand"
+                    onClick={() =>
+                      navigate(`/coupons/brand`, {
+                        state: { Brand: Brand },
+                      })
+                    }
+                  >
+                    {Brand}
+                  </div>
+                </Col>
+              </>
+            );
+          })}
         </Row>
+        <button className="More-coupon-guest" onClick={More}>
+          More Brands
+        </button>
         <div className="coupon-heading">
           <span>Clickonik</span> helps people buy stuff cheaper
           <span> in XX countries</span> around the world!

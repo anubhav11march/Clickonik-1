@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useRef, useMemo } from "react";
 import "./AdminAddCoupons.css";
 import uploadCoupon from "../../assets/images/uploadCoupon.svg";
 import { Container, Row, Col } from "react-bootstrap";
@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../../utils/userContext";
 import axios from "../../utils/axios";
 import { storage } from "../../utils/firebaseConfig";
+import Select from "react-select";
+import countryList from "react-select-country-list";
 
 const AdminAddCoupons = () => {
   const image = useRef(null);
@@ -16,6 +18,8 @@ const AdminAddCoupons = () => {
   const { user, isLoading } = useContext(UserContext);
   const [selectedImage, setSelectedImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [countryvalue, setCountryValue] = useState("");
+  const options = useMemo(() => countryList().getData(), []);
   const [inputData, setInputData] = useState({
     BrandName: "",
     Title: "",
@@ -121,6 +125,7 @@ const AdminAddCoupons = () => {
       image: url,
       from: From,
       to: To,
+      country: countryvalue?.label,
     };
     try {
       const res = await axios.post("api/admin/coupon", data);
@@ -130,6 +135,10 @@ const AdminAddCoupons = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const changeHandler = (Cvalue) => {
+    setCountryValue(Cvalue);
   };
 
   return (
@@ -245,12 +254,29 @@ const AdminAddCoupons = () => {
                             type="text"
                             placeholder="Deal"
                             name="Deal"
-                            value={inputData.deal}
+                            value={inputData.Deal}
                             onChange={handleInputs}
                             required
                             className="coupon-input"
                           />
                         </div>
+
+                        <Select
+                          placeholder="Select Country"
+                          className="coupon-input"
+                          options={options}
+                          value={countryvalue}
+                          onChange={changeHandler}
+                          theme={(theme) => ({
+                            ...theme,
+                            borderRadius: 0,
+                            colors: {
+                              ...theme.colors,
+                              neutral0: "#f1f1f1",
+                            },
+                          })}
+                        />
+
                         <button
                           type="submit"
                           className="coupon-btn"

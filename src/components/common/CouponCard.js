@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./CouponCard.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Col,
   Container,
@@ -11,13 +11,15 @@ import {
   InputGroup,
   FormControl,
 } from "react-bootstrap";
-
 import axios from "../../utils/axios";
+
 function CouponCard() {
   const [data, setData] = useState();
   const [show, setShow] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
   const [getCoupon, setGetCoupon] = useState();
-  const[state, setState]= useState(false)
+  const [state, setState] = useState(false);
+  const [index, setIndex] = useState(0);
 
   const handleShow = (e) => {
     try {
@@ -27,24 +29,21 @@ function CouponCard() {
     } catch (err) {
       console.log(err);
     }
-    setState(true)
-
+    setState(true);
   };
 
-useEffect(() => {
- 
- if(state===true){
-   setShow(true);
-  show === true ? setShow(false) : setShow(true);}
-setState(false)
-},[state])
-
-
+  useEffect(() => {
+    if (state === true) {
+      setShow(true);
+      show === true ? setShow(false) : setShow(true);
+    }
+    setState(false);
+  }, [state]);
 
   const GetData = () => {
     try {
       axios
-        .get(`api/user/coupon?couponIndex=0&isExpired=false`)
+        .get(`api/user/coupon?couponIndex=${index}&isExpired=false`)
         .then((response) => {
           setData([response.data.data]);
         });
@@ -55,22 +54,47 @@ setState(false)
   useEffect(() => {
     GetData();
   }, []);
+  useEffect(() => {
+    setWidth(window.innerWidth);
+  });
 
+  const More = () => {
+    setIndex(index + 1);
+  };
 
-const CopyText=(e)=>{
-  navigator.clipboard.writeText(e)
-  toast.success( <div className="Toast-success-copy">Coupon Copied To ClipBoard!!</div>, {
-    backgroundColor: "Green",
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    });
-}
+  useEffect(() => {
+    if (index > 0) {
+      try {
+        axios
+          .get(`api/user/coupon?couponIndex=${index}&isExpired=false`)
+          .then((response) => {
+            if (response.data.data.length === 0) {
+              alert("No More Coupon ");
+            } else {
+              setData([...data, response.data.data]);
+            }
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [index]);
 
+  const CopyText = (e) => {
+    navigator.clipboard.writeText(e);
+    toast.success(
+      <div className="Toast-success-copy">Coupon Copied To ClipBoard!!</div>,
+      {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
+  };
 
   return (
     <Container>
@@ -78,7 +102,7 @@ const CopyText=(e)=>{
         {data?.flat()?.map((data, id) => {
           return (
             <>
-              <Col lg={4} md={12} key={id}>
+              <Col lg={width > 1200 ? 4 : 6} md={12} key={id}>
                 <div className="coupon-cards">
                   <div className="cccoupon-image">
                     <img
@@ -88,7 +112,7 @@ const CopyText=(e)=>{
                     />
                   </div>
                   <div className="coupon-cdh">{data.title.slice(0, 55)}</div>
-                  <div className="coupon-cdsh">{data.bio.slice(0, 90)}...</div>
+                  <div className="coupon-cdsh">{data.bio.slice(0, 70)}...</div>
                   <div className="deal-btn">
                     <button
                       className="deal-coupon-btn"
@@ -122,13 +146,10 @@ const CopyText=(e)=>{
                   </div>
                 </div>
                 <div className="Modal-header-item-1">
-                  <b>
-                    {getCoupon?.title.slice(0, 55)}
-                   
-                  </b>
+                  <b>{getCoupon?.title.slice(0, 55)}</b>
                   <br />
                   {getCoupon?.bio.slice(0, 200)}
-                 
+
                   <br />
                   <div className="verify-modal">Verified</div>
                 </div>
@@ -146,7 +167,6 @@ const CopyText=(e)=>{
                   target="_blank"
                 >
                   {getCoupon?.brandName}&nbsp;
-                  
                 </a>
                 and paste the code at checkout
               </div>
@@ -161,7 +181,7 @@ const CopyText=(e)=>{
                     size="lg"
                     variant="dark"
                     className="modal-body-copy"
-                    onClick={()=> CopyText(getCoupon?.couponCode)}
+                    onClick={() => CopyText(getCoupon?.couponCode)}
                     style={{ boxShadow: "none", width: "80px" }}
                   >
                     COPY
@@ -178,7 +198,7 @@ const CopyText=(e)=>{
                     target="_blank"
                   >
                     {" "}
-                    Go to Makemytrip Website
+                    Go to {getCoupon?.brandName} Website
                   </a>
                 </button>
               </div>
@@ -198,6 +218,9 @@ const CopyText=(e)=>{
           </div>
         </Modal>
       </Row>
+      <button className="More-coupon-guest" onClick={More}>
+        More Coupon
+      </button>
     </Container>
   );
 }

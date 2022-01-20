@@ -11,25 +11,25 @@ import AdminExpireCard from "../admin/AdminExpireCard";
 
 const AdminCoupons = () => {
   const [sidebarShow, setSidebarShow] = useState(false);
-  const[more, setMore]=useState();
+  const [more, setMore] = useState();
   const navigate = useNavigate();
   const { user, isLoading } = useContext(UserContext);
 
   if (!isLoading && !user?.isAdmin) navigate("/");
   if (isLoading) return null;
 
-  const More=()=>{
-    setMore(true)
-    if (more===true){
-      setMore(false)
+  const More = () => {
+    setMore(true);
+    if (more === true) {
+      setMore(false);
     }
-  }
-  const ExpireMore=()=>{
-    setMore(0)
-    if (more===0){
-      setMore(1)
+  };
+  const ExpireMore = () => {
+    setMore(0);
+    if (more === 0) {
+      setMore(1);
     }
-  }
+  };
 
   return (
     <>
@@ -63,19 +63,23 @@ const AdminCoupons = () => {
           <div className="Trend-text">Trending Coupons</div>
         </div>
         <div className="adminv-card">
-          <AdminCouponCard  />
+          <AdminCouponCard />
         </div>
         {/* <button className="More-coupon" onClick={More}>More Coupon</button> */}
         <div className="Trend-text">Active Coupons</div>
         <div className="adminv-card">
-        <AdminCouponCard more={more} />
+          <AdminCouponCard more={more} />
         </div>
-        <button className="More-coupon" onClick={More}>More Coupon</button>
+        <button className="More-coupon" onClick={More}>
+          More Coupon
+        </button>
         <div className="Trend-text">Expired Coupons</div>
         <div className="adminv-card">
           <AdminExpireCard more={more} />
         </div>
-        <button className="More-coupon" onClick={ExpireMore}>More Coupon</button>
+        <button className="More-coupon" onClick={ExpireMore}>
+          More Coupon
+        </button>
       </Container>
     </>
   );

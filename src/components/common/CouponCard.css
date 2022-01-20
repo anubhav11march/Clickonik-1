@@ -68,6 +68,11 @@
   font-weight: 700;
   height: 62px;
 }
+
+.deal-coupon-btn:hover{
+  background: #5179ff;
+}
+
 .deal-btn {
   margin-top: 10px;
   grid-row-start: 4;
@@ -75,14 +80,14 @@
   grid-row-end: 3;
   grid-column-end: 5;
 }
-.modal-body{
+.modal-body {
   border-radius: 0px !important;
 }
 .Modal-header-grid {
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  gap: 0px;
+  gap: 10px;
   height: 100%;
 }
 
@@ -182,12 +187,11 @@
   grid-column-end: 6;
   margin-bottom: 20px;
 }
-.modal-body-copy:hover{
-  background-color: rgb(75, 75, 75) !important
-
+.modal-body-copy:hover {
+  background-color: rgb(75, 75, 75) !important;
 }
-.Modal-Body-Website{
-   border: none;
+.Modal-Body-Website {
+  border: none;
   color: #ffffff;
   background: #4468e2;
   box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
@@ -202,12 +206,35 @@
   background: #5078fd;
 }
 
-.modal-footer-main{
-  display:flex;
+.modal-footer-main {
+  display: flex;
   justify-content: center !important;
 }
-.Toast-success-copy{
+.Toast-success-copy {
   font-size: 15px;
- font-style: italic;
- font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-family: "Times New Roman", Times, serif;
+}
+
+@media (max-width: 769.9px) {
+  .coupon-cards {
+    height: 21em;
+  }
+}
+
+
+.More-coupon-guest{
+  float: right;
+  border: none;
+  color: #ffffff;
+  background: #4468e2;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  width: 200px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  height: 55px;
+}
+.More-coupon-guest:hover {
+  background: #557dff;
 }

@@ -5,6 +5,7 @@ import Landing from "./components/landing/Landing";
 import Blogs from "./components/blogs/Blogs";
 import ParticularBlog from "./components/particularBlog/ParticularBlog";
 import Coupons from "./components/coupons/Coupons";
+import CouponBrand from "./components/coupons/CouponBrand";
 import Brand from "./components/particularBrand/Brand";
 import Contact from "./components/contact/Contact";
 import Submit from "./components/submit/Submit";
@@ -40,6 +41,7 @@ function App() {
             <Route exact path="/blogs" element={<Blogs />} />
             <Route exact path="/particular-blog" element={<ParticularBlog />} />
             <Route exact path="/coupons" element={<Coupons />} />
+            <Route exact path="/coupons/brand" element={<CouponBrand />} />
             <Route exact path="/particular-brand" element={<Brand />} />
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/submit" element={<Submit />} />
