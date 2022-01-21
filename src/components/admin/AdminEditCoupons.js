@@ -63,6 +63,7 @@ const AdminEditCoupons = () => {
       Couponcode: `${coupon?.couponCode}`,
       Deal: `${coupon?.deal}`,
     });
+    setCountryValue(coupon?.country)
   }, []);
 
   if (!isLoading && !user?.isAdmin) navigate("/");
@@ -292,7 +293,7 @@ const AdminEditCoupons = () => {
                           />
                         </div>
                         <Select
-                          placeholder="Select Country"
+                          placeholder={!countryvalue?"Select Country":countryvalue}
                           className="coupon-input"
                           options={options}
                           value={countryvalue}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import BlogList from "../common/BlogList";
+import BlogList from "./BlogList";
 import Cards from "../common/Cards";
 import MajorCards from "../common/MajorCards";
 import Related from "../common/Related";
@@ -11,7 +11,7 @@ import Navbarr from "../common/Navbarr";
 import Footer from "../common/Footer";
 
 function Landing() {
-
+ 
   return (
     <>
       <Navbarr />

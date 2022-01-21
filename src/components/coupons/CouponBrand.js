@@ -25,7 +25,6 @@ function CouponBrand() {
   const { state } = useLocation();
   const { Brand } = state;
   const GetData = () => {
-    // api/user/coupon?couponIndex=0&brand=Spotify
     try {
       axios
         .get(`api/user/coupon?couponIndex=0&brand=${Brand}`)
@@ -39,7 +38,7 @@ function CouponBrand() {
   useEffect(() => {
     GetData();
   }, []);
-
+console.log(data)
   const CopyText = (e) => {
     navigator.clipboard.writeText(e);
     toast.success(

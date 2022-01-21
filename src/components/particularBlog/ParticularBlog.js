@@ -16,19 +16,20 @@ import About from "./About";
 import Recommend from "./Recommend";
 import Navbarr from "../common/Navbarr";
 import Footer from "../common/Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import Comments from "./Comments";
 import axios from "../../utils/axios";
 
 function ParticularBlog() {
   const history = useNavigate();
+  const location = useLocation()
+  const { blog_id } = location.state
   const [play, setPlay] = useState(false);
   const [speak, setSpeak] = useState(false);
   const [userdata, setUserData] = useState(null);
-
   const GetBlog = () => {
     try {
-      axios.get("api/user/blog/61d3c417e08a45be3450bc28").then((response) => {
+      axios.get(`api/user/blog/${blog_id}`).then((response) => {
         setUserData(response.data);
         if (response.data.code !== 200) throw history("/blogs");
       });
@@ -40,7 +41,7 @@ function ParticularBlog() {
   useEffect(() => {
     GetBlog();
   }, []);
-
+  var ProfileRating=userdata?.data?.userId?.ratings?.avg
   useEffect(() => {
     if (speak) {
       handleSpeak();
@@ -132,6 +133,7 @@ function ParticularBlog() {
                 : Parser(userdata?.data?.blogText)}
             </div>
             <About
+                userProfileRating={ProfileRating?.toFixed(1)}
               Image={userdata?.data?.userId?.profile}
               Name={
                 userdata?.data?.isGuest === false
