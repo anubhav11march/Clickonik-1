@@ -38,7 +38,6 @@ function CouponBrand() {
   useEffect(() => {
     GetData();
   }, []);
-console.log(data)
   const CopyText = (e) => {
     navigator.clipboard.writeText(e);
     toast.success(
@@ -65,7 +64,6 @@ console.log(data)
     }
     setState(true);
   };
-
 
   useEffect(() => {
     if (updatestate === true) {
@@ -126,7 +124,9 @@ console.log(data)
                     <div className="brand-right-2-header-grid">
                       <div className="brand-right-2-header-item-0">
                         <div className="brand-right-2-header-box">
-                          <div className="brand-right-2_coupon_code_">10%</div>
+                          <div className="brand-right-2_coupon_code_">
+                            {data?.deal.slice(0, 3)}
+                          </div>
                           <div className="brand-right-2-header-inner-border">
                             CODE
                           </div>
@@ -169,7 +169,7 @@ console.log(data)
                   <div className="Modal-header-item-0">
                     <div className="Modal-header-box">
                       <div className="modal_coupon_code_">
-                        {getCoupon?.deal}
+                        {getCoupon?.deal.slice(0, 3)}
                       </div>
                       <div className="Modal-header-inner-border"> CODE</div>
                     </div>
