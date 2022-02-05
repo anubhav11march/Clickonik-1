@@ -1,6 +1,6 @@
 import React from "react";
 import "./Blogs.css";
-import BlogList from "../common/BlogList";
+import BlogList from "./BlogList";
 import Cards from "../common/Cards";
 import MajorCards from "../common/MajorCards";
 import Navbarr from "../common/Navbarr";
@@ -12,8 +12,7 @@ function Blogs() {
       <Navbarr />
       <div className="blogs-main">
         <MajorCards />
-        <BlogList />
-        <Cards />
+         <Cards />
         <BlogList />
       </div>
       <Footer />

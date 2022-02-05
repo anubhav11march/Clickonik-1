@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./components/landing/Landing";
 import Blogs from "./components/blogs/Blogs";
+import AllBlogs from "./components/blogs/AllBlogs";
 import ParticularBlog from "./components/particularBlog/ParticularBlog";
 import Coupons from "./components/coupons/Coupons";
 import CouponBrand from "./components/coupons/CouponBrand";
 import Brand from "./components/particularBrand/Brand";
 import Contact from "./components/contact/Contact";
+import SearchPage from "./components/common/SearchPage";
 import Submit from "./components/submit/Submit";
 import UserContact from "./components/loggedInUser/UserContact";
 import UserInsights from "./components/loggedInUser/UserInsights";
@@ -39,6 +41,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Landing />} />
             <Route exact path="/blogs" element={<Blogs />} />
+            <Route exact path="/blogs/allblogs" element={<AllBlogs />} />
             <Route exact path="/particular-blog" element={<ParticularBlog />} />
             <Route exact path="/coupons" element={<Coupons />} />
             <Route exact path="/coupons/brand" element={<CouponBrand />} />
@@ -56,6 +59,7 @@ function App() {
             <Route exact path="/admin/blogs" element={<AdminBlogs />} />
             <Route exact path="/admin/comments" element={<AdminComments />} />
             <Route exact path="/admin/coupons" element={<AdminCoupons />} />
+            <Route exact path="/searchPage" element={<SearchPage />} />
             <Route
               exact
               path="/admin/addcoupons"

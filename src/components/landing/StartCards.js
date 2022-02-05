@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./StartCards.css";
 import { Container, Row, Col } from "react-bootstrap";
 import start1 from "../../assets/images/start1.svg";
@@ -6,8 +6,25 @@ import start2 from "../../assets/images/start2.svg";
 import start3 from "../../assets/images/start3.svg";
 import start4 from "../../assets/images/start4.svg";
 import start5 from "../../assets/images/start5.svg";
-
+import axios from "../../utils/axios";
 function StartCards() {
+  const [data, setData] = useState();
+
+  const GetData = () => {
+    try {
+      axios
+        .get(`api/guest/promotedblogs`)
+        .then((response) => {
+          setData(response.data.data);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    GetData();
+  }, []);
+// console.log(data)
   return (
     <Container className="start-main">
       <Row>

@@ -16,14 +16,14 @@ import About from "./About";
 import Recommend from "./Recommend";
 import Navbarr from "../common/Navbarr";
 import Footer from "../common/Footer";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Comments from "./Comments";
 import axios from "../../utils/axios";
 
 function ParticularBlog() {
   const history = useNavigate();
-  const location = useLocation()
-  const { blog_id } = location.state
+  const location = useLocation();
+  const { blog_id } = location.state;
   const [play, setPlay] = useState(false);
   const [speak, setSpeak] = useState(false);
   const [userdata, setUserData] = useState(null);
@@ -37,11 +37,11 @@ function ParticularBlog() {
       console.log(err);
     }
   };
-
   useEffect(() => {
     GetBlog();
   }, []);
-  var ProfileRating=userdata?.data?.userId?.ratings?.avg
+  console.log(userdata?.data);
+  var ProfileRating = userdata?.data?.userId?.ratings?.avg;
   useEffect(() => {
     if (speak) {
       handleSpeak();
@@ -71,16 +71,18 @@ function ParticularBlog() {
         <Row>
           <Col lg={8}>
             <div className="pb-sec1">
-              <span>
+              <div className="pb-left">{userdata?.data?.title}</div>
+              <span className="pb-right">
                 <img
                   src={Back}
                   alt="back"
                   className="pb-back"
+                  Title="Go Back"
                   onClick={() => history("/blogs")}
                 />
               </span>
-              {userdata?.data?.title}
             </div>
+
             <div className="pb-sec2">
               <div className="pb-left">
                 Share via
@@ -132,8 +134,11 @@ function ParticularBlog() {
                 ? ""
                 : Parser(userdata?.data?.blogText)}
             </div>
+
             <About
-                userProfileRating={ProfileRating?.toFixed(1)}
+              BlogId={userdata?.data?._id}
+              userId={userdata?.data?.userId?._id}
+              userProfileRating={ProfileRating?.toFixed(1)}
               Image={userdata?.data?.userId?.profile}
               Name={
                 userdata?.data?.isGuest === false
@@ -151,7 +156,7 @@ function ParticularBlog() {
                   : false
               }
             />
-            <Comments />
+            <Comments BlogId={userdata?.data?._id} />
           </Col>
           <Col lg={4}>
             <Recommend />

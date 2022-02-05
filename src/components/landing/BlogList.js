@@ -10,7 +10,7 @@ function BlogList() {
   useEffect(() => {
     function GetData() {
       try {
-        axios.get(`api/user/homepageBlogs`).then((response) => {
+        axios.get(`api/guest/mostviewedblogs`).then((response) => {
           setData(response.data.data);
         });
       } catch (err) {
@@ -20,26 +20,26 @@ function BlogList() {
 
     GetData();
   }, []);
-  console.log(data);
+
 
   return (
     <Container className="list-main">
       <div className="list-explore">
-        Explore from <span>India</span>
+      Highest Rated<span> Posts</span>
       </div>
-      {data?.slice(0, 6).map((data, id) => {
+      {data?.slice(0, 5).map((data, id) => {
           
         return (
-          <Row className="list-row" key={id}>
-            <Col lg={2}>
+          <Row className="list-rows" key={id}>
+            <Col lg={2} xs={3} md={3}>
               <img
                 src={data?.thumbnail}
                 alt={data?.title}
                 className="list-img"
               />
             </Col>
-            <Col lg={10}>
-              <NavLink
+            <Col lg={10} xs={9} md={9}>
+            <NavLink
                 className="navlink-css"
                 to="/particular-blog" state={{ blog_id: data?._id }}
               >

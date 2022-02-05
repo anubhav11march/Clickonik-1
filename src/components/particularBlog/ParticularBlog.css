@@ -6,10 +6,12 @@
   font-size: 3.2rem;
   font-weight: 600;
   display: flex;
+  justify-content: space-between;
 }
 
 .pb-back {
   margin-right: 1em;
+  cursor: pointer;
 }
 
 .pb-sec2 {

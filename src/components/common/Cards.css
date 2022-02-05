@@ -16,14 +16,15 @@
 
 .card-div {
   position: absolute;
-  left: 5%;
-  bottom: 10%;
+  left: 6%;
+  bottom: 50%;
   color: white;
   width: 90%;
+
 }
 
 .card-heading {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-weight: 700;
 }
 

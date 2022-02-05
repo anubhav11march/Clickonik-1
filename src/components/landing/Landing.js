@@ -28,14 +28,14 @@ function Landing() {
         <MajorCards />
         <CardWithList />
         <Cards />
-        <Row>
+        {/* <Row>
           <Col lg={8}>
             <BlogList />
           </Col>
           <Col lg={4}>
             <Related />
           </Col>
-        </Row>
+        </Row> */}
       </Container>
       <Footer />
     </>

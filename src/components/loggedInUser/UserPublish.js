@@ -143,7 +143,8 @@ function UserPublish() {
           src={Back}
           alt="back"
           className="publish-back"
-          onClick={() => navigate("/user/blogs")}
+          Title="Back"
+          onClick={() => navigate("/")}
         />
         <span className="publish-head">Publish Blog</span>
         <div className="publish-form">

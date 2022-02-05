@@ -13,6 +13,8 @@ import User from "../../assets/images/user.svg";
 import { signInWithGoogle } from "../../utils/firebaseAuth";
 import axios from "../../utils/axios";
 import UserContext from "../../utils/userContext";
+import { BsSearch } from "react-icons/bs";
+
 
 function Navbarr() {
   const navigate = useNavigate();
@@ -177,6 +179,8 @@ function Navbarr() {
             <NavLink className="nav-link nav-padding" to="/coupons">
               Coupons
             </NavLink>
+            
+           
             {!user ? (
                <NavLink className="nav-link nav-padding" to="/contact">
                Contact Us
@@ -195,11 +199,12 @@ function Navbarr() {
                 Submit Blog
               </NavLink>
             )}
+            
             {!user ? (
               <NavLink
                 className="nav-link nav-padding nav-menu"
                 onClick={handleShow}
-                to="#"
+                to={window?.location.href.slice(21)==='/particular-blog'?'/blog':'#'}
               >
                 Sign In
               </NavLink>
@@ -222,6 +227,9 @@ function Navbarr() {
                 </span>
               </NavLink>
             )}
+            <NavLink className="nav-link nav-padding" to="/SearchPage">
+             <BsSearch/>
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
         <Modal show={show} onHide={handleClose} centered>
@@ -272,14 +280,14 @@ function Navbarr() {
                         <img src={Google} alt="google" className="nav-google" />
                         Sign in with Google
                       </div>
-                      <div className="nav-fdiv">
+                      {/* <div className="nav-fdiv">
                         <img
                           src={Facebook}
                           alt="facebook"
                           className="nav-facebook"
                         />
                         Sign in with Facebook
-                      </div>
+                      </div> */}
                     </div>
                   </Col>
                 </Row>
@@ -328,14 +336,7 @@ function Navbarr() {
                         <img src={Google} alt="google" className="nav-google" />
                         Sign Up with Google
                       </div>
-                      <div className="nav-fdiv">
-                        <img
-                          src={Facebook}
-                          alt="facebook"
-                          className="nav-facebook"
-                        />
-                        Sign Up with Facebook
-                      </div>
+                     
                     </div>
                   </Col>
                 </Row>

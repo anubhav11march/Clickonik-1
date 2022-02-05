@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./About.css";
 import User from "../../assets/images/user.svg";
-import BlueStar from "../../assets/images/blueStar.svg";
+// import BlueStar from "../../assets/images/blueStar.svg";
 import ReactStars from "react-rating-stars-component";
 import Tick from "../../assets/images/tick.svg";
 import UserContext from "../../utils/userContext";
@@ -48,7 +48,7 @@ function About(props) {
 
   const handleSubmit = () => {
     const data = {
-      blogId: "61c2098a1d7d65f2d91e158c",
+      blogId: props?.BlogId,
       comment,
     };
     setComment("");
@@ -87,7 +87,7 @@ function About(props) {
 
   const postRating = async () => {
     const data = {
-      userId: "61d3bdb8ce9cd427685091ac",
+      userId: props?.userId,
       ratings: rating,
     };
     try {

@@ -3,17 +3,18 @@ import "./Comments.css";
 import User from "../../assets/images/user.svg";
 import axios from "../../utils/axios";
 
-function Comments() {
+function Comments(props) {
   const [commentIndex, setCommentIndex] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [comments, setComments] = useState([]);
-
+console.log(props?.BlogId)
   const getAllComments = async (commentIndex) => {
     try {
       const res = await axios.get(
-        `/api/user/comment/61c2098a1d7d65f2d91e158c/${commentIndex}`
+        `/api/user/comment/${props?.BlogId}/${commentIndex}`
       );
-      // console.log(res);
+
+      console.log(res?.data);
       if (res?.data?.code !== 200) return;
       if (res?.data?.data?.length < 1) {
         setHasMore(false);
@@ -45,6 +46,9 @@ function Comments() {
     if (!hasMore) return;
     getAllComments(commentIndex);
   }, [hasMore, commentIndex]);
+  useEffect(()=>{
+    getAllComments(commentIndex);
+  },[props?.BlogId])
 
   return (
     <div className="cmts-comments">

@@ -86,7 +86,7 @@
 }
 
 .nav-signin {
-  padding: 1.5em 3rem;
+  padding: 4.5em 3rem;
 }
 
 .nav-head {
@@ -159,7 +159,7 @@
   padding-right: 1em;
 }
 
-.nav-fdiv {
+/* .nav-fdiv {
   font-size: 1.7rem;
   text-align: center;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
@@ -173,4 +173,4 @@
 
 .nav-facebook {
   padding-right: 1em;
-}
+} */

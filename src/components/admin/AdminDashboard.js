@@ -121,7 +121,6 @@ const AdminDashboard = () => {
   if (isLoading) return null;
 
 
-
   const acceptbtn = async (_id) => {
     try {
       const res = await axios.put(`api/admin/blog/${_id}`);

@@ -60,6 +60,7 @@
 
 .publish-back {
   padding: 0em 2em 2em 0em;
+  cursor: pointer;
 }
 
 select:required:invalid {

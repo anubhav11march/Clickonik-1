@@ -20,14 +20,14 @@ function BlogList() {
 
     GetData();
   }, []);
-  console.log(data);
+
 
   return (
     <Container className="list-main">
       <div className="list-explore">
-        Explore from <span>India</span>
+        Most Recent <span>Blogs</span>
       </div>
-      {data?.slice(0, 6).map((data, id) => {
+      {data?.slice(0, 11).map((data, id) => {
           
         return (
           <Row className="list-row" key={id}>
@@ -51,9 +51,24 @@ function BlogList() {
                 </div>
               </NavLink>
             </Col>
+           
           </Row>
+          
         );
       })}
+      <NavLink
+                className="navlink-css"
+                to="/blogs/allblogs" 
+              >
+               
+              
+      <div >
+       <button  className="More-coupon-guest"  >
+          View More
+        </button>
+      </div>
+      </NavLink>
+      <br/><br/>
     </Container>
   );
 }

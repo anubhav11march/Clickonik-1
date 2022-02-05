@@ -1,5 +1,7 @@
 .related-main{
     padding-top: 1em;
+    padding-bottom: 1em;
+    cursor: default;
 }
 
 .related-heading {
@@ -17,14 +19,21 @@
   font-size: 2rem;
   font-weight: 500;
   padding: 1em;
+  cursor: pointer;
 }
 
 .related-odd {
-  color: rgba(0, 0, 0, 0.35);
+  color: rgba(22, 20, 20, 0.493);
   padding-bottom: 1em;
+}
+.related-content:nth-child(odd){
+  background: #e9f5ff;
+  }
+.related-odd:hover{
+  color: rgba(102, 77, 253, 0.8);
 }
 
-.related-even {
+/* .related-even {
   color: rgba(102, 77, 253, 0.8);
   padding-bottom: 1em;
-}
+} */
