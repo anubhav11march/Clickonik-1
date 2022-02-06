@@ -10,7 +10,7 @@ function BlogList() {
   useEffect(() => {
     function GetData() {
       try {
-        axios.get(`api/user/homepageBlogs`).then((response) => {
+        axios.get(`api/guest/recentblogs`).then((response) => {
           setData(response.data.data);
         });
       } catch (err) {
