@@ -31,14 +31,16 @@ function BlogList() {
           
         return (
           <Row className="list-row" key={id}>
-            <Col lg={2}>
+            <Col  lg={2} xs={3} md={3}>
+            <div className="list-main-img">
               <img
                 src={data?.thumbnail}
                 alt={data?.title}
-                className="list-img"
+                className="list-img-blogs"
               />
+              </div>
             </Col>
-            <Col lg={10}>
+            <Col lg={10} xs={9} md={9}>
               <NavLink
                 className="navlink-css"
                 to="/particular-blog" state={{ blog_id: data?._id }}

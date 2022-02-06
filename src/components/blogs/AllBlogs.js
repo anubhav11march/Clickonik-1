@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import "./BlogList.css";
+import "./AllList.css";
 import { NavLink } from "react-router-dom";
 import axios from "../../utils/axios";
 import Navbarr from "../common/Navbarr";
@@ -9,6 +9,7 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Filter from "../../assets/images/Filter.png";
 function AllBlogs() {
   const [data, setData] = useState();
+  const[blogs,setBlogs] = useState();
   const [topbtn, setTopbtn] = useState({
     Sort: true,
     Rate: true,
@@ -17,7 +18,7 @@ function AllBlogs() {
   useEffect(() => {
     function GetData() {
       try {
-        axios.get(`api/user/homepageBlogs`).then((response) => {
+        axios.get(`api/guest/recentblogs`).then((response) => {
           setData(response.data.data);
         });
       } catch (err) {
@@ -28,10 +29,26 @@ function AllBlogs() {
     GetData();
   }, []);
 
+useEffect(() => {
+if (data?.length > 0) {
+  setBlogs(data)
+}
+},[data])
+
+
   const SortbyDate = () => {
-    topbtn.Sort === false
-      ? setTopbtn({ Sort: true })
-      : setTopbtn({ Sort: false });
+    if(topbtn.Sort === false){
+    setTopbtn({ Sort: true })
+    setBlogs( [...data])
+    console.log(blogs);
+  }
+
+    else{
+      setTopbtn({ Sort: false });
+      setBlogs( [...data].reverse())
+    }
+      
+
   };
   const SortbyRating = () => {
     topbtn.Rate === false
@@ -51,7 +68,7 @@ function AllBlogs() {
         <div className="list-explore">Explore</div>
         <div className="Sort-filter">
           <p className="Sort-text">Sort by</p>{" "}
-          <button className="Sort-Button" onClick={SortbyDate}>
+          <button className="Sort-Button" onClick={SortbyDate} title={topbtn.Sort === true ? "Latest Blogs":'Oldest Blogs'}>
             Date{" "}
             {topbtn.Sort === false ? (
               <IoMdArrowDropup size="25px" />
@@ -86,17 +103,17 @@ function AllBlogs() {
           </div>
         </div>
 
-        {data?.slice(0, 11).map((data, id) => {
+        {  blogs?.map((data, id) => {
           return (
             <Row className="list-row" key={id}>
-              <Col lg={2}>
+              <Col lg={2} xs={3} md={3}>
                 <img
                   src={data?.thumbnail}
                   alt={data?.title}
-                  className="list-img"
+                  className="list-img-blogs"
                 />
               </Col>
-              <Col lg={10}>
+              <Col lg={10} xs={9} md={9}>
                 <NavLink
                   className="navlink-css"
                   to="/particular-blog"

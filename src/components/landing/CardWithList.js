@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./CardWithList.css";
 import axios from "../../utils/axios";
-
+import { NavLink } from "react-router-dom";
 
 function CardWithList() {
   const [data, setData] = useState();
@@ -29,6 +29,10 @@ function CardWithList() {
     <Container className="cwl-main">
       <Row>
         <Col lg={7} className="cwl-col">
+        <NavLink
+                className="navlink-css"
+                to="/particular-blog" state={{ blog_id: item1?._id }}
+              >
           <img src={item1?.thumbnail} alt={item1?.title} className="cwl-img" />
           <div className="cwl-div">
             <div className="cwl-heading">{item1?.title}</div>
@@ -36,6 +40,7 @@ function CardWithList() {
               {item1?.blogText.slice(0, 250)}...
             </div>
           </div>
+          </NavLink>
         </Col>
         <Col lg={5}>
 {data?.slice(1,4).map((item, id)=>{
@@ -44,16 +49,28 @@ return(
 
 
         <Row className="item-row" key={id}>
-      <Col lg={3}>
+      <Col lg={3} xs={2} md={2}>
+      <NavLink
+                className="navlink-css"
+                to="/particular-blog" state={{ blog_id: item?._id }}
+              >
+      <div className="list-main-img">
         <img src={item?.thumbnail} alt={item?.title} className="item-img" />
+      </div>
+      </NavLink>
       </Col>
-      <Col lg={9}>
+      <Col lg={9} xs={9} md={9}>
+      <NavLink
+                className="navlink-css"
+                to="/particular-blog" state={{ blog_id: item?._id }}
+              >
         <div className="item-content">
           <div className="item-heading">{item?.title}</div>
           <div className="item-subheading">
-          {item?.blogText.slice(0, 70)}...
+          {item?.blogText.slice(0, 150)}...
           </div>
         </div>
+        </NavLink>
       </Col>
     </Row>
 

@@ -32,11 +32,13 @@ function BlogList() {
         return (
           <Row className="list-rows" key={id}>
             <Col lg={2} xs={3} md={3}>
+              <div className="list-main-img">
               <img
                 src={data?.thumbnail}
                 alt={data?.title}
-                className="list-img"
+                className="list-img-landing"
               />
+              </div>
             </Col>
             <Col lg={10} xs={9} md={9}>
             <NavLink
