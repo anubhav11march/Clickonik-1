@@ -18,16 +18,15 @@ function Related() {
 
     GetData();
   }, []);
-
   return (
     <div className="related-main">
       <div className="related-heading">Latest Posts</div>
-      {data?.slice(0, 4).map((data, id) => {
+      {data?.slice(-4).reverse().map((data, id) => {
         return (
           <div className="related-content" key={id}>
             <NavLink
               className="navlink-css"
-              to="/particular-blog"
+              to={{pathname:`/particular-blog/${data?._id}`}}
               state={{ blog_id: data?._id }}
             >
               <div className="related-odd">

@@ -43,7 +43,7 @@ function CardWithList() {
           </NavLink>
         </Col>
         <Col lg={5}>
-{data?.slice(1,4).map((item, id)=>{
+{data?.slice(-4).reverse().map((item, id)=>{
 return(
 <>
 
