@@ -125,7 +125,8 @@ function ParticularBlog() {
                 <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                    href={`
+                    https://twitter.com/share?url=[${window.location.href}]&text=[${userdata?.data?.title} ]`}
                   >
                   <img src={Twitter} alt="twitter" className="pb-sm" />
                   </a>
@@ -135,7 +136,7 @@ function ParticularBlog() {
                     target="_blank"
                     rel="noopener noreferrer"
                     href={`
-                    https://api.whatsapp.com/send?text=${userdata?.data?.title} ${window.location.href}
+                    https://api.whatsapp.com/send?text=[${userdata?.data?.title}] [${window.location.href}]
                     `}
                   >
                   <img src={Whatsapp} alt="whatsapp" className="pb-sm" />
