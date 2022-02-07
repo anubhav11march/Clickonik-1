@@ -29,24 +29,23 @@ const ABlog = () => {
     }
     Userblog();
   }, []);
-
   return (
     <>
       {userdata?.data.slice(0, 3).map((data, id) => {
         return (
           <div className="userd-blog" key={id}>
-            <img id="item-0" src={data?.thumbnail} alt="blog" />
+            <img id="item-0ud" src={data?.thumbnail} alt="blog" />
 
-            <div id="item-1">{data?.title}</div>
-            <div id="item-2">
+            <div id="item-1ud">{data?.title}</div>
+            <div id="item-2ud">
               {data?.blogText.slice(0, 150)}
               <span className="more-text">...more</span>
             </div>
-            <div id="item-3">
+            <div id="item-3ud">
               <img src={View} alt="view" />
-              <span> &nbsp; 102</span>
+              <span> &nbsp; {data?.viewCount}</span>
               <img className="item-share" src={Share} alt="share" />
-              <span> &nbsp; 14</span>
+              <span> &nbsp;{data?.shareCount}</span>
 
               <span className="item-comments-span"> &nbsp; 17</span>
               <img className="item-comments" src={Comments} alt="comment" />

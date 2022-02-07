@@ -12,10 +12,7 @@ function Cards() {
           <span className="card-category">Technology</span>
           <div className="card-div">
             <div className="card-heading">Lorem ipsum dolor sit</div>
-            {/* <div className="card-subheading">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id nibh
-              ullamcorper
-            </div> */}
+           
           </div>
         </Col>
         <Col lg={3} className="card-col">
@@ -23,10 +20,7 @@ function Cards() {
           <span className="card-category">Sci-Fi</span>
           <div className="card-div">
             <div className="card-heading">Lorem ipsum dolor sit</div>
-            {/* <div className="card-subheading">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id nibh
-              ullamcorper
-            </div> */}
+           
           </div>
         </Col>
         <Col lg={3} className="card-col">
@@ -34,10 +28,7 @@ function Cards() {
           <span className="card-category">Educational</span>
           <div className="card-div">
             <div className="card-heading">Lorem ipsum dolor sit</div>
-            {/* <div className="card-subheading">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id nibh
-              ullamcorper
-            </div> */}
+           
           </div>
         </Col>
         <Col lg={3} className="card-col">
@@ -45,10 +36,7 @@ function Cards() {
           <span className="card-category">Kids</span>
           <div className="card-div">
             <div className="card-heading">Lorem ipsum dolor sit</div>
-            {/* <div className="card-subheading">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id nibh
-              ullamcorper
-            </div> */}
+           
           </div>
         </Col>
       </Row>
@@ -60,10 +48,7 @@ function Cards() {
           <span className="card-category">Horror</span>
           <div className="card-div">
             <div className="card-heading">Lorem ipsum dolor sit</div>
-            {/* <div className="card-subheading">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id nibh
-              ullamcorper
-            </div> */}
+           
           </div>
         </Col>
        
@@ -72,10 +57,7 @@ function Cards() {
           <span className="card-category">Drama</span>
           <div className="card-div">
             <div className="card-heading">Lorem ipsum dolor sit</div>
-            {/* <div className="card-subheading">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id nibh
-              ullamcorper
-            </div> */}
+           
           </div>
         </Col>
         

@@ -3,7 +3,7 @@
 }
 
 .rmd-topic {
-  text-align: center;
+  text-align: start;
   margin-bottom: 30px;
 }
 
@@ -31,6 +31,10 @@
 }
 
 .rmd-even {
+  color: rgba(0, 0, 0, 0.35);
+  padding-bottom: 1em;
+}
+.rmd-even:hover{
   color: rgba(102, 77, 253, 0.8);
   padding-bottom: 1em;
 }
@@ -38,6 +42,24 @@
 .rmd-img {
   padding-top: 2em;
   width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+@media (max-width: 991.9px) {
+  .rmd-img {
+     height: 400px;
+  }
+}
+@media (max-width: 767.9px) {
+  .rmd-img {
+     height: 300px;
+  }
+}
+@media (max-width: 450.9px) {
+  .rmd-img {
+     height: 250px;
+  }
 }
 
 .rmd-ch {
@@ -50,5 +72,11 @@
   font-size: 1.6rem;
   font-weight: 400;
   color: #5b5b5b;
-  padding-top: 1em;
+  padding-top: 0em;
+  padding-bottom: 2em;
+
+}
+.realted-explore-img{
+  width: 100%;
+  height: 100%;
 }

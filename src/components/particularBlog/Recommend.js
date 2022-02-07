@@ -1,47 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Recommend.css";
 import Related from "../../assets/images/related.svg";
+import axios from "../../utils/axios";
+import { NavLink } from "react-router-dom";
 
 function Recommend() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    function GetData() {
+      try {
+        axios.get(`api/guest/recentblogs`).then((response) => {
+          setData(response.data.data);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    GetData();
+  }, []);
   return (
     <div className="rmd-main">
       <div className="rmd-topic">
         <div className="rmd-th">Related Content </div>
-        <ul className="rmd-list">
-          <li className="rmd-odd">Topic related to the content</li>
-          <li className="rmd-even">Topic related to the content</li>
-          <li className="rmd-odd">Topic related to the content</li>
-          <li className="rmd-even">Topic related to the content</li>
-          <li className="rmd-odd">Topic related to the content</li>
-          <li className="rmd-even">Topic related to the content</li>
-          <li className="rmd-odd">Topic related to the content</li>
-          <li className="rmd-even">Topic related to the content</li>
-          <li className="rmd-odd">Topic related to the content</li>
-          <li className="rmd-even">Topic related to the content</li>
-          <li className="rmd-odd">Topic related to the content</li>
-          <li className="rmd-even">Topic related to the content</li>
-        </ul>
+        <div className="rmd-list">
+        {data?.slice(0,10).reverse().map((data, id) => {
+        return (
+          <NavLink
+          onClick={()=>window.reload()}
+          className="navlink-css"
+          to={{pathname:`/particular-blog/${data?._id}`}}
+          state={{ blog_id: data?._id }}
+          
+        >
+          <div className="rmd-even" key={id}>{data?.title}</div>
+          </NavLink>
+        )})}
+        </div>
       </div>
       <div className="rmd-content">
         <div className="rmd-th"> Explore Related Content </div>
-        <img src={Related} alt="related" className="rmd-img" />
-        <div className="rmd-ch">Topic</div>
-        <div className="rmd-cb">
-          Lorem ipsum dolor sit amet, con se ctetur adipiscing elit. Tellus
-          pretium mauris, at blandit massa....more
+        {data?.slice(0,5).map((data, id) => {
+          return(
+          <>
+          <NavLink
+          onClick={()=>window.reload()}
+          className="navlink-css"
+          to={{pathname:`/particular-blog/${data?._id}`}}
+          state={{ blog_id: data?._id }}
+        >
+          <div key={id} className="realted-explore-img" >
+
+        <img src={data?.thumbnail} alt="related" className="rmd-img" />
         </div>
-        <img src={Related} alt="related" className="rmd-img" />
-        <div className="rmd-ch">Topic</div>
+        <div className="rmd-ch">{data?.title?.slice(0,30)}</div>
         <div className="rmd-cb">
-          Lorem ipsum dolor sit amet, con se ctetur adipiscing elit. Tellus
-          pretium mauris, at blandit massa....more
+        {data?.blogText?.slice(0,110)}...more
         </div>
-        <img src={Related} alt="related" className="rmd-img" />
-        <div className="rmd-ch">Topic</div>
-        <div className="rmd-cb">
-          Lorem ipsum dolor sit amet, con se ctetur adipiscing elit. Tellus
-          pretium mauris, at blandit massa....more
-        </div>
+        </NavLink>
+        </>
+          )
+        })}
       </div>
     </div>
   );

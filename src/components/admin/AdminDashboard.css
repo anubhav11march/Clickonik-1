@@ -37,7 +37,7 @@
 }
 
 .admind-blogc {
-  padding: 1em;
+  padding: 0em 1em 1em 1em;
 }
 
 .admind-blogb {
@@ -100,6 +100,7 @@
 .admind-user {
   width: 40px;
   height: 40px;
+ 
 }
 
 .admind-name {
@@ -125,6 +126,7 @@
   width: 184px;
   height: 184px;
   object-fit: cover;
+  border-radius:8px
 }
 
 @media (max-width: 992px) {

@@ -83,18 +83,18 @@ function UserBlogs() {
               if (state === "Active Blogs") {
                 return (
                   <div className="Blog-box" key={id}>
-                    <img id="item-0" src={data?.thumbnail} alt="blog" />
-                    <div id="item-1">{data?.title}</div>
-                    <div id="item-2">
+                    <img id="item-0ub" src={data?.thumbnail} alt="blog" />
+                    <div id="item-1ub">{data?.title}</div>
+                    <div id="item-2ub">
                       {data?.blogText.slice(0, 150) + "..."}
                       <span className="more-text">more</span>
                     </div>
-                    <div id="item-3">
+                    <div id="item-3ub">
                       <img src={View} alt="view" />
-                      <span> &nbsp; 102</span>
+                      <span> &nbsp; {data?.viewCount}</span>
                       <img className="item-share" src={Share} alt="share" />
-                      <span> &nbsp; 14</span>
-                      <span className="item-comments-span"> &nbsp; 17</span>
+                      <span> &nbsp; {data?.shareCount}</span>
+                      <span className="item-comments-span-ub"> &nbsp; 17</span>
                       <img
                         className="item-comments"
                         src={Comments}
@@ -107,14 +107,14 @@ function UserBlogs() {
               } else {
                 return (
                   <div className="Blog-box" key={id}>
-                    <img id="item-0" src={data?.thumbnail} alt="blog" />
-                    <div id="item-1">{data?.title}</div>
-                    <div id="item-2">
+                    <img id="item-0ub" src={data?.thumbnail} alt="blog" />
+                    <div id="item-1ub">{data?.title}</div>
+                    <div id="item-2ub">
                       {data?.blogText.slice(0, 150) + "..."}
                       <span className="more-text">more</span>
                     </div>
 
-                    <div id="item-3">Edit</div>
+                    <div id="item-3ub">Edit</div>
                   </div>
                 );
               }
