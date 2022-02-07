@@ -113,7 +113,7 @@ function ParticularBlog() {
                   </a>
                 </span>
                 <span>
-                  <a
+                  <a onClick={() => CopyText()}
                     target="_blank"
                     rel="noopener noreferrer"
                     href={` https://www.instagram.com/`}
@@ -136,7 +136,7 @@ function ParticularBlog() {
                     target="_blank"
                     rel="noopener noreferrer"
                     href={`
-                    https://api.whatsapp.com/send?text=${userdata?.data?.title} ${window.location.href}
+                    https://api.whatsapp.com/send?text=${userdata?.data?.title} Click Here To Read My Blog👉${window.location.href}
                     `}
                   >
                   <img src={Whatsapp} alt="whatsapp" className="pb-sm" />
