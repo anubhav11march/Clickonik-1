@@ -16,14 +16,17 @@ import About from "./About";
 import Recommend from "./Recommend";
 import Navbarr from "../common/Navbarr";
 import Footer from "../common/Footer";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Comments from "./Comments";
 import axios from "../../utils/axios";
 
 function ParticularBlog() {
   const history = useNavigate();
-  const location = useLocation();
-  const { blog_id } = location.state;
+  let BlogId = useParams();
+  let blog_id = BlogId._id
+  // const { blog_id } = location.state;
   const [play, setPlay] = useState(false);
   const [speak, setSpeak] = useState(false);
   const [userdata, setUserData] = useState(null);
@@ -62,6 +65,23 @@ function ParticularBlog() {
     synth.speak(utterThis);
   };
 
+  const CopyText = () => {
+    navigator.clipboard.writeText(window.location.href);
+    toast.success(
+      <div className="Toast-success-copy">Blog Link Copied To ClipBoard!!</div>,
+      {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
+  };
+
+
   return (
     <>
       <Navbarr />
@@ -85,7 +105,12 @@ function ParticularBlog() {
               <div className="pb-left">
                 Share via
                 <span>
+                  <a target="_blank"
+                                        href={
+                                            `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`
+                                        }>
                   <img src={Facebook} alt="facebook" className="pb-sm" />
+                  </a>
                 </span>
                 <span>
                   <img src={Instagram} alt="instagram" className="pb-sm" />
@@ -102,8 +127,8 @@ function ParticularBlog() {
                   <img src={Views} alt="views" className="pb-sm" />
                 </span>
                 {userdata?.data?.viewCount}
-                <span>
-                  <img src={Share} alt="share" className="pb-sm" />
+                <span >
+                  <img src={Share} alt="share" className="pb-sm" onClick={()=> CopyText()}/>
                 </span>
                 {userdata?.data?.shareCount}
               </div>
@@ -158,6 +183,7 @@ function ParticularBlog() {
             <Recommend />
           </Col>
         </Row>
+        <ToastContainer />
       </Container>
       <Footer />
     </>

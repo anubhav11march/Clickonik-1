@@ -7,14 +7,13 @@ function Comments(props) {
   const [commentIndex, setCommentIndex] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [comments, setComments] = useState([]);
-console.log(props?.BlogId)
   const getAllComments = async (commentIndex) => {
     try {
       const res = await axios.get(
         `/api/user/comment/${props?.BlogId}/${commentIndex}`
       );
 
-      console.log(res?.data);
+  
       if (res?.data?.code !== 200) return;
       if (res?.data?.data?.length < 1) {
         setHasMore(false);

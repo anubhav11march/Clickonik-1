@@ -42,7 +42,7 @@ function App() {
             <Route exact path="/" element={<Landing />} />
             <Route exact path="/blogs" element={<Blogs />} />
             <Route exact path="/blogs/allblogs" element={<AllBlogs />} />
-            <Route exact path="/particular-blog" element={<ParticularBlog />} />
+            <Route exact path="/particular-blog/:_id" element={<ParticularBlog />} />
             <Route exact path="/coupons" element={<Coupons />} />
             <Route exact path="/coupons/brand" element={<CouponBrand />} />
             <Route exact path="/particular-brand" element={<Brand />} />

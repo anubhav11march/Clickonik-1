@@ -421,7 +421,7 @@ function AllBlogs() {
               <Col lg={10} xs={9} md={9}>
                 <NavLink
                   className="navlink-css"
-                  to="/particular-blog"
+                  to={{pathname:`/particular-blog/${data?._id}`}}
                   state={{ blog_id: data?._id }}
                 >
                   <div className="list-content">

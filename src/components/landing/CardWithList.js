@@ -31,7 +31,7 @@ function CardWithList() {
         <Col lg={7} className="cwl-col">
         <NavLink
                 className="navlink-css"
-                to="/particular-blog" state={{ blog_id: item1?._id }}
+                to={{pathname:`/particular-blog/${item1?._id}`}} state={{ blog_id: item1?._id }}
               >
           <img src={item1?.thumbnail} alt={item1?.title} className="cwl-img" />
           <div className="cwl-div">
@@ -52,7 +52,7 @@ return(
       <Col lg={3} xs={2} md={2}>
       <NavLink
                 className="navlink-css"
-                to="/particular-blog" state={{ blog_id: item?._id }}
+                to={{pathname:`/particular-blog/${item?._id}`}} state={{ blog_id: item?._id }}
               >
       <div className="list-main-img">
         <img src={item?.thumbnail} alt={item?.title} className="item-img" />
@@ -62,7 +62,7 @@ return(
       <Col lg={9} xs={9} md={9}>
       <NavLink
                 className="navlink-css"
-                to="/particular-blog" state={{ blog_id: item?._id }}
+                to={{pathname:`/particular-blog/${item?._id}`}} state={{ blog_id: item?._id }}
               >
         <div className="item-content">
           <div className="item-heading">{item?.title}</div>

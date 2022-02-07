@@ -34,7 +34,7 @@ function StartCards() {
         <Col lg={7} className="start-col">
         <NavLink
                 className="navlink-css"
-                to="/particular-blog" state={{ blog_id: item1?._id }}
+                to={{pathname:`/particular-blog/${item1?._id}`}} state={{ blog_id: item1?._id }}
               >
           <div className="start-fit-img1">
             <img src={item1?.thumbnail} alt="scene1" className="start-img1" />
@@ -56,7 +56,7 @@ function StartCards() {
                   <Col md={6} className="start-col" key={id}>
                   <NavLink
                 className="navlink-css"
-                to="/particular-blog" state={{ blog_id: item?._id }}
+                to={{pathname:`/particular-blog/${item?._id}`}} state={{ blog_id: item?._id }}
               >
                     <div className="start-fit-img">
                       <img
