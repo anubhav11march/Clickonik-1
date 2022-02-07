@@ -13,12 +13,8 @@ function About(props) {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const [update, setUpdate] = useState(false);
-  const [ProfileRating, setProfileRating] = useState(3);
+  
 
-  useEffect(() => {
-    setProfileRating(props.userProfileRating);
-    console.log(props.userProfileRating);
-  }, [props?.userProfileRating]);
 
   const postGuestComment = async (data) => {
     try {
@@ -74,24 +70,16 @@ function About(props) {
     },
   };
 
-  const userProfileRating = {
-    size: 30,
-    count: 5,
-    edit: false,
-    isHalf: true,
-    value: ProfileRating,
-    color: "#DFDFDF",
-    activeColor: "#4468e2",
-  };
+  
 
 
   const postRating = async () => {
     const data = {
-      userId: props?.userId,
-      ratings: rating,
+      blogid: props?.BlogId,
+      rating: `${rating}`,
     };
     try {
-      const res = await axios.post("api/user/ratings", data);
+      const res = await axios.post("api/user/blogratings", data);
       alert(res?.data?.message);
     } catch (err) {
       console.log(err);
@@ -126,9 +114,7 @@ function About(props) {
                 <img src={Tick} alt="tick" className="about-tick" />
               )}
             </div>
-            <div className="about-star">
-              <ReactStars {...userProfileRating} />
-            </div>
+           
           </div>
           <div className="about-lower">{props.About}</div>
         </div>

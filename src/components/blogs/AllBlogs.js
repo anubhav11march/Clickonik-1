@@ -12,10 +12,12 @@ function AllBlogs() {
   const [data, setData] = useState();
   const [showFilter, setFilter] = useState(false);
   const [populardata, setPopulardata] = useState();
+  const [ratedata, setRatedata] = useState();
   const [blogs, setBlogs] = useState();
   const [popularvalue, setPopularvalue] = useState();
   const [ratingvalue, setRatingvalue] = useState();
   const [date, setDate] = useState({ Start: "", End: "" });
+  // const[startDate,Set]
   const [topbtn, setTopbtn] = useState({
     Sort: true,
     Rate: true,
@@ -50,6 +52,20 @@ function AllBlogs() {
   }, []);
 
   useEffect(() => {
+    function GetRatedata() {
+      try {
+        axios.get(`api/user/getblogsviarating`).then((response) => {
+          setRatedata(response.data.blogs);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    GetRatedata();
+  }, []);
+
+  useEffect(() => {
     if (data?.length > 0) {
       setBlogs(data);
     }
@@ -63,13 +79,17 @@ function AllBlogs() {
       setTopbtn({ Sort: false });
       setBlogs([...data].reverse());
     }
-    setFilter(false)
+    setFilter(false);
   };
   const SortbyRating = () => {
-    topbtn.Rate === false
-      ? setTopbtn({ Rate: true })
-      : setTopbtn({ Rate: false });
-      setFilter(false)
+    if (topbtn.Rate === false) {
+      setTopbtn({ Rate: true });
+      setBlogs([...ratedata]);
+    } else {
+      setTopbtn({ Rate: false });
+      setBlogs([...ratedata].reverse());
+    }
+    setFilter(false);
   };
   const SortbyPopularity = () => {
     if (topbtn.Popularity === false) {
@@ -79,18 +99,17 @@ function AllBlogs() {
       setTopbtn({ Popularity: false });
       setBlogs([...populardata].reverse());
     }
-    setFilter(false)
+    setFilter(false);
   };
 
   const FilterPannel = () => {
     showFilter === false ? setFilter(true) : setFilter(false);
-    
   };
   useEffect(() => {
     if (showFilter === true) {
-      setBlogs([...data])
+      setBlogs([...data]);
     }
-  },[showFilter])
+  }, [showFilter]);
 
   const PopularRadio = (e) => {
     setPopularvalue(e);
@@ -98,29 +117,74 @@ function AllBlogs() {
   const RatingRadio = (e) => {
     setRatingvalue(e);
   };
-  const DatePicker = () => {
 
+  const DatePicker = () => {
+    let result = blogs.filter(
+      (datep) =>
+        datep?.createdAt.slice(0, 10) <= date.End &&
+        datep?.createdAt.slice(0, 10) >= date.Start
+    );
+    if (!date.Start) {
+      alert("Select a Valid Start-Date");
+    } else if (!date.End) {
+      alert("Select a Valid End-Date");
+    } else {
+      setBlogs(result);
+      setFilter(false);
+      setDate({ Start: "", End: "" });
+    }
   };
-  const Popularfilter=() => {
+  const Ratingfilter = () => {
     let result;
-    if (popularvalue==='1000+'){
-   result= blogs.filter((view)=>view?.viewCount >= 1000)
-  }
-  else if (popularvalue==='1000'){
-  result= blogs.filter((view)=>view?.viewCount <= 1000 &&view?.viewCount >= 700)
-  }
-  else if (popularvalue==='700'){
-  result= blogs.filter((view)=>view?.viewCount <= 10 &&view?.viewCount >= 0)
-  }
-  else if (popularvalue==='400'){
-  result= blogs.filter((view)=>view?.viewCount <= 12 &&view?.viewCount >= 10)
-  }
-  else if(popularvalue==='200'){
-  result= blogs.filter((view)=>view?.viewCount <= 15 &&view?.viewCount >= 12)
-  }
-   setBlogs(result)
-   setFilter(false)
-  }
+   if (ratingvalue=== "5") {
+      result = ratedata.filter(
+        (rate) => rate?.avgrating <= 5 && rate?.avgrating >= 4
+      );
+    } else if (ratingvalue=== "4") {
+      result = ratedata.filter(
+        (rate) => rate?.avgrating <= 4 && rate?.avgrating >= 3
+      );
+    } else if (ratingvalue=== "3") {
+      result = ratedata.filter(
+        (rate) => rate?.avgrating <= 3 && rate?.avgrating >= 2
+      );
+    } else if (ratingvalue=== "2") {
+      result = ratedata.filter(
+        (rate) => rate?.avgrating <= 2 && rate?.avgrating >= 1
+      );
+    }
+    else if (ratingvalue=== "1") {
+      result = ratedata.filter(
+        (rate) => rate?.avgrating <= 1 && rate?.avgrating >= 0
+      );
+    }
+    setBlogs(result);
+    setFilter(false);
+  };
+  const Popularfilter = () => {
+    let result;
+    if (popularvalue === "1000+") {
+      result = blogs.filter((view) => view?.viewCount >= 1000);
+    } else if (popularvalue === "1000") {
+      result = blogs.filter(
+        (view) => view?.viewCount <= 1000 && view?.viewCount >= 700
+      );
+    } else if (popularvalue === "700") {
+      result = blogs.filter(
+        (view) => view?.viewCount <= 700 && view?.viewCount >= 400
+      );
+    } else if (popularvalue === "400") {
+      result = blogs.filter(
+        (view) => view?.viewCount <= 400 && view?.viewCount >= 200
+      );
+    } else if (popularvalue === "200") {
+      result = blogs.filter(
+        (view) => view?.viewCount <= 200 && view?.viewCount >= 0
+      );
+    }
+    setBlogs(result);
+    setFilter(false);
+  };
 
   return (
     <>
@@ -141,7 +205,11 @@ function AllBlogs() {
               <IoMdArrowDropdown size="25px" />
             )}
           </button>{" "}
-          <button className="Sort-Button" onClick={SortbyRating}>
+          <button
+            className="Sort-Button"
+            onClick={SortbyRating}
+            title={topbtn.Rate === true ? "Highest Rating" : "Lowest Rating"}
+          >
             Rating{" "}
             {topbtn.Rate === false ? (
               <IoMdArrowDropup size="25px" />
@@ -165,7 +233,7 @@ function AllBlogs() {
               <IoMdArrowDropdown size="25px" />
             )}
           </button>
-          <div className="filter-container" onClick={FilterPannel}>
+          <div className="filter-container" onClick={FilterPannel} title="Filter">
             <p className="Sort-text">Filter</p>
             <img
               src={Filter}
@@ -190,7 +258,9 @@ function AllBlogs() {
                       className="blog-Date-picker"
                       name="Start Date"
                       value={date.Start}
-                      onChange={(e) => setDate({ Start: e.target.value })}
+                      onChange={(e) =>
+                        setDate({ ...date, Start: e.target.value })
+                      }
                     />
                   </Col>
                   <Col>
@@ -199,7 +269,9 @@ function AllBlogs() {
                       className="blog-Date-picker"
                       name="End date"
                       value={date.End}
-                      onChange={(e) => setDate({ End: e.target.value })}
+                      onChange={(e) =>
+                        setDate({ ...date, End: e.target.value })
+                      }
                     />
                   </Col>
                 </Row>
@@ -218,41 +290,46 @@ function AllBlogs() {
                   <RadioGroup onChange={RatingRadio}>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      iconInnerSize={9.5}
+                      rootColor={'#9e9b9b'}
+                      iconInnerSize={9.9}
                       iconSize={20}
-                      value="5-4"
+                      value="5"
                     >
                       <h4> 5 - 4 Star</h4>
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      iconInnerSize={9.5}
+                      rootColor={'#9e9b9b'}
+                      iconInnerSize={9.9}
                       iconSize={20}
-                      value="4-3"
+                      value="4"
                     >
                       <h4> 4 - 3 Star </h4>
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      iconInnerSize={9.5}
+                      rootColor={'#9e9b9b'}
+                      iconInnerSize={9.9}
                       iconSize={20}
-                      value="3-2"
+                      value="3"
                     >
                       <h4> 3 - 2 Star </h4>
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      iconInnerSize={9.5}
+                      rootColor={'#9e9b9b'}
+                      iconInnerSize={9.9}
                       iconSize={20}
-                      value="2-1"
+                      value="2"
                     >
                       <h4> 2 - 1 Star </h4>
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      iconInnerSize={9.5}
+                      rootColor={'#9e9b9b'}
+                      iconInnerSize={9.9}
                       iconSize={20}
-                      value="1-0"
+                      value="1"
                     >
                       <h4> 1 - 0 Star </h4>
                     </ReversedRadioButton>
@@ -260,7 +337,9 @@ function AllBlogs() {
                 </div>
                 <div className="Filter-button-div">
                   {" "}
-                  <button className="Filter-Button">Filter</button>{" "}
+                  <button className="Filter-Button" onClick={Ratingfilter}>
+                    Filter
+                  </button>{" "}
                 </div>
               </div>
             </Col>
@@ -272,16 +351,18 @@ function AllBlogs() {
                 <div>
                   <RadioGroup onChange={PopularRadio}>
                     <ReversedRadioButton
-                      value='1000+'
+                      value="1000+"
                       pointColor={"#23A6F0"}
-                      iconInnerSize={9.5}
+                      rootColor={'#9e9b9b'}
+                      iconInnerSize={9.9}
                       iconSize={20}
                     >
                       <h4> 1000+ Views </h4>
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      iconInnerSize={9.5}
+                      rootColor={'#9e9b9b'}
+                      iconInnerSize={9.9}
                       iconSize={20}
                       value="1000"
                     >
@@ -289,7 +370,8 @@ function AllBlogs() {
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      iconInnerSize={9.5}
+                      rootColor={'#9e9b9b'}
+                      iconInnerSize={9.9}
                       iconSize={20}
                       value="700"
                     >
@@ -297,7 +379,8 @@ function AllBlogs() {
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      iconInnerSize={9.5}
+                      rootColor={'#9e9b9b'}
+                      iconInnerSize={9.9}
                       iconSize={20}
                       value="400"
                     >
@@ -305,7 +388,8 @@ function AllBlogs() {
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      iconInnerSize={9.5}
+                      rootColor={'#9e9b9b'}
+                      iconInnerSize={9.9}
                       iconSize={20}
                       value="200"
                     >
@@ -315,7 +399,9 @@ function AllBlogs() {
                 </div>
                 <div className="Filter-button-div">
                   {" "}
-                  <button className="Filter-Button" onClick={Popularfilter}>Filter</button>{" "}
+                  <button className="Filter-Button" onClick={Popularfilter}>
+                    Filter
+                  </button>{" "}
                 </div>
               </div>
             </Col>

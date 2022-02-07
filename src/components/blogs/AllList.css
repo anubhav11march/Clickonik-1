@@ -9,10 +9,14 @@
 .Sort-text {
   font-family: Poppins;
   font-style: normal;
+cursor: pointer;
   font-weight: 500;
   font-size: 24px;
   line-height: 36px;
   color: rgba(0, 0, 0, 0.35);
+}
+.Sort-text:hover{
+  color: rgba(0, 0, 0, 0.726);
 }
 .Sort-Button {
   border: none;
@@ -33,6 +37,7 @@
   display: flex;
   right: 6%;
   position: absolute;
+  cursor: pointer;
 }
 .Filter-main {
   background: #ffffff;
@@ -52,8 +57,9 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 30px;
-  color: #c4c4c4;
+  color: #9e9b9b;
 }
+
 .blog-Date-picker {
   width: 144px;
   height: 50px;

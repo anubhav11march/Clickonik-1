@@ -20,6 +20,9 @@ function AdminBlogs() {
   const navigate = useNavigate();
   const { user, isLoading } = useContext(UserContext);
 
+
+
+  
   const infiniteScroll = () => {
     if (
       Math.round(window.innerHeight + window.scrollY) >=
@@ -95,6 +98,23 @@ function AdminBlogs() {
     setGuestBlogs(guestBlogs.filter((guestBlog) => guestBlog._id !== _id));
   };
 
+
+
+
+  const rejectbtn = async (_id) => {
+    const blogid = {
+      blogid: _id,
+    };
+    try {
+      const res = await axios.post(`api/admin//rejectblog`, blogid);
+    } catch (err) {
+      console.log(err);
+    }
+    setUserBlogs(userBlogs.filter((userBlog) => userBlog._id !== _id));
+    setGuestBlogs(guestBlogs.filter((guestBlog) => guestBlog._id !== _id));
+  };
+
+
   return (
     <>
       <Header setSidebarShow={setSidebarShow} sidebarShow={sidebarShow} />
@@ -134,7 +154,12 @@ function AdminBlogs() {
                         {blog?.blogText?.slice(0, 80)}
                       </div>
                       <div className="adminb-ar">
-                        <div className="adminb-rej">Reject</div>
+                        <div
+                          className="adminb-rej"
+                          onClick={() => rejectbtn(blog._id)}
+                        >
+                          Reject
+                        </div>
                         <div
                           className="adminb-app"
                           onClick={() => acceptbtn(blog._id)}
@@ -160,7 +185,12 @@ function AdminBlogs() {
                         {blog?.blogText?.slice(0, 80)}
                       </div>
                       <div className="adminb-ar">
-                        <div className="adminb-rej">Reject</div>
+                        <div
+                          className="adminb-rej"
+                          onClick={() => rejectbtn(blog._id)}
+                        >
+                          Reject
+                        </div>
                         <div
                           className="adminb-app"
                           onClick={() => acceptbtn(blog._id)}

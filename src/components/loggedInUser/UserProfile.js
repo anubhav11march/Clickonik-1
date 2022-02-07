@@ -1,7 +1,6 @@
 import React, { useRef, useState, useContext, useEffect } from "react";
 import "./UserProfile.css";
 import User from "../../assets/images/user.svg";
-import BlueStar from "../../assets/images/blueStar.svg";
 import Add from "../../assets/images/add.svg";
 import { Container } from "react-bootstrap";
 import Sidebar from "../common/Sidebar";
@@ -145,14 +144,7 @@ function UserProfile() {
                 onChange={handleUsername}
                 minLength="8"
               />
-              <div className="userp-rating">
-                <span>User Rating</span>
-                <img src={BlueStar} alt="star" />
-                <img src={BlueStar} alt="star" />
-                <img src={BlueStar} alt="star" />
-                <img src={BlueStar} alt="star" />
-                <img src={BlueStar} alt="star" />
-              </div>
+             
             </div>
           </div>
           <textarea

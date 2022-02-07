@@ -40,8 +40,6 @@ function ParticularBlog() {
   useEffect(() => {
     GetBlog();
   }, []);
-  console.log(userdata?.data);
-  var ProfileRating = userdata?.data?.userId?.ratings?.avg;
   useEffect(() => {
     if (speak) {
       handleSpeak();
@@ -137,8 +135,6 @@ function ParticularBlog() {
 
             <About
               BlogId={userdata?.data?._id}
-              userId={userdata?.data?.userId?._id}
-              userProfileRating={ProfileRating?.toFixed(1)}
               Image={userdata?.data?.userId?.profile}
               Name={
                 userdata?.data?.isGuest === false
