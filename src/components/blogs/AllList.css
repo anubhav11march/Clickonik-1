@@ -64,14 +64,15 @@ cursor: pointer;
   width: 144px;
   height: 50px;
   font-size: 13px;
-  background: #f6f6f6;
-  border: 1px solid #e6e6e6;
+  background: #fff;
+  border: 1px solid rgb(158, 155, 155) ;
   box-sizing: border-box;
   border-radius: 5px;
   text-transform: uppercase;
   text-align: center;
   color: #7a7878;
   padding: 5px;
+  border-radius: 1px;
 }
 .blog-Date-picker:focus {
   outline: #9e9b9b;
