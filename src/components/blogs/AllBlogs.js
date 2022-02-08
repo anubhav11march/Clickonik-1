@@ -47,10 +47,9 @@ function AllBlogs() {
         console.log(err);
       }
     }
-
-    GetPopulardata();
-  }, []);
-
+    if (ratedata?.length > 0){
+      GetPopulardata()
+  }}, [ratedata]);
   useEffect(() => {
     function GetRatedata() {
       try {
@@ -61,10 +60,9 @@ function AllBlogs() {
         console.log(err);
       }
     }
-
-    GetRatedata();
-  }, []);
-
+    if (data?.length>0){
+  GetRatedata();
+   } }, [data]);
   useEffect(() => {
     if (data?.length > 0) {
       setBlogs(data);
@@ -81,6 +79,7 @@ function AllBlogs() {
     }
     setFilter(false);
   };
+
   const SortbyRating = () => {
     if (topbtn.Rate === false) {
       setTopbtn({ Rate: true });

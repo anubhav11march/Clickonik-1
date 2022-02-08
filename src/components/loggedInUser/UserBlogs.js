@@ -40,7 +40,7 @@ function UserBlogs() {
       setDraftBlogs(false);
     }
   }, [state]);
-  // console.log(userdata?.data);
+  console.log(userdata?.data);
 
   if (!isLoading && !user) navigate("/");
   if (isLoading) return null;
