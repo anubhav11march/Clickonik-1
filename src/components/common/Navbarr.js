@@ -8,7 +8,7 @@ import Close from "../../assets/images/close.svg";
 import SignIn from "../../assets/images/signIn.svg";
 import SignUp from "../../assets/images/signUp.svg";
 import Google from "../../assets/images/google.svg";
-import Facebook from "../../assets/images/sfacebook.svg";
+// import Facebook from "../../assets/images/sfacebook.svg";
 import User from "../../assets/images/user.svg";
 import { signInWithGoogle } from "../../utils/firebaseAuth";
 import axios from "../../utils/axios";

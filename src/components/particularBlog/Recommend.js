@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Recommend.css";
-import Related from "../../assets/images/related.svg";
 import axios from "../../utils/axios";
 import { NavLink } from "react-router-dom";
 

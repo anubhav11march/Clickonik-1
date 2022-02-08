@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, InputGroup, FormControl } from "react-bootstrap";
 import "./AllList.css";
 import { NavLink } from "react-router-dom";
 import axios from "../../utils/axios";
@@ -8,11 +8,14 @@ import Footer from "../common/Footer";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Filter from "../../assets/images/Filter.png";
 import { RadioGroup, ReversedRadioButton } from "react-radio-buttons";
+import { BsSearch } from "react-icons/bs";
 function AllBlogs() {
   const [data, setData] = useState();
   const [showFilter, setFilter] = useState(false);
   const [populardata, setPopulardata] = useState();
   const [ratedata, setRatedata] = useState();
+  const [categoryData, setCategorydata] = useState();
+  const [input, setInput] = useState("");
   const [blogs, setBlogs] = useState();
   const [popularvalue, setPopularvalue] = useState();
   const [ratingvalue, setRatingvalue] = useState();
@@ -47,9 +50,10 @@ function AllBlogs() {
         console.log(err);
       }
     }
-    if (ratedata?.length > 0){
-      GetPopulardata()
-  }}, [ratedata]);
+    if (ratedata?.length > 0) {
+      GetPopulardata();
+    }
+  }, [ratedata]);
   useEffect(() => {
     function GetRatedata() {
       try {
@@ -60,9 +64,26 @@ function AllBlogs() {
         console.log(err);
       }
     }
-    if (data?.length>0){
-  GetRatedata();
-   } }, [data]);
+    if (data?.length > 0) {
+      GetRatedata();
+    }
+  }, [data]);
+
+  useEffect(() => {
+    function GetCategorydata() {
+      try {
+        axios.get(`api/guest/categoryblogs`).then((response) => {
+          setCategorydata(response?.data?.data);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    if (populardata?.length > 0) {
+      GetCategorydata();
+    }
+  }, [populardata]);
+
   useEffect(() => {
     if (data?.length > 0) {
       setBlogs(data);
@@ -102,7 +123,7 @@ function AllBlogs() {
   };
 
   const FilterPannel = () => {
-    showFilter === false ? setFilter(true) : setFilter(false);
+    showFilter === false ? setFilter(true) : setFilter(false);setInput('');
   };
   useEffect(() => {
     if (showFilter === true) {
@@ -135,24 +156,23 @@ function AllBlogs() {
   };
   const Ratingfilter = () => {
     let result;
-   if (ratingvalue=== "5") {
+    if (ratingvalue === "5") {
       result = ratedata.filter(
         (rate) => rate?.avgrating <= 5 && rate?.avgrating >= 4
       );
-    } else if (ratingvalue=== "4") {
+    } else if (ratingvalue === "4") {
       result = ratedata.filter(
         (rate) => rate?.avgrating <= 4 && rate?.avgrating >= 3
       );
-    } else if (ratingvalue=== "3") {
+    } else if (ratingvalue === "3") {
       result = ratedata.filter(
         (rate) => rate?.avgrating <= 3 && rate?.avgrating >= 2
       );
-    } else if (ratingvalue=== "2") {
+    } else if (ratingvalue === "2") {
       result = ratedata.filter(
         (rate) => rate?.avgrating <= 2 && rate?.avgrating >= 1
       );
-    }
-    else if (ratingvalue=== "1") {
+    } else if (ratingvalue === "1") {
       result = ratedata.filter(
         (rate) => rate?.avgrating <= 1 && rate?.avgrating >= 0
       );
@@ -184,7 +204,18 @@ function AllBlogs() {
     setBlogs(result);
     setFilter(false);
   };
+  const Categoryfilter = () => {
+    let result;
+    result = categoryData.filter((category) => category?.category === input);
 
+    setBlogs(result);
+    setInput("");
+    setFilter(false);
+  };
+
+  const unique = [
+    ...new Set(categoryData?.flat().map((data) => data?.category)),
+  ];
   return (
     <>
       <Navbarr />
@@ -232,7 +263,11 @@ function AllBlogs() {
               <IoMdArrowDropdown size="25px" />
             )}
           </button>
-          <div className="filter-container" onClick={FilterPannel} title="Filter">
+          <div
+            className="filter-container"
+            onClick={FilterPannel}
+            title="Filter"
+          >
             <p className="Sort-text">Filter</p>
             <img
               src={Filter}
@@ -248,39 +283,105 @@ function AllBlogs() {
         >
           <Row>
             <Col lg={4}>
-              <div className="Filter-container">
-                <p className="Filter-date-text">Filter by Date</p>
-                <Row>
-                  <Col>
-                    <input
-                      type="date"
-                      className="blog-Date-picker"
-                      name="Start Date"
-                      value={date.Start}
-                      onChange={(e) =>
-                        setDate({ ...date, Start: e.target.value })
-                      }
-                    />
-                  </Col>
-                  <Col>
-                    <input
-                      type="date"
-                      className="blog-Date-picker"
-                      name="End date"
-                      value={date.End}
-                      onChange={(e) =>
-                        setDate({ ...date, End: e.target.value })
-                      }
-                    />
-                  </Col>
-                </Row>
-                <div className="Filter-button-div">
-                  {" "}
-                  <button className="Filter-Button" onClick={DatePicker}>
-                    Filter
-                  </button>{" "}
+              <Row>
+                <div className="Filter-container">
+                  <p className="Filter-date-text">Filter by Date</p>
+                  <Row>
+                    <Col>
+                      <input
+                        type="date"
+                        className="blog-Date-picker"
+                        name="Start Date"
+                        value={date.Start}
+                        onChange={(e) =>
+                          setDate({ ...date, Start: e.target.value })
+                        }
+                      />
+                    </Col>
+
+                    <Col>
+                      <input
+                        type="date"
+                        className="blog-Date-picker"
+                        name="End date"
+                        value={date.End}
+                        onChange={(e) =>
+                          setDate({ ...date, End: e.target.value })
+                        }
+                      />
+                    </Col>
+                  </Row>
+                  <div className="Filter-button-div">
+                    <button className="Filter-Button" onClick={DatePicker}>
+                      Filter
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </Row>
+
+              <Row style={{ paddingTop: "20px" }}>
+                <div className="Filter-container">
+                  <p className="Filter-date-text">Filter by Category</p>
+                  <div className="Filter-category">
+                    <InputGroup className="mb-3" size="lg">
+                      <FormControl 
+                      className="Search-field-filter"
+                        placeholder="Search Category"
+                        value={input}
+                        onChange={(e) => {
+                          setInput(e.target.value);
+                        }}
+                      />
+                      <InputGroup.Text
+                        id="basic-addon1"
+                        onClick={Categoryfilter}
+                      >
+                        <BsSearch />
+                      </InputGroup.Text>
+                    </InputGroup>
+                  </div>
+
+                  <div
+                    className="filter-SearchR"
+                    style={
+                      input == "" ? { display: "none" } : { display: "grid" }
+                    }
+                  >
+                    {unique
+                      ?.filter((val) => {
+                        if (input === "") {
+                          return null;
+                        } else if (
+                          val?.toLowerCase()?.includes(input?.toLowerCase())
+                        ) {
+                          return val;
+                        } else {
+                          return null;
+                        }
+                      })
+                      .slice(0, 3)
+                      .map((val, key) => {
+                        return (
+                          <p
+                            className="SearchR-text"
+                            key={key}
+                            onClick={() => setInput(val)}
+                          >
+                            {val}
+                          </p>
+                        );
+                      })}
+                  </div>
+
+                
+
+                  <div className="Filter-button-div">
+                    <button className="Filter-Button" onClick={Categoryfilter}>
+                      Filter
+                    </button>
+                  </div>
+                </div>
+              </Row>
             </Col>
             <Col lg={4}>
               <div className="Filter-container">
@@ -289,7 +390,7 @@ function AllBlogs() {
                   <RadioGroup onChange={RatingRadio}>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      rootColor={'#9e9b9b'}
+                      rootColor={"#9e9b9b"}
                       iconInnerSize={9.9}
                       iconSize={20}
                       value="5"
@@ -298,7 +399,7 @@ function AllBlogs() {
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      rootColor={'#9e9b9b'}
+                      rootColor={"#9e9b9b"}
                       iconInnerSize={9.9}
                       iconSize={20}
                       value="4"
@@ -307,7 +408,7 @@ function AllBlogs() {
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      rootColor={'#9e9b9b'}
+                      rootColor={"#9e9b9b"}
                       iconInnerSize={9.9}
                       iconSize={20}
                       value="3"
@@ -316,7 +417,7 @@ function AllBlogs() {
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      rootColor={'#9e9b9b'}
+                      rootColor={"#9e9b9b"}
                       iconInnerSize={9.9}
                       iconSize={20}
                       value="2"
@@ -325,7 +426,7 @@ function AllBlogs() {
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      rootColor={'#9e9b9b'}
+                      rootColor={"#9e9b9b"}
                       iconInnerSize={9.9}
                       iconSize={20}
                       value="1"
@@ -352,7 +453,7 @@ function AllBlogs() {
                     <ReversedRadioButton
                       value="1000+"
                       pointColor={"#23A6F0"}
-                      rootColor={'#9e9b9b'}
+                      rootColor={"#9e9b9b"}
                       iconInnerSize={9.9}
                       iconSize={20}
                     >
@@ -360,7 +461,7 @@ function AllBlogs() {
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      rootColor={'#9e9b9b'}
+                      rootColor={"#9e9b9b"}
                       iconInnerSize={9.9}
                       iconSize={20}
                       value="1000"
@@ -369,7 +470,7 @@ function AllBlogs() {
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      rootColor={'#9e9b9b'}
+                      rootColor={"#9e9b9b"}
                       iconInnerSize={9.9}
                       iconSize={20}
                       value="700"
@@ -378,7 +479,7 @@ function AllBlogs() {
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      rootColor={'#9e9b9b'}
+                      rootColor={"#9e9b9b"}
                       iconInnerSize={9.9}
                       iconSize={20}
                       value="400"
@@ -387,7 +488,7 @@ function AllBlogs() {
                     </ReversedRadioButton>
                     <ReversedRadioButton
                       pointColor={"#23A6F0"}
-                      rootColor={'#9e9b9b'}
+                      rootColor={"#9e9b9b"}
                       iconInnerSize={9.9}
                       iconSize={20}
                       value="200"
@@ -420,7 +521,7 @@ function AllBlogs() {
               <Col lg={10} xs={9} md={9}>
                 <NavLink
                   className="navlink-css"
-                  to={{pathname:`/particular-blog/${data?._id}`}}
+                  to={{ pathname: `/particular-blog/${data?._id}` }}
                   state={{ blog_id: data?._id }}
                 >
                   <div className="list-content">

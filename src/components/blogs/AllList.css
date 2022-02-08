@@ -9,13 +9,13 @@
 .Sort-text {
   font-family: Poppins;
   font-style: normal;
-cursor: pointer;
+  cursor: pointer;
   font-weight: 500;
   font-size: 24px;
   line-height: 36px;
   color: rgba(0, 0, 0, 0.35);
 }
-.Sort-text:hover{
+.Sort-text:hover {
   color: rgba(0, 0, 0, 0.726);
 }
 .Sort-Button {
@@ -65,7 +65,7 @@ cursor: pointer;
   height: 50px;
   font-size: 13px;
   background: #fff;
-  border: 1px solid rgb(158, 155, 155) ;
+  border: 1px solid rgb(158, 155, 155);
   box-sizing: border-box;
   border-radius: 5px;
   text-transform: uppercase;
@@ -104,26 +104,54 @@ cursor: pointer;
   justify-content: center;
 }
 
-@media (max-width:767.9px) {
-
+@media (max-width: 767.9px) {
   .Sort-Button {
     width: 120px;
     font-size: 1.5rem;
-}
-.Sort-text {
-  font-size: 20px;
-}
+  }
+  .Sort-text {
+    font-size: 20px;
+  }
 }
 
-@media (max-width:670.9px) {
+@media (max-width: 670.9px) {
   .Sort-filter {
     display: grid;
     margin-bottom: 30px;
+  }
+  .Sort-Button {
+    width: 250px;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
 }
-.Sort-Button {
-  width: 250px;
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+
+.Filter-category {
+  margin: 0px 30px 30px 30px;
+  height: 30px;
+}
+
+.filter-SearchR {
+  background-color: #f4f4f4;
+  margin: -36px 30px 5px 30px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: default;
   border-radius: 8px;
 }
+.SearchR-text {
+  height: 16px;
+}
+.SearchR-text:hover {
+  color: #4468e2;
+}
+
+.Search-field-filter {
+  outline: 0px solid #9e9b9b;
+  box-shadow: none !important;
+}
+.Search-field-filter:hover {
+  background-color: #fcf8f8;
+  cursor: pointer;
 }
