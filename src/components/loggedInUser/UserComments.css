@@ -50,19 +50,32 @@
   font-size: 1.4rem;
   padding-left: 3em;
   font-weight: 600;
+
 }
 
 .userc-Title-comment{
 
   padding-right: 6px;
   font-size: 1.4rem;
-  color: #ea4335;
+  color: #34a853;
 }
 .userc-blog-comment{
   font-size: 1.4rem;
   font-weight: 600;
   color: #5b5b5b;
 }
+.userc-Total-comment{
+  padding-right: 3px;
+  font-size: 1.5rem;
+  color: #ea4335;
+}
+.userc-TotalT-comment{
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #3b3a3a;
+}
+
+
 .userc-comment {
   padding-bottom: 1em;
   overflow: scroll;

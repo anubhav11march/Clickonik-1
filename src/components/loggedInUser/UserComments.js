@@ -15,23 +15,27 @@ const Comment = ({ comments, Title,id }) => {
   const ShowComments = (e) => {
     if (show === true) {
       setShow(false);
+      setResult(comments.filter((comments) => comments?.targetuser?.title === e));
     } else {
       setShow(true);
       setResult(comments.filter((comments) => comments?.targetuser?.title === e));
     }
   };
-
   return (
     <div className="userc-comment ">
+      
       <div>
         <span className="usercnd-name" onClick={() => ShowComments(Title)} Title={show === false ? 'Open Comments' : 'Close Comments'}>
          {id+1}) {Title} {show === false ? <TiArrowSortedDown /> : <TiArrowSortedUp />}
         </span>
       </div>
+      
+      <div style={{ display: show === true ? "grid" : "none",paddingTop:'30px',paddingLeft:'10px' }}>
+     
 {result?.map((data, id) =>{
   return(
-      <div style={{ display: show === true ? "grid" : "none",paddingTop:'30px',paddingLeft:'10px' }} key={id}>
-        <div>
+     <>
+        <div key={id}>
         <img
           src={data?.isGuest ? User : data?.user?.profile || User}
           alt="user"
@@ -45,10 +49,17 @@ const Comment = ({ comments, Title,id }) => {
           {" "}
           <span className="userc-Title-comment">Comment:</span>
           <span className="userc-blog-comment">{data?.comment}</span> 
-        </div>
+       
        {/* {result?.length>1?<hr/>:""}  */}
       </div>
+      </>
 )})}
+ <div className="userc-cb">
+          {" "}
+          <span className="userc-Total-comment">Total : </span>
+          <span className="userc-TotalT-comment">{result?.length} Comments</span> 
+        </div>
+ </div>
       <hr />
     </div>
   );
@@ -79,34 +90,6 @@ function UserComments() {
     ...new Set(comments?.flat().map((data) => data.targetuser?.title)),
   ];
 
-  // const infiniteScroll = () => {
-  //   if (
-  //     Math.round(window.innerHeight + window.scrollY) >=
-  //     document.body.offsetHeight
-  //   ) {
-  //     setCommentIndex((commentIndex) => commentIndex + 1);
-  //     // console.log("kjdfadf");
-  //     // console.log(commentIndex);
-  //   }
-  // };
-
-  // const updateCommentList = (commentId) => {
-  //   setComments(comments.filter((comment) => comment?._id !== commentId));
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", infiniteScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", infiniteScroll);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!hasMore) return;
-  //   getAllComments(commentIndex);
-  //   // console.log("commentIndex", commentIndex);
-  // }, [hasMore, commentIndex]);
-
   if (!isLoading && !user) navigate("/");
   if (isLoading) return null;
 
@@ -118,7 +101,9 @@ function UserComments() {
         <div className="userc-comments">
           <h2>All User Blogs</h2>
           {unique?.map((Title, id) => {
-            return <Comment key={id} id={id} Title={Title} comments={comments} />;
+
+            return (
+            <Comment key={id} id={id} Title={Title} comments={comments} />);
           })}
         </div>
       </Container>
