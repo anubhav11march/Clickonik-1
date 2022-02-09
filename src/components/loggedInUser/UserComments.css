@@ -31,10 +31,8 @@
 }
 
 .userc-cb {
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: #5b5b5b;
-  padding: 1em 0em 1em 4em;
+ 
+  padding: 1em 0em 1em 0em;
 }
 
 .userc-approve {
@@ -47,4 +45,37 @@
   .userc-comments {
     margin-top: 2em;
   }
+}
+.userc-Title-blog{
+  font-size: 1.4rem;
+  padding-left: 3em;
+  font-weight: 600;
+}
+
+.userc-Title-comment{
+
+  padding-right: 6px;
+  font-size: 1.4rem;
+  color: #ea4335;
+}
+.userc-blog-comment{
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #5b5b5b;
+}
+.userc-comment {
+  padding-bottom: 1em;
+  overflow: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  cursor: pointer;
+}
+.userc-comment::-webkit-scrollbar {
+  display: none;
+}
+
+.usercnd-name {
+  padding-left: 1em;
+  font-size: 1.8rem;
+  white-space: nowrap;
 }

@@ -29,6 +29,7 @@ const ABlog = () => {
     }
     Userblog();
   }, []);
+  console.log(userdata)
   return (
     <>
       {userdata?.data.slice(0, 3).map((data, id) => {
@@ -47,7 +48,7 @@ const ABlog = () => {
               <img className="item-share" src={Share} alt="share" />
               <span> &nbsp;{data?.shareCount}</span>
 
-              <span className="item-comments-span"> &nbsp; 17</span>
+              <span className="item-comments-span"> &nbsp; {data?.commentCount}</span>
               <img className="item-comments" src={Comments} alt="comment" />
             </div>
           </div>
@@ -57,26 +58,48 @@ const ABlog = () => {
   );
 };
 
-const Comment = () => {
+const Comment = ({ comment }) => {
+
   return (
-    <div className="userd-comment">
+    <div className="admind-comment">
       <div>
-        <img src={User} alt="user" className="userd-user" />
-        <span className="userd-name">User Name</span>
+        <img
+          src={comment?.isGuest ? User : comment?.user?.profile || User}
+          alt="user"
+          className="admind-user"
+        />
+        <span className="admind-name">
+          {!comment?.username ? comment?.user?.username : comment?.username}
+        </span>
       </div>
-      <div className="userd-cb">
-        Lorem ipsum dolor sit amet, con se ctetur adipiscing elit. Tellus
-        pretium mauris, at blandit massa....more
-      </div>
-      <div className="userd-approve">Approve</div>
+      <div className="admind-cb">{comment?.comment}</div>
     </div>
   );
 };
+
+
 
 function UserDashboard() {
   const { user, isLoading } = useContext(UserContext);
   const navigate = useNavigate();
   const [sidebarShow, setSidebarShow] = useState(false);
+  const [comments, setComments] = useState([]);
+
+
+  useEffect(() => {
+    const getAllComments = async () => {
+      try {
+        const res = await axios.get("/api/user/getcomments");
+        if (res?.status !== 200) return;
+        setComments(res?.data?.comments);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getAllComments();
+  }, []);
+console.log(comments)
+
 
   if (!isLoading && !user) navigate("/");
   if (isLoading) return null;
@@ -105,13 +128,17 @@ function UserDashboard() {
             </div>
           </Col>
           <Col lg={4}>
-            <div className="userd-comments">
-              <div className="userd-chead">Comments</div>
-              <Comment />
-              <Comment />
-              <Comment />
+            <div className="admind-comments">
+              <div className="admind-chead">Comments</div>
+              {comments?.slice(0,3)?.map((comment, id) => {
+                return (
+                  <Comment key={id}
+                    comment={comment}
+                  />
+                );
+              })}
               <div
-                className="userd-show"
+                className="admind-show"
                 onClick={() => navigate("/user/comments")}
               >
                 show all

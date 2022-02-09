@@ -155,3 +155,9 @@
   background-color: #fcf8f8;
   cursor: pointer;
 }
+
+@media (max-width: 991px) {
+  .filter-SearchR {
+    margin: -36px 0px 5px 0px;
+}
+}

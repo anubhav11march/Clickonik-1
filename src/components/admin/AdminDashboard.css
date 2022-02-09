@@ -79,7 +79,9 @@
   text-align: center;
   cursor: pointer;
 }
-
+.admind-show:hover{
+  color: rgb(105, 104, 104);
+}
 .admind-comments {
   background: #ffffff;
   box-shadow: 0px 0px 30px rgba(102, 77, 253, 0.15);

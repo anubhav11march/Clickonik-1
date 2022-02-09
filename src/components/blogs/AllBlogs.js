@@ -319,7 +319,7 @@ function AllBlogs() {
                 </div>
               </Row>
 
-              <Row style={{ paddingTop: "20px" }}>
+              <Row style={{ paddingTop: "30px" ,paddingBottom:'30px' }}>
                 <div className="Filter-container">
                   <p className="Filter-date-text">Filter by Category</p>
                   <div className="Filter-category">

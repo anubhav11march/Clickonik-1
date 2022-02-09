@@ -31,6 +31,10 @@
   text-align: right;
 }
 
+.footer-list:hover{
+  color: #000;
+}
+
 @media (max-width: 767px) {
   .footer-div1 {
     padding-bottom: 1em;

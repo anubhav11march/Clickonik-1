@@ -94,7 +94,7 @@ function UserBlogs() {
                       <span> &nbsp; {data?.viewCount}</span>
                       <img className="item-share" src={Share} alt="share" />
                       <span> &nbsp; {data?.shareCount}</span>
-                      <span className="item-comments-span-ub"> &nbsp; 17</span>
+                      <span className="item-comments-span-ub"> &nbsp; {data?.commentCount}</span>
                       <img
                         className="item-comments"
                         src={Comments}
