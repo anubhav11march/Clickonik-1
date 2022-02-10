@@ -158,7 +158,6 @@ const AdminCategories = () => {
                     <Button variant="primary" onClick={SaveChanges}>
                       Save Changes
                     </Button>
-                    
                   </div>
                 ) : (
                   ""

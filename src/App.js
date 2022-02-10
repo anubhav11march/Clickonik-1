@@ -20,6 +20,7 @@ import UserProfile from "./components/loggedInUser/UserProfile";
 import UserPublish from "./components/loggedInUser/UserPublish";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import AdminBlogs from "./components/admin/AdminBlogs";
+import AdminPromoted from "./components/admin/AdminPromoted";
 import AdminComments from "./components/admin/AdminComments";
 import AdminVerifications from "./components/admin/AdminVerifications";
 import AdminCoupons from "./components/admin/AdminCoupons";
@@ -57,6 +58,7 @@ function App() {
             <Route exact path="/user/publish" element={<UserPublish />} />
             <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
             <Route exact path="/admin/blogs" element={<AdminBlogs />} />
+            <Route exact path="/admin/promotedblogs" element={<AdminPromoted />} />
             <Route exact path="/admin/comments" element={<AdminComments />} />
             <Route exact path="/admin/coupons" element={<AdminCoupons />} />
             <Route exact path="/searchPage" element={<SearchPage />} />

@@ -57,6 +57,14 @@ function AdminSidebar({ selected }) {
         </li>
         <li
           className={`adminsb-li ${
+            selected === "promotedBlogs" && "adminsb-active"
+          }`}
+          onClick={() => handleChange("/admin/promotedBlogs")}
+        >
+        Promoted Blogs
+        </li>
+        <li
+          className={`adminsb-li ${
             selected === "categories" && "adminsb-active"
           }`}
           onClick={() => handleChange("/admin/categories")}

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import "./UserBlogs.css";
-import Blog from "../../assets/images/ablog.svg";
+// import Blog from "../../assets/images/ablog.svg";
 import View from "../../assets/images/bview.svg";
 import Share from "../../assets/images/bshare.svg";
 import Comments from "../../assets/images/bcomment.svg";
