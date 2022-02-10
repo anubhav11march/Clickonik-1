@@ -17,6 +17,7 @@
   justify-content: space-around;
   align-items: center;
   cursor: pointer;
+ 
 }
 
 .userb-pub {
@@ -52,6 +53,16 @@
     gap: 0px;
     height: 100%;
     margin-bottom: 30px;
+    overflow: scroll;
+}
+.Blog-box {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.Blog-box::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
 }
 
 #item-0ub {

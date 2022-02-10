@@ -9,7 +9,7 @@ function CardWithList() {
   const [item1, setItem1] = useState();
   const GetData = () => {
     try {
-      axios.get(`api/guest/recentblogs`).then((response) => {
+      axios.get(`api/guest/mostviewedblogs`).then((response) => {
         setData(response.data.data);
       });
     } catch (err) {

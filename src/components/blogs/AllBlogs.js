@@ -72,7 +72,7 @@ function AllBlogs() {
   useEffect(() => {
     function GetCategorydata() {
       try {
-        axios.get(`api/guest/categoryblogs`).then((response) => {
+        axios.post(`api/guest/categoryblogs`).then((response) => {
           setCategorydata(response?.data?.data);
         });
       } catch (err) {

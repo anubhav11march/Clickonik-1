@@ -26,7 +26,7 @@ function ParticularBlog() {
   const history = useNavigate();
   let BlogId = useParams();
   let blog_id = BlogId._id;
-  // const { blog_id } = location.state;
+  const [state, setState] = useState(false);
   const [play, setPlay] = useState(false);
   const [speak, setSpeak] = useState(false);
   const [userdata, setUserData] = useState(null);
@@ -43,6 +43,7 @@ function ParticularBlog() {
   useEffect(() => {
     GetBlog();
   }, []);
+
   useEffect(() => {
     if (speak) {
       handleSpeak();
@@ -65,7 +66,7 @@ function ParticularBlog() {
     synth.speak(utterThis);
   };
 
-  const CopyText = () => {
+  const CopyText = async () => {
     navigator.clipboard.writeText(window.location.href);
     toast.success(
       <div className="Toast-success-copy">Blog Link Copied To ClipBoard!!</div>,
@@ -79,7 +80,25 @@ function ParticularBlog() {
         progress: undefined,
       }
     );
+    const data = {
+      blogid: blog_id,
+    };
+    try {
+      const res = await axios.post("/api/guest/share_count", data);
+      setState(true)
+      if (res?.data?.code !== 200) return;
+    } catch (err) {
+      console.log(err);
+    }
+  
   };
+
+  useEffect(() => {
+if (state===true) {
+    GetBlog();
+    setState(false)
+  }
+  }, [state]);
 
   return (
     <>
@@ -105,6 +124,7 @@ function ParticularBlog() {
                 Share via
                 <span>
                   <a
+                    onClick={() => CopyText()}
                     target="_blank"
                     rel="noopener noreferrer"
                     href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
@@ -114,7 +134,10 @@ function ParticularBlog() {
                 </span>
                 <span>
                   <a
-                    onClick={() =>  navigator.clipboard.writeText(window.location.href)}
+                    onClick={() => CopyText()}
+                    onClick={() =>
+                      navigator.clipboard.writeText(window.location.href)
+                    }
                     target="_blank"
                     rel="noopener noreferrer"
                     href={` https://www.instagram.com/`}
@@ -124,6 +147,7 @@ function ParticularBlog() {
                 </span>
                 <span>
                   <a
+                    onClick={() => CopyText()}
                     target="_blank"
                     rel="noopener noreferrer"
                     href={`
@@ -134,6 +158,7 @@ function ParticularBlog() {
                 </span>
                 <span>
                   <a
+                    onClick={() => CopyText()}
                     target="_blank"
                     rel="noopener noreferrer"
                     href={`

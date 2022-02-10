@@ -10,8 +10,8 @@ function BlogList() {
   useEffect(() => {
     function GetData() {
       try {
-        axios.get(`api/guest/mostviewedblogs`).then((response) => {
-          setData(response.data.data);
+        axios.get(`api/user/getblogsviarating`).then((response) => {
+          setData(response?.data?.blogs);
         });
       } catch (err) {
         console.log(err);

@@ -11,17 +11,67 @@ import UserContext from "../../utils/userContext";
 import axios from "../../utils/axios";
 function AdminPromoted() {
   const [blogs, setBlogs] = useState(true);
-  const [allblogs, setAllBlogs] = useState();
+  const [allblogs, setAllBlogs] = useState([]);
   const [users, setUsers] = useState([]);
   const [show, setShow] = useState(true);
   const [promoted, setPromoted] = useState();
   const [sidebarShow, setSidebarShow] = useState(false);
   const navigate = useNavigate();
   const { user, isLoading } = useContext(UserContext);
+  
+  ///
+  const [BlogIndex, setBlogIndex] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const getAllComments = async (BlogIndex) => {
+    try {
+      const res = await axios.get(`api/guest/mostviewedblogs?page=${BlogIndex}`);
+      if (res?.status !== 200) return;
+      if (res?.data?.data?.length < 1) {
+        setHasMore(false);
+        return;
+      }
+      if(allblogs?.length<1){
+      setAllBlogs([res?.data?.data])
+    }
+      else{
+        setAllBlogs([...allblogs, res?.data?.data])
+      }
+      
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const infiniteScroll = () => {
+    if (
+      Math.round(window.innerHeight + window.scrollY) >=
+      document.body.offsetHeight
+    ) {
+      setBlogIndex((BlogIndex) => BlogIndex + 1);
+    }
+  };
+
+
+  useEffect(() => {
+    window.addEventListener("scroll", infiniteScroll);
+    return () => {
+      window.removeEventListener("scroll", infiniteScroll);
+    };
+  }, []);
+
+  
+  useEffect(() => {
+    if (!hasMore) return;
+    getAllComments(BlogIndex);
+  }, [hasMore, BlogIndex]);
+
+
+
+////
   let result;
   useEffect(() => {
     if (allblogs?.length > 0) {
-      setUsers(allblogs);
+      setUsers(allblogs?.flat());
     }
   }, [allblogs]);
   const handleChange = (e) => {
@@ -39,32 +89,42 @@ function AdminPromoted() {
     }
   };
 
-  useEffect(() => {
-    function GetData() {
-      try {
-        axios.get(`api/guest/mostviewedblogs`).then((response) => {
-          setAllBlogs(response.data.data);
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    }
+  // useEffect(() => {
+  //   function GetData() {
+  //     try {
+  //       axios.get(`api/guest/mostviewedblogs`).then((response) => {
+  //         setAllBlogs(response.data.data);
+  //       });
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
 
-    GetData();
-  }, []);
+  //   GetData();
+  // }, []);
 
   useEffect(() => {
     if(blogs===true){
     function GetData() {
       try {
-        axios.get(`api/guest/mostviewedblogs`).then((response) => {
-          setAllBlogs(response.data.data);
-        });
+        const res =  axios.get(`api/guest/mostviewedblogs?page=${BlogIndex}`);
+        if (res?.status !== 200) return;
+        if (res?.data?.data?.length < 1) {
+          setHasMore(false);
+          return;
+        }
+        console.log(allblogs?.length)
+        if(allblogs?.length<1){
+        setAllBlogs([res?.data?.data])
+      }
+        else{
+          setAllBlogs([...allblogs, res?.data?.data])
+        }
+        
       } catch (err) {
         console.log(err);
       }
     }
-  
     GetData();}
   }, [blogs]);
 
@@ -82,11 +142,11 @@ function AdminPromoted() {
     GetData();
   }, []);
   useEffect(() => {
-    if (blogs===false){
+    if (blogs===false||show === true){
     function GetData() {
       try {
         axios.get(`api/guest/promotedblogs`).then((response) => {
-          setPromoted(response.data.data);
+          setPromoted(response?.data.data);
         });
       } catch (err) {
         console.log(err);
@@ -94,7 +154,7 @@ function AdminPromoted() {
     }
 
     GetData();}
-  }, [blogs]);
+  }, [blogs,show]);
 
   result = users?.filter((users) => users?.isChecked === true);
 
@@ -173,14 +233,14 @@ function AdminPromoted() {
           </div>
 
           {blogs ? (
-            allblogs?.map((data, id) => {
+            allblogs?.flat()?.map((data, id) => {
               return (
                 <>
                   <div className="Blog-box" key={id}>
                     <img id="item-0ub" src={data?.thumbnail} alt="blog" />
                     <div id="item-1ub">{data?.title}</div>
                     <div id="item-2ub">
-                      {data?.blogText.slice(0, 150) + "..."}
+                      {data?.blogText?.slice(0, 150) + "..."}
                       {/* <span className="more-text">more</span> */}
                     </div>
                     <div id="item-3ub">
