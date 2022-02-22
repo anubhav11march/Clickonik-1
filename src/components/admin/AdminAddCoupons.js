@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef, useMemo, useEffect } from "react";
 import "./AdminAddCoupons.css";
 import uploadCoupon from "../../assets/images/uploadCoupon.svg";
-import { Container, Row, Col, Dropdown } from "react-bootstrap";
+import { Container, Row, Col} from "react-bootstrap";
 import Header from "../common/Header";
 import AdminSidebar from "../common/AdminSidebar";
 import { useNavigate } from "react-router-dom";

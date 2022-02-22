@@ -3,7 +3,6 @@ import "./CouponBrand.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CouponCard from "../common/CouponCard";
-import Flag from "../../assets/images/flag.svg";
 import {
   Col,
   Container,
@@ -15,7 +14,7 @@ import {
 } from "react-bootstrap";
 import Navbarr from "../common/Navbarr";
 import Footer from "../common/Footer";
-import { useLocation } from "react-router-dom";
+import { useLocation ,useNavigate} from "react-router-dom";
 import axios from "../../utils/axios";
 function CouponBrand() {
   const [data, setData] = useState();
@@ -24,6 +23,7 @@ function CouponBrand() {
   const [updatestate, setState] = useState(false);
   const { state } = useLocation();
   const { Brand } = state;
+  const navigate = useNavigate();
   const GetData = () => {
     try {
       axios
@@ -73,6 +73,9 @@ function CouponBrand() {
     setState(false);
   }, [updatestate]);
 
+  const country = [...new Set(data?.flat().map((data) => data.country))];
+  console.log(data)
+
   return (
     <>
       <Navbarr />
@@ -84,25 +87,24 @@ function CouponBrand() {
             <div className="brand-left-3-cards">
               Check out offers in other countries
               <div className="brand-left-3-flag">
-                <Row>
+                <Row className='mt-4'>
+                {country.map((data)=>{
+                    return (
+                      
                   <Col>
-                    <div className="brand-coupon-flag">
-                      <img src={Flag} alt="flag" />
-                      <span>USA</span>
+                    <div  style={{cursor:'pointer'}}onClick={() =>
+                      navigate(`/coupons/${data}`, {
+                        state: { data: data },
+                      })}>
+                    <img className="coupon-flag-img"src={`https://countryflagsapi.com/svg/${data}`} alt="flag" />
+                      <span className="brand-flag-coupon"> {data}</span>
                     </div>
                   </Col>
-                  <Col>
-                    <div className="brand-coupon-flag">
-                      <img src={Flag} alt="flag" />
-                      <span>USA</span>
-                    </div>
-                  </Col>
-                  <Col>
-                    <div className="brand-coupon-flag">
-                      <img src={Flag} alt="flag" />
-                      <span>USA</span>
-                    </div>
-                  </Col>
+                 
+                 )
+                })}
+                
+                
                 </Row>
               </div>
             </div>
