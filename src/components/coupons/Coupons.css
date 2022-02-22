@@ -100,5 +100,6 @@ color: #ffffff;
 .coupon-flag > span:hover {
 text-decoration: underline;
 cursor: pointer;
+color: #4468e2;
 }
 
