@@ -52,6 +52,7 @@ function ParticularBlog() {
       window.speechSynthesis.cancel();
     }
   }, [speak]);
+  console.log(userdata?.data)
   const handleSpeak = () => {
     const synth = window.speechSynthesis;
     const text = userdata?.data?.content;

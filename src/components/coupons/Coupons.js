@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Coupons.css";
-// import Shoes from "../../assets/images/shoes.svg";
-import Flag from "../../assets/images/flag.svg";
 import { Container, Row, Col,Form,FormControl } from "react-bootstrap";
 import { IoSearchOutline } from "react-icons/io5";
 import CouponCard from "../common/CouponCard";
