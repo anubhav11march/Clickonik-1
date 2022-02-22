@@ -1,7 +1,7 @@
-import React, { useState, useContext, useRef, useMemo } from "react";
+import React, { useState, useContext, useRef, useMemo, useEffect } from "react";
 import "./AdminAddCoupons.css";
 import uploadCoupon from "../../assets/images/uploadCoupon.svg";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Dropdown } from "react-bootstrap";
 import Header from "../common/Header";
 import AdminSidebar from "../common/AdminSidebar";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import countryList from "react-select-country-list";
 const AdminAddCoupons = () => {
   const image = useRef(null);
   const [sidebarShow, setSidebarShow] = useState(false);
+  const [store, setAllstore] = useState();
   const navigate = useNavigate();
   const { user, isLoading } = useContext(UserContext);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -29,7 +30,23 @@ const AdminAddCoupons = () => {
     To: "",
     Couponcode: "",
     Deal: "",
+    storeid: "",
   });
+
+  useEffect(() => {
+    function GetStore() {
+      try {
+        axios.get("api/admin/getstores").then((response) => {
+          setAllstore(response.data.data);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    GetStore();
+  }, []);
+
+ 
   let name, value;
   const handleInputs = (e) => {
     name = e.target.name;
@@ -111,9 +128,8 @@ const AdminAddCoupons = () => {
       );
     }
   };
-
   const handleSave = async (url) => {
-    const { BrandName, Title, WebsiteLink, Bio, Couponcode, Deal, From, To } =
+    const { BrandName, Title, WebsiteLink, Bio, Couponcode, Deal, From, To,storeid } =
       inputData;
     const data = {
       brandName: BrandName,
@@ -126,6 +142,7 @@ const AdminAddCoupons = () => {
       from: From,
       to: To,
       country: countryvalue?.label,
+      storeid:storeid,
     };
     try {
       const res = await axios.post("api/admin/coupon", data);
@@ -141,6 +158,18 @@ const AdminAddCoupons = () => {
     setCountryValue(Cvalue);
   };
 
+  const unique = [...new Set(store?.flat().map((data) => data?.name))];
+
+
+  
+  const Storename = (e) => {
+    let result = store.filter((name) => name?.name === e);
+    
+    setInputData({ BrandName: e, storeid: result[0]._id });
+  };
+
+  console.log(typeof(inputData.storeid))
+  console.log(inputData.storeid)
   return (
     <>
       <Header setSidebarShow={setSidebarShow} sidebarShow={sidebarShow} />
@@ -191,6 +220,51 @@ const AdminAddCoupons = () => {
                           required
                           className="coupon-input"
                         />
+
+                        <div
+                          className="filter-SearchR"
+                          style={{
+                            display:
+                              inputData.BrandName == "" ? "none" : "grid",
+                            margin: "-20px 0px 30px 0px",
+                          }}
+                        >
+                          {unique
+                            ?.filter((val) => {
+                              if (inputData.BrandName === "") {
+                                return null;
+                              } else if (inputData.BrandName === val) {
+                                return null;
+                              } else if (
+                                val
+                                  ?.toLowerCase()
+                                  ?.includes(inputData.BrandName?.toLowerCase())
+                              ) {
+                                return val;
+                              } else {
+                                return null;
+                              }
+                            })
+                            .slice(0, 3)
+                            .map((val, key) => {
+                              return (
+                                <p
+                                  style={{
+                                    display:
+                                      inputData.BrandName === val
+                                        ? "none"
+                                        : "grid",
+                                  }}
+                                  className="SearchR-text"
+                                  key={key}
+                                  onClick={() => Storename(val)}
+                                >
+                                  {val}
+                                </p>
+                              );
+                            })}
+                        </div>
+
                         <input
                           type="text"
                           placeholder="Title"

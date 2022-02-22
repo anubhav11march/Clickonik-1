@@ -47,7 +47,15 @@ const AdminCoupons = () => {
             >
               Add New Coupon
             </Button>
+            <Button
+              variant="primary"
+              onClick={() => navigate("/admin/addstore")}
+              className="btn-store"
+            >
+              Add New store
+            </Button>
             <Form className="d-flex">
+          
               <FormControl
                 type="search"
                 placeholder="Search"
@@ -59,6 +67,7 @@ const AdminCoupons = () => {
                 <IoSearchOutline />
               </div>
             </Form>
+            
           </div>
           <div className="Trend-text">Trending Coupons</div>
         </div>

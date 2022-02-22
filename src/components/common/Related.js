@@ -30,7 +30,7 @@ function Related() {
               state={{ blog_id: data?._id }}
             >
               <div className="related-odd">
-                {data?.blogText.slice(0, 120)}...
+                {data?.blogText.slice(0, 120)}...<span className="read-more-text">Read more</span>
               </div>
             </NavLink>
           </div>

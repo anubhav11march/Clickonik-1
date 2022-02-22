@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./CouponCard.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -13,7 +12,7 @@ import {
 } from "react-bootstrap";
 import axios from "../../utils/axios";
 
-function CouponCard() {
+function CCardCountry(props) {
   const [data, setData] = useState();
   const [show, setShow] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
@@ -95,11 +94,12 @@ function CouponCard() {
       }
     );
   };
-
+console.log(data?.flat())
+let Country= data?.flat().filter((data) =>data?.country===props.country);
   return (
     <Container>
-      <Row lg={true}>
-        {data?.flat()?.map((data, id) => {
+      <Row lg={true} style={{display:Country?.length===0?'none':'flex'}}>
+        {Country?.flat()?.map((data, id) => {
           return (
             <>
               <Col lg={width > 1200 ? 2 : 6} md={12} key={id}>
@@ -125,7 +125,8 @@ function CouponCard() {
               </Col>
             </>
           );
-        })}
+        })
+    }
 
         <Modal
           show={show}
@@ -218,11 +219,12 @@ function CouponCard() {
           </div>
         </Modal>
       </Row>
-      <button className="More-coupon-guest" onClick={More}>
+      <h1 style={{display:Country?.length===0?'flex':'none',justifyContent:'center'}} >Currently No Coupons in {props.country} !!</h1>
+      <button className="More-coupon-guest" style={{display:Country?.length===0?'none':'flex'}} onClick={More}>
         More Coupon
       </button>
     </Container>
   );
 }
 
-export default CouponCard;
+export default CCardCountry;

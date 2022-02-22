@@ -4,6 +4,7 @@
 
 .coupon-banner {
   width: 100%;
+  margin-top: 8em;
   height: 290px;
   background: linear-gradient(
       90deg,
@@ -63,7 +64,7 @@
   box-shadow: 0px 0px 50px rgba(102, 77, 253, 0.15);
   border-radius: 8px;
   color: #4468e2;
-  font-size: 3.2rem;
+  font-size: 2rem;
   font-weight: 600;
   padding: 1em 0em;
   text-align: center;
@@ -80,9 +81,24 @@ color: #ffffff;
 .coupon-flag {
   font-size: 2.2rem;
   margin-bottom: 1em;
+  background: #ffffff;
+  width: 2.6em;
+  display: flex;
+  cursor: default;
+  box-shadow: 0px 0px 50px rgb(104 79 255 / 15%);
+}
+.coupon-flag-img{
+  width:70px;
+  box-shadow: 0px 0px 50px rgb(104 79 255 / 15%);
+  background: #ffffff;
 }
 
 .coupon-flag > span {
   padding-left: 1em;
+  white-space: nowrap;
+}
+.coupon-flag > span:hover {
+text-decoration: underline;
+cursor: pointer;
 }
 

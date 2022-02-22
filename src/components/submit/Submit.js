@@ -38,6 +38,9 @@ function Submit() {
     Getcategory();
   }, []);
 
+
+const uniquecategory = [...new Set(categorylist?.flat().map((data) => data.category))];
+
   const handleAuthorName = (e) => {
     setAuthorName(e.target.value);
   };
@@ -193,7 +196,7 @@ function Submit() {
               <option value="" disabled>
                 Category
               </option>
-              {categorylist.map((data, id) => {
+              {uniquecategory?.map((data, id) => {
                 return (
                   <option value={data} key={id}>
                     {data}

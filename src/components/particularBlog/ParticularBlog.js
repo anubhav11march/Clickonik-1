@@ -22,6 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Comments from "./Comments";
 import axios from "../../utils/axios";
 
+
 function ParticularBlog() {
   const history = useNavigate();
   let BlogId = useParams();
@@ -119,7 +120,7 @@ if (state===true) {
               </span>
             </div>
 
-            <div className="pb-sec2">
+            <div className="pb-sec2" style={{display: userdata?.data.status?"none":'flex'}}>
               <div className="pb-left">
                 Share via
                 <span>

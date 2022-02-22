@@ -106,10 +106,47 @@
 
 @media (max-width: 767px) {
   .list-name {
-    width: 140px;
+    width: 150px;
     margin: 0px 0px 0px 50px;
   }
   .adminc-input {
     margin: 0px 20px 10px 53px;
   }
+}
+.sub-category{
+  width: 10px;
+}
+
+
+.edit-subcategory-btn {
+  text-align: end;
+  color: #a3a3a3;
+  margin-top: 0px;
+  right: 60px;
+  position: absolute;
+  float: right;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+}
+.edit-subcategory {
+  text-align: end;
+  color: #000;
+  margin-top: 0px;
+  right: 60px;
+  position: absolute;
+  float: right;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+}
+.edit-subcategory-btn:hover {
+  color: #000;
+}
+.list-subcat{
+  font-size: 16px;
 }

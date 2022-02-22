@@ -81,3 +81,9 @@
     
      }
     }
+    .read-more-text{
+      color: rgba(102, 77, 253, 0.8);
+    }
+    .read-more-text:hover{
+      color: rgba(102, 77, 253, 0.8);
+    }

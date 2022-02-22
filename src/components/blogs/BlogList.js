@@ -48,7 +48,7 @@ function BlogList() {
                 <div className="list-content">
                   <div className="list-heading">{data?.title}</div>
                   <div className="list-subheading">
-                    {data?.blogText.slice(0, 220)}...
+                    {data?.blogText.slice(0, 210)}...<span className="read-more-text">Read more</span>
                   </div>
                 </div>
               </NavLink>

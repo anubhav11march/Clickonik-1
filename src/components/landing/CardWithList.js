@@ -37,7 +37,7 @@ function CardWithList() {
           <div className="cwl-div">
             <div className="cwl-heading">{item1?.title}</div>
             <div className="cwl-subheading">
-              {item1?.blogText.slice(0, 250)}...
+              {item1?.blogText.slice(0, 250)}
             </div>
           </div>
           </NavLink>
@@ -67,7 +67,7 @@ return(
         <div className="item-content">
           <div className="item-heading">{item?.title}</div>
           <div className="item-subheading">
-          {item?.blogText.slice(0, 150)}...
+          {item?.blogText.slice(0, 80)}...<span className="read-more-text">Read more</span>
           </div>
         </div>
         </NavLink>

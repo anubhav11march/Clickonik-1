@@ -7,6 +7,8 @@ import AllBlogs from "./components/blogs/AllBlogs";
 import ParticularBlog from "./components/particularBlog/ParticularBlog";
 import Coupons from "./components/coupons/Coupons";
 import CouponBrand from "./components/coupons/CouponBrand";
+import AllStore from "./components/coupons/AllStore";
+import CCountry from "./components/coupons/CCountry";
 import Brand from "./components/particularBrand/Brand";
 import Contact from "./components/contact/Contact";
 import SearchPage from "./components/common/SearchPage";
@@ -25,6 +27,7 @@ import AdminComments from "./components/admin/AdminComments";
 import AdminVerifications from "./components/admin/AdminVerifications";
 import AdminCoupons from "./components/admin/AdminCoupons";
 import AdminAddCoupons from "./components/admin/AdminAddCoupons";
+import AdminAddStore from "./components/admin/AdminAddStore";
 import AdminEditCoupons from "./components/admin/AdminEditCoupons";
 import AdminCategories from "./components/admin/AdminCategories";
 import getUser from "./utils/getUser";
@@ -46,6 +49,8 @@ function App() {
             <Route exact path="/particular-blog/:_id" element={<ParticularBlog />} />
             <Route exact path="/coupons" element={<Coupons />} />
             <Route exact path="/coupons/brand" element={<CouponBrand />} />
+            <Route exact path="/coupons/stores" element={<AllStore />} />
+            <Route exact path="/coupons/:id" element={<CCountry />} />
             <Route exact path="/particular-brand" element={<Brand />} />
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/submit" element={<Submit />} />
@@ -66,6 +71,11 @@ function App() {
               exact
               path="/admin/addcoupons"
               element={<AdminAddCoupons />}
+            />
+             <Route
+              exact
+              path="/admin/addstore"
+              element={<AdminAddStore />}
             />
             <Route
               exact

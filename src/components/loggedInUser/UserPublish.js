@@ -38,6 +38,7 @@ function UserPublish() {
     }
     Getcategory();
   }, []);
+  const uniquecategory = [...new Set(categorylist?.flat().map((data) => data.category))];
 
   if (!isLoading && !user) navigate("/");
   if (isLoading) return null;
@@ -182,7 +183,7 @@ function UserPublish() {
               <option value="" disabled>
                 Category
               </option>
-              {categorylist.map((data, id) => {
+              { uniquecategory?.map((data, id) => {
                 return (
                   <option value={data} key={id}>
                     {data}

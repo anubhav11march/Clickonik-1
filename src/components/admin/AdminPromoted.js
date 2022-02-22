@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import "./AdminBlogs.css";
 import View from "../../assets/images/bview.svg";
 import Share from "../../assets/images/bshare.svg";
+import { BiHide } from "react-icons/bi";
 import Comments from "../../assets/images/bcomment.svg";
 import Header from "../common/Header";
 import AdminSidebar from "../common/AdminSidebar";
@@ -18,8 +19,6 @@ function AdminPromoted() {
   const [sidebarShow, setSidebarShow] = useState(false);
   const navigate = useNavigate();
   const { user, isLoading } = useContext(UserContext);
-  
-  ///
   const [BlogIndex, setBlogIndex] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const getAllComments = async (BlogIndex) => {
@@ -89,19 +88,7 @@ function AdminPromoted() {
     }
   };
 
-  // useEffect(() => {
-  //   function GetData() {
-  //     try {
-  //       axios.get(`api/guest/mostviewedblogs`).then((response) => {
-  //         setAllBlogs(response.data.data);
-  //       });
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-
-  //   GetData();
-  // }, []);
+ 
 
   useEffect(() => {
     if(blogs===true){
@@ -197,12 +184,30 @@ function AdminPromoted() {
   };
 
   
+const hideviewblog=(e,s) => {
+  console.log(s)
+   const data = {
+      blogid: e,
+      status:s===false?true:false
+   }
 
+    try {
+      const res = axios.post("api/admin/setstate", data);
+     
+      if (res?.data?.code !== 200) return;
+    } catch (err) {
+      console.log(err);
+    }
+    
+}
 
 
 
   if (!isLoading && !user?.isAdmin) navigate("/");
   if (isLoading) return null;
+
+
+
 
   return (
     <>
@@ -234,6 +239,7 @@ function AdminPromoted() {
 
           {blogs ? (
             allblogs?.flat()?.map((data, id) => {
+             
               return (
                 <>
                   <div className="Blog-box" key={id}>
@@ -244,12 +250,14 @@ function AdminPromoted() {
                       {/* <span className="more-text">more</span> */}
                     </div>
                     <div id="item-3ub">
-                      <img src={View} alt="view" />
+                      <span style={{cursor:'pointer'}} onClick={()=>hideviewblog(data?._id,data.status)}>{data.status===false?<img src={View} alt="view" title="Hide-views" />:<BiHide  size={33} title="Show-views"/>}</span>
                       <span> &nbsp; {data?.viewCount}</span>
                       <img className="item-share" src={Share} alt="share" />
                       <span> &nbsp; {data?.shareCount}</span>
                       <img className="item-share" src={Comments} alt="share" />
-                      <span> &nbsp; {data?.commentCount}</span>
+                      <span> &nbsp; {data?.commentCount}</span>&nbsp; 
+                     
+                     
                       <span
                         className="item-comments-span-ub"
                         style={{
@@ -280,7 +288,7 @@ function AdminPromoted() {
                       {/* <span className="more-text">more</span> */}
                     </div>
                     <div id="item-3ub">
-                      <img src={View} alt="view" />
+                       <span style={{cursor:'pointer'}} onClick={()=>hideviewblog(data?._id,data.status)}>{data.status===false?<img src={View} alt="view" title="Hide-views" />:<BiHide  size={33} title="Show-views"/>}</span>
                       <span> &nbsp; {data?.viewCount}</span>
                       <img className="item-share" src={Share} alt="share" />
                       <span> &nbsp; {data?.shareCount}</span>

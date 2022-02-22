@@ -1,20 +1,27 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Navbarr.css";
 import Logo from "../../assets/images/Brand-icon.svg";
 // import Menu from "../../assets/images/Hamberger-menu.svg";
-import { Navbar, Container, Nav, Modal, Row, Col } from "react-bootstrap";
+import {
+  Navbar,
+  Container,
+  Nav,
+  Modal,
+  Row,
+  Col,
+  NavDropdown,
+} from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import Close from "../../assets/images/close.svg";
 import SignIn from "../../assets/images/signIn.svg";
 import SignUp from "../../assets/images/signUp.svg";
 import Google from "../../assets/images/google.svg";
-// import Facebook from "../../assets/images/sfacebook.svg";
+import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import User from "../../assets/images/user.svg";
 import { signInWithGoogle } from "../../utils/firebaseAuth";
 import axios from "../../utils/axios";
 import UserContext from "../../utils/userContext";
 import { BsSearch } from "react-icons/bs";
-
 
 function Navbarr() {
   const navigate = useNavigate();
@@ -23,7 +30,8 @@ function Navbarr() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { user, setUser } = useContext(UserContext);
-
+  const [navdata, setNavdata] = useState([]);
+  const [state, setState] = useState(false);
   // console.log(user);
   const postSignUpWithGoogle = async (accessToken) => {
     const data = {
@@ -152,6 +160,31 @@ function Navbarr() {
     }
   };
 
+  const [Dropshow, setDropShow] = useState(false);
+  const showDropdown = () => {
+    if (Dropshow == false) setDropShow(true);
+    else setDropShow(false);
+  };
+
+  const GetNavD = () => {
+    try {
+      axios.get(`api/admin/blogCategory`).then((response) => {
+        setNavdata(response?.data?.data);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    GetNavD();
+  }, []);
+  let IndiaNav,InternationalNav;
+
+  if (navdata?.length !== 0) {
+    IndiaNav = navdata[1]?.subcategory;
+    InternationalNav = navdata[0]?.subcategory;
+  }
+
   return (
     <Navbar
       collapseOnSelect
@@ -161,17 +194,87 @@ function Navbarr() {
       id="navbar"
     >
       <Container>
-        <Navbar.Brand href="/">
-          <img src={Logo} alt="logo" /> Logo
-        </Navbar.Brand>
+        <NavLink className="nav-link nav-padding" to="/">
+          <Navbar.Brand>
+            <img src={Logo} alt="logo" /> Logo
+          </Navbar.Brand>
+        </NavLink>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav>
-            <NavLink className="nav-link nav-padding" to="/">
+            {/* <NavLink className="nav-link nav-padding" to="/">
               Home
+            </NavLink> */}
+            <NavDropdown
+              size="lg"
+              show={Dropshow}
+              autoClose="outside"
+              onMouseEnter={showDropdown}
+              onMouseLeave={showDropdown}
+              title={
+                <div>
+                  Destinations{" "}
+                  {Dropshow ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
+                </div>
+              }
+              id="navbarScrollingDropdown"
+              className="dropdown-desti"
+              to="/blogs"
+              onClick={() =>
+                state === false ? setState(true) : setState(false)
+              }
+            >
+              <div className="Destinations-drop">
+                <div className="destinations-main">
+                  <h2>Indian Destinations</h2>
+               
+                   
+                      <ul
+                        style={{
+                          listStyle: "none",
+                          columns: 2,
+                          webKitColumns: 2,
+                          mozColumns: 2,
+                          
+                        }}
+
+                      >
+                           {IndiaNav?.map((data,id) => (
+                        <li className="destList" key={id}>{data}</li>
+                        ))}
+                      </ul>
+               
+               
+                </div>
+                <div className="destinations-main">
+                  <h2>International Destinations</h2>
+                
+                  
+                    <ul
+                      style={{
+                        listStyle: "none",
+                        columns: 2,
+                        webKitColumns: 2,
+                        mozColumns: 2,
+                        padding: "10px",
+                        fontSize:'15px'
+                      }}
+                    >
+                        {InternationalNav?.map((data,id) => (
+                      <li className="destList" key={id}>{data}</li>
+                      ))}
+                    </ul>
+          
+              
+                </div>
+              </div>
+            </NavDropdown>
+
+            <NavLink className="nav-link nav-padding" to="/blogs">
+              Things To Do
             </NavLink>
             <NavLink className="nav-link nav-padding" to="/blogs">
-              Blogs
+              Travel Theme
             </NavLink>
             {/* <NavLink className="nav-link nav-padding" to="/categories">
               Categories
@@ -179,8 +282,8 @@ function Navbarr() {
             <NavLink className="nav-link nav-padding" to="/coupons">
               Coupons
             </NavLink>
-            
-           
+
+            {/*            
             {!user ? (
                <NavLink className="nav-link nav-padding" to="/contact">
                Contact Us
@@ -189,7 +292,7 @@ function Navbarr() {
               <NavLink className="nav-link nav-padding" to="/user/contact">
               Contact Us
             </NavLink>
-            )}
+            )} */}
             {!user ? (
               <NavLink className="nav-link nav-padding" to="/submit">
                 Submit Blog
@@ -199,12 +302,16 @@ function Navbarr() {
                 Submit Blog
               </NavLink>
             )}
-            
+
             {!user ? (
               <NavLink
                 className="nav-link nav-padding nav-menu"
                 onClick={handleShow}
-                to={window?.location.href.slice(21)==='/particular-blog'?'/blog':'#'}
+                to={
+                  window?.location.href.slice(21) === "/particular-blog"
+                    ? "/blog"
+                    : "#"
+                }
               >
                 Sign In
               </NavLink>
@@ -228,7 +335,7 @@ function Navbarr() {
               </NavLink>
             )}
             <NavLink className="nav-link nav-padding" to="/SearchPage">
-             <BsSearch/>
+              <BsSearch />
             </NavLink>
           </Nav>
         </Navbar.Collapse>
@@ -336,7 +443,6 @@ function Navbarr() {
                         <img src={Google} alt="google" className="nav-google" />
                         Sign Up with Google
                       </div>
-                     
                     </div>
                   </Col>
                 </Row>

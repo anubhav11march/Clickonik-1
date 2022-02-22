@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import "./AdminCategories.css";
 import { BsFillCheckSquareFill, BsFillSquareFill } from "react-icons/bs";
 
@@ -17,15 +17,25 @@ const AdminCategories = () => {
   const [post, setPost] = useState(false);
   const [color, setColor] = useState();
   const [show, setShow] = useState(false);
+  const [showsub, setShowsub] = useState(false);
   const [list, setList] = useState([]);
   const [input, setInput] = useState("");
+  const [inputsub, setInputsub] = useState("");
   const [remove, setRemove] = useState();
-
+  const [subc, setSub] = useState([]);
+  const [subarray, setSubarray] = useState([]);
+  const [Modalshow, setModalShow] = useState(false);
+  const [postsub, setPostsub] = useState(false);
+  const [alldata, setAlldata] = useState([]);
+  const [removesub, setRemovesub] = useState("");
   useEffect(() => {
     function Getcategory() {
       try {
         axios.get("api/admin/blogCategory").then((response) => {
-          setList(response.data.data);
+          let newdata = response?.data?.data;
+          setList(newdata.map((data) => data.category));
+          setSub(response.data.data);
+          setAlldata(response.data.data);
         });
       } catch (err) {
         console.log(err);
@@ -42,9 +52,28 @@ const AdminCategories = () => {
       setShow(true);
     }
   };
+
+  const ShowSubEdit = () => {
+    setColor();
+    if (showsub === true) {
+      setShowsub(false);
+    } else {
+      setShowsub(true);
+    }
+  };
+
   const update = (e, data) => {
     color === e ? setColor() : setColor(e);
     setRemove(data);
+    if (state === true) {
+      setState(false);
+    } else {
+      setState(true);
+    }
+  };
+  const updatesub = (e, data) => {
+    color === e ? setColor() : setColor(e);
+    setRemovesub(data);
     if (state === true) {
       setState(false);
     } else {
@@ -56,7 +85,6 @@ const AdminCategories = () => {
     if (input.length !== 0) {
       setList([...list, input]);
     }
-
     setShow(false);
     setPost(true);
     setInput("");
@@ -71,10 +99,10 @@ const AdminCategories = () => {
   useEffect(() => {
     if (post === true) {
       setPost(false);
-
       const data = {
         blogCategory: list,
       };
+
       try {
         const res = axios.post("api/admin/blogCategory", data);
         if (res?.data?.code !== 200) return;
@@ -83,6 +111,60 @@ const AdminCategories = () => {
       }
     }
   }, [post]);
+
+  useEffect(() => {
+    if (Modalshow === true) {
+      setSub(subc?.filter((list) => list.category === remove));
+      let news = subc?.filter((list) => list.category === remove);
+      setSubarray(news[0]?.subcategory);
+    } else {
+      try {
+        axios.get("api/admin/blogCategory").then((response) => {
+          let newdata = response?.data?.data;
+          setList(newdata.map((data) => data.category));
+          setSub(response.data.data);
+          setAlldata(response.data.data);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [Modalshow]);
+
+  // console.log(subc[0].map((data)=>data.subcategory))
+  const SaveEditChanges = () => {
+    if (inputsub.length !==0 ) {
+      setSubarray([...subarray, inputsub]);
+    }
+    setShowsub(false);
+    setInputsub("");
+    if (removesub) {
+      function Delete() {
+        setSubarray(subarray?.filter((sub) => removesub !== sub));
+      }
+      Delete();
+    }
+
+
+    const data = {
+      category: remove,
+      subcategory: subarray,
+    };
+    try {
+      const res = axios.post("api/admin/addblogsubcategory", data);
+      if (res?.data?.code !== 200) return;
+    } catch (err) {
+      console.log(err);
+    }
+    setInputsub("");
+
+    // setModalShow(false);
+
+  };
+
+
+
+  const handleShow = () => setModalShow(true);
 
   if (!isLoading && !user?.isAdmin) navigate("/");
   if (isLoading) return null;
@@ -105,11 +187,11 @@ const AdminCategories = () => {
             Edit
           </button>
           <Row>
-            {list.map((data, id) => {
+            {list?.map((data, id) => {
               return (
                 <Col>
                   {" "}
-                  <li className="list-name" onClick={(e) => update(id, data)}>
+                  <li className="list-name" onClick={() => update(id, data)}>
                     {show === true ? (
                       id === color ? (
                         <BsFillSquareFill
@@ -123,12 +205,106 @@ const AdminCategories = () => {
                     ) : (
                       ""
                     )}
+                    {show === false ? (
+                      <Button
+                        clasName="sub-category"
+                        onClick={handleShow}
+                        Title="Add sub-category"
+                        variant="success"
+                      >
+                        Add
+                      </Button>
+                    ) : (
+                      ""
+                    )}
                     &nbsp;{data}
                   </li>
                 </Col>
               );
             })}
           </Row>
+          <Modal
+            show={Modalshow}
+            onHide={() => {
+              setModalShow(false);
+            }}
+          >
+            <Modal.Header closeButton>
+              <h2>Category: {remove}</h2>
+              <button
+                onClick={ShowSubEdit}
+                className={
+                  showsub === true ? "edit-subcategory" : "edit-subcategory-btn"
+                }
+              >
+                Edit
+              </button>
+            </Modal.Header>
+            <Modal.Body>
+              {/* SUBCATEGORY */}
+              {/* <Row> */}
+              <ul
+                style={{
+                  listStyle: "none",
+                  columns: 2,
+                  webKitColumns: 2,
+                  mozColumns: 2,
+                  margin: "20px",
+                  padding: "10px",
+                }}
+              >
+                {subarray?.map((data, id) => {
+                  return (
+                    // <Col>
+                    <>
+                      <li
+                        className="list-subcat"
+                        onClick={(e) => updatesub(id, data)}
+                      >
+                        {showsub === true ? (
+                          id === color ? (
+                            <BsFillSquareFill
+                              style={{
+                                border: "2px solid #28318C",
+                                color: "#fff",
+                              }}
+                            />
+                          ) : (
+                            <>
+                              <BsFillCheckSquareFill
+                                style={{
+                                  backgroundColor: "#fff",
+                                  color: "#28318C",
+                                }}
+                              />
+                            </>
+                          )
+                        ) : (
+                          ""
+                        )}
+                        &nbsp;{data}
+                      </li>
+                    </>
+                  );
+                })}
+              </ul>
+              <input
+                style={{ fontSize: "17px", width: "90%", marginLeft: "22px" }}
+                className="input-category"
+                placeholder="Add New Category"
+                type="text"
+                value={inputsub}
+                onChange={(e) => setInputsub(e.target.value)}
+                name="inputsub"
+              />
+              {/* </Row> */}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" onClick={SaveEditChanges}>
+                Save Changess
+              </Button>
+            </Modal.Footer>
+          </Modal>
           <Row>
             <Col>
               <div className="input-groupc">

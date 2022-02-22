@@ -18,7 +18,7 @@
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 3fr 1fr;
-  gap: 0px;
+  gap: 10px;
   height: 100%;
 }
 .btn-primary {
@@ -251,4 +251,18 @@
 }
 .More-coupon:hover {
   background: #a32c21;
+}
+.btn-store{
+  width: 200px;
+  height: 45px;
+  background-color: #4468e2 !important;
+  border-radius: 5px !important;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500 !important;
+  font-size: 17px !important;
+  grid-row-start: 2;
+  grid-column-start: 1;
+  grid-row-end: 3;
+  grid-column-end: 3;
 }
