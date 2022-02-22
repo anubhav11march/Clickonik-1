@@ -99,7 +99,7 @@ console.log(country)
           </Col>
         </Row> */}
         <div className="coupon-heading">
-          Selection of <span>the best 2021 offers</span>
+          Selection of <span>the best {year} offers</span>
         </div>
         <Row>
           <CouponCard />
@@ -133,7 +133,7 @@ console.log(country)
         </button>
         <div className="coupon-heading">
           <span>Clickonik</span> helps people buy stuff cheaper
-          <span> in XX countries</span> around the world!
+          <span> in {country?.length} countries</span> around the world!
         </div>
         <Row>
           {country.map((data)=>{
